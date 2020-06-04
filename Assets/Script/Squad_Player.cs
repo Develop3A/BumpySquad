@@ -44,10 +44,11 @@ public class Squad_Player : Squad {
         }
         if(Input.GetMouseButtonUp(0))
         {
-           if(500< Mathf.Abs((m_pos.x - m_pos_down.x) + (m_pos.y - m_pos_down.y)))
+           if(100< Mathf.Abs((m_pos.x - m_pos_down.x) + (m_pos.y - m_pos_down.y)))
             {
                 Turnback(true);
             }
+            Set_Curving(false);
         }
     }
 

@@ -5,10 +5,14 @@ using UnityEngine;
 public class Squad : MonoBehaviour {
 
     [Header("분대의 최대속도 관련")]
-    public float max_staright_speed;
-    public float max_curve_speed;
-    public float max_dash_speed;
-    public float max_knockback_speed;
+    public float max_straight_speed_persecond;
+    public float max_curve_speed_persecond;
+    public float max_dash_speed_persecond;
+    public float max_knockback_speed_persecond;
+     float max_straight_speed;
+     float max_curve_speed;
+     float max_dash_speed;
+     float max_knockback_speed;
 
 
     [Header("분대의 가속도 관련")]
@@ -34,8 +38,13 @@ public class Squad : MonoBehaviour {
 
     void Awake()
     {
+        float f = Application.targetFrameRate;
         speed = 0;
         Set_Active(true);
+        max_straight_speed= max_straight_speed_persecond / f;
+        max_curve_speed = max_curve_speed_persecond / f;
+         max_dash_speed = max_dash_speed_persecond / f;
+         max_knockback_speed = max_knockback_speed_persecond / f;
     }
 
     public void Sum_speed(float value)
@@ -54,14 +63,14 @@ public class Squad : MonoBehaviour {
         }
         else if(isCurving)
         {
-            speed = Mathf.Clamp(speed, 0, max_staright_speed);
+            speed = Mathf.Clamp(speed, 0, max_straight_speed);
             if (speed > max_curve_speed) speed -= curve_decel;
             else speed += accel;
         }
         else
         {
             speed += value;
-            speed = Mathf.Clamp(speed, 0, max_staright_speed);
+            speed = Mathf.Clamp(speed, 0, max_straight_speed);
         }
     }
 
@@ -137,10 +146,9 @@ public class Squad : MonoBehaviour {
 
             if(isTurnback)
             {
-                for(int i=0; i<5; i++)
+                for(int i=0; i<1; i++)
                 {
-                    transform.Rotate(0, 36, 0);
-                    yield return new WaitForEndOfFrame();
+                    transform.Rotate(0, 180, 0);
                 }
 
                 Turnback(false);

@@ -62,16 +62,16 @@
      <Compile Include="Assets\Script\Squad_Player.cs" />
      <Compile Include="Assets\Script\TextFollow.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>C:/Users/K-CY/Documents/BumpySquad/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/K-CY/Documents/Github_folder/BumpySquad/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/K-CY/Documents/BumpySquad/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/K-CY/Documents/Github_folder/BumpySquad/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/K-CY/Documents/BumpySquad/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/K-CY/Documents/Github_folder/BumpySquad/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/K-CY/Documents/BumpySquad/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/K-CY/Documents/Github_folder/BumpySquad/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity2018.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

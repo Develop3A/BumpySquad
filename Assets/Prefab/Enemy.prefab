@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad: {fileID: 0}
-  max_hp: 2
+  max_hp: 10
   attack_range: 1
   isEnemy: 1
 --- !u!136 &136184268177237794
