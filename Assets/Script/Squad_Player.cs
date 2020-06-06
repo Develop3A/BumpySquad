@@ -5,18 +5,28 @@ using UnityEngine;
 public class Squad_Player : Squad {
 
 
+    [Space(15)]
+    [Header("Player Option")]
+    [Header("각도")]
+    public float rotate_persecond;
     Camera mainCamera;
+
+    [Space(20)]
     public int max_doubletap_time = 15;
     int doubletap_time = 0;
 
+    public float swipe_distance;
     public Vector3 m_pos;
     public Vector3 m_pos_down;
 
 
     void Start()
     {
+        int f = Application.targetFrameRate;
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         doubletap_time = 0;
+        rotation_speed = rotate_persecond / f;
+        Set_Active(true);
     }
 
     void Update()
@@ -44,7 +54,11 @@ public class Squad_Player : Squad {
         }
         if(Input.GetMouseButtonUp(0))
         {
-           if(500< Mathf.Abs((m_pos.x - m_pos_down.x) + (m_pos.y - m_pos_down.y)))
+            float x = (m_pos.x - m_pos_down.x) * (m_pos.x - m_pos_down.x);
+            float y = (m_pos.y - m_pos_down.y) * (m_pos.y - m_pos_down.y);
+            float dis = Mathf.Sqrt(x + y);
+            Debug.Log(Mathf.Sqrt(x) + " " + Mathf.Sqrt(y) + " " + dis);
+            if (swipe_distance < Mathf.Abs(dis))
             {
                 Turnback(true);
             }
@@ -56,20 +70,14 @@ public class Squad_Player : Squad {
     {
         rot_target.position = transform.position;
         rot_target.LookAt(vec);
-        float f = 0;
-        if (rot_target.localEulerAngles.y >= 180 && rot_target.localEulerAngles.y < 315)
+        if (rot_target.localEulerAngles.y >= 180 && rot_target.localEulerAngles.y < 359)
         {
-            f = -45;
+            curve_isright = false;
         }
-        else if (rot_target.localEulerAngles.y > 45 && rot_target.localEulerAngles.y < 180)
+        else if (rot_target.localEulerAngles.y > 0 && rot_target.localEulerAngles.y < 180)
                 {
-            f = 45;
+            curve_isright = true;
         } 
-        else
-        {
-            f = 0;
-        }
-        rot_target.localRotation = Quaternion.Euler(0,f , 0);
         Set_Curving(true);
     }
 

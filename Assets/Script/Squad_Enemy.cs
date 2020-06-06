@@ -6,12 +6,18 @@ public class Squad_Enemy : Squad {
 
     Squad player;
 
+    [Space(15)]
+    [Header("Enemy Option")]
     public bool isAttack;
+    public float rot_speed;
 
     void Start()
     {
+        isEnemy = true;
         player = GameObject.FindObjectOfType<Squad_Player>();
         Set_Attack(true);
+        rotation_speed = rot_speed;
+        Set_Active(true);
     }
     public override void Curve(Vector3 vec)
     {

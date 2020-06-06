@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class Squad : MonoBehaviour {
 
+    [Header("Squad Option")]
     [Header("분대의 최대속도 관련")]
     public float max_straight_speed_persecond;
     public float max_curve_speed_persecond;
     public float max_dash_speed_persecond;
     public float max_knockback_speed_persecond;
-     float max_straight_speed;
-     float max_curve_speed;
-     float max_dash_speed;
-     float max_knockback_speed;
 
 
     [Header("분대의 가속도 관련")]
-    [Range(0,1)]public float accel_persecond;
-    [Range(0,1)]public float curve_decel_persecond;
+    public float accel_;
+    public float curve_decel_;
     float accel;
     float curve_decel;
 
-    [Header("각도 관련 설정  - 각도 전환 속도입니다")]
+    [Header("각도 관련")]
     public Transform rot_target;
-    [Range(0,1)]public float rotation_speed = 0.025f;
-    float rot_clamp = 0.1f;
 
     [Space(20)]
-    protected float speed;
+   [SerializeField] protected float speed;
+    protected float rotation_speed = 0.025f;
+    protected bool curve_isright;
+    protected bool isEnemy;
     protected bool isDash;
     bool isActive;
     bool isCurving;
@@ -37,18 +35,21 @@ public class Squad : MonoBehaviour {
     int dashcount=0;
     int max_knockbackcount = 3;
     int knockbackcount = 0;
+    Rigidbody rigid;
+    
+    /*
+    [SerializeField] float z1, z2;
+    [SerializeField] float time = 1.0f;
+    bool timer_active=false;
+    */
 
     void Awake()
     {
+        rigid = GetComponent<Rigidbody>();
         float f = Application.targetFrameRate;
         speed = 0;
-        Set_Active(true);
-        max_straight_speed= max_straight_speed_persecond / f;
-        max_curve_speed = max_curve_speed_persecond / f;
-         max_dash_speed = max_dash_speed_persecond / f;
-         max_knockback_speed = max_knockback_speed_persecond / f;
-        accel = max_straight_speed * accel_persecond / f;
-        curve_decel =  max_curve_speed * curve_decel_persecond / f;
+        accel = accel_ / f;
+        curve_decel = curve_decel_ / f;
     }
 
     public void Sum_speed(float value)
@@ -57,24 +58,24 @@ public class Squad : MonoBehaviour {
         {
             isCurving = false;
             if (knockbackcount == 0) Knockback(false);
-            speed = max_knockback_speed;
+            speed = max_knockback_speed_persecond;
         }
         else if(isDash)
         {
             isCurving = false;
             if (dashcount == 0) Dash(false);
-            speed = max_dash_speed;
+            speed = max_dash_speed_persecond;
         }
         else if(isCurving)
         {
-            speed = Mathf.Clamp(speed, 0, max_straight_speed);
-            if (speed > max_curve_speed) speed -= curve_decel;
+            speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
+            if (speed > max_curve_speed_persecond) speed -= curve_decel;
             else speed += accel;
         }
         else
         {
             speed += value;
-            speed = Mathf.Clamp(speed, 0, max_straight_speed);
+            speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
         }
     }
 
@@ -143,28 +144,36 @@ public class Squad : MonoBehaviour {
 
     IEnumerator Active()
     {
-        while(isActive)
+        while (isActive)
         {
             Sum_speed(accel);
-            transform.Translate(0, 0, speed);
+            rigid.velocity = transform.forward * speed;
 
-            if(isTurnback)
+            if (isTurnback)
             {
-                for(int i=0; i<1; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     transform.Rotate(0, 180, 0);
                 }
 
                 Turnback(false);
             }
-            else if(isCurving)
+            else if (isCurving)
             {
-                Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rotation_speed);
-                Quaternion ori_q = transform.rotation;
-                transform.rotation = q;
+                if (isEnemy)
+                {
+                    Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rotation_speed);
+                    Quaternion ori_q = transform.rotation;
+                    transform.rotation = q;
 
-                if (Mathf.Abs(Mathf.Abs(transform.eulerAngles.y) - Mathf.Abs(ori_q.eulerAngles.y)) < rot_clamp)
-                    isCurving = false;
+                    if (Mathf.Abs(Mathf.Abs(transform.eulerAngles.y) - Mathf.Abs(ori_q.eulerAngles.y)) < 0.1f)
+                        isCurving = false;
+                }
+                else
+                {
+                    if (curve_isright) transform.Rotate(0, rotation_speed, 0);
+                    else transform.Rotate(0, -rotation_speed, 0);
+                }
             }
 
             dashcount--;
@@ -173,4 +182,17 @@ public class Squad : MonoBehaviour {
         }
         yield return new WaitForEndOfFrame();
     }
+
+    /*
+    IEnumerator Timer()
+    {
+        if (!timer_active)
+        {
+            timer_active = true;
+            z1 = transform.position.z;
+            yield return new WaitForSeconds(time);
+            z2 = transform.position.z;
+        }
+    }
+    */
 }
