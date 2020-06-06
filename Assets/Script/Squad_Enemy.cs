@@ -41,7 +41,7 @@ public class Squad_Enemy : Squad {
         {
             Curve(player.transform.position);
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1.0f);
         }
     }
 }

@@ -16,15 +16,15 @@ public class Squad : MonoBehaviour {
 
 
     [Header("분대의 가속도 관련")]
-    public float accel_persecond;
-    public float curve_decel_persecond;
+    [Range(0,1)]public float accel_persecond;
+    [Range(0,1)]public float curve_decel_persecond;
     float accel;
     float curve_decel;
 
-    [Header("각도 관련")]
+    [Header("각도 관련 설정  - 각도 전환 속도입니다")]
     public Transform rot_target;
-    public float rot_clamp;
-    public float rot_speed;
+    [Range(0,1)]public float rotation_speed = 0.025f;
+    float rot_clamp = 0.1f;
 
     [Space(20)]
     protected float speed;
@@ -47,8 +47,8 @@ public class Squad : MonoBehaviour {
         max_curve_speed = max_curve_speed_persecond / f;
          max_dash_speed = max_dash_speed_persecond / f;
          max_knockback_speed = max_knockback_speed_persecond / f;
-        accel = accel_persecond / f;
-        curve_decel = curve_decel_persecond / f;
+        accel = max_straight_speed * accel_persecond / f;
+        curve_decel =  max_curve_speed * curve_decel_persecond / f;
     }
 
     public void Sum_speed(float value)
@@ -159,7 +159,7 @@ public class Squad : MonoBehaviour {
             }
             else if(isCurving)
             {
-                Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rot_speed);
+                Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rotation_speed);
                 Quaternion ori_q = transform.rotation;
                 transform.rotation = q;
 

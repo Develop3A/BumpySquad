@@ -1900,11 +1900,10 @@ MonoBehaviour:
   max_curve_speed_persecond: 1
   max_dash_speed_persecond: 12
   max_knockback_speed_persecond: -15
-  accel_persecond: 0.1
-  curve_decel_persecond: 0.05
+  accel_persecond: 0.8
+  curve_decel_persecond: 0.5
   rot_target: {fileID: 901664551}
-  rot_clamp: 1
-  rot_speed: 0.01
+  rotation_speed: 0.025
   isAttack: 0
 --- !u!1 &900996679
 GameObject:
@@ -3333,11 +3332,10 @@ MonoBehaviour:
   max_curve_speed_persecond: 1
   max_dash_speed_persecond: 12
   max_knockback_speed_persecond: -15
-  accel_persecond: 0.1
-  curve_decel_persecond: 0.05
+  accel_persecond: 0.8
+  curve_decel_persecond: 0.5
   rot_target: {fileID: 1788818549}
-  rot_clamp: 0.1
-  rot_speed: 0.025
+  rotation_speed: 0.025
   max_doubletap_time: 15
   m_pos: {x: 0, y: 0, z: 0}
   m_pos_down: {x: 0, y: 0, z: 0}
