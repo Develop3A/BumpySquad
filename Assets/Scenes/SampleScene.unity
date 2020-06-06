@@ -1900,8 +1900,8 @@ MonoBehaviour:
   max_curve_speed_persecond: 1
   max_dash_speed_persecond: 12
   max_knockback_speed_persecond: -15
-  accel: 0.002
-  curve_decel: 0.001
+  accel_persecond: 0.1
+  curve_decel_persecond: 0.05
   rot_target: {fileID: 901664551}
   rot_clamp: 1
   rot_speed: 0.01
@@ -3333,8 +3333,8 @@ MonoBehaviour:
   max_curve_speed_persecond: 1
   max_dash_speed_persecond: 12
   max_knockback_speed_persecond: -15
-  accel: 0.002
-  curve_decel: 0.001
+  accel_persecond: 0.1
+  curve_decel_persecond: 0.05
   rot_target: {fileID: 1788818549}
   rot_clamp: 0.1
   rot_speed: 0.025

@@ -44,7 +44,7 @@ public class Squad_Player : Squad {
         }
         if(Input.GetMouseButtonUp(0))
         {
-           if(100< Mathf.Abs((m_pos.x - m_pos_down.x) + (m_pos.y - m_pos_down.y)))
+           if(500< Mathf.Abs((m_pos.x - m_pos_down.x) + (m_pos.y - m_pos_down.y)))
             {
                 Turnback(true);
             }
@@ -76,6 +76,18 @@ public class Squad_Player : Squad {
     void OnCollisionEnter(Collision c)
     {
         if (isDash&  c.gameObject.tag == "Enemy")
+        {
+            Squad s = c.gameObject.GetComponent<Squad>();
+            s.Knockback(true);
+
+            Dash(false);
+            speed = 0;
+        }
+    }
+
+    void OnCollisionStay(Collision c)
+    {
+        if (isDash & c.gameObject.tag == "Enemy")
         {
             Squad s = c.gameObject.GetComponent<Squad>();
             s.Knockback(true);

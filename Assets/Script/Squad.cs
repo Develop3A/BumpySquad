@@ -16,8 +16,10 @@ public class Squad : MonoBehaviour {
 
 
     [Header("분대의 가속도 관련")]
-    public float accel;
-    public float curve_decel;
+    public float accel_persecond;
+    public float curve_decel_persecond;
+    float accel;
+    float curve_decel;
 
     [Header("각도 관련")]
     public Transform rot_target;
@@ -45,6 +47,8 @@ public class Squad : MonoBehaviour {
         max_curve_speed = max_curve_speed_persecond / f;
          max_dash_speed = max_dash_speed_persecond / f;
          max_knockback_speed = max_knockback_speed_persecond / f;
+        accel = accel_persecond / f;
+        curve_decel = curve_decel_persecond / f;
     }
 
     public void Sum_speed(float value)
