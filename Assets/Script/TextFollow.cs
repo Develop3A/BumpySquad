@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TextFollow : MonoBehaviour {
-
-    public Transform rot__;
+    
     Transform target;
     Text t;
     public Soldier s;
 
-    void Awake()
+    void Start()
     {
         t = GetComponent<Text>();
         target = s.transform;
@@ -31,7 +30,7 @@ public class TextFollow : MonoBehaviour {
             }
             Vector3 v = target.position;
             transform.position = new Vector3(v.x, v.y + 1, v.z);
-            transform.rotation = rot__.rotation;
+            transform.eulerAngles = new Vector3(80, target.eulerAngles.y, target.eulerAngles.z);
             t.text = s.Get_hp().ToString();
             yield return new WaitForEndOfFrame();
         }

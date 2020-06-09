@@ -10,6 +10,7 @@ public class Squad : MonoBehaviour {
     public float max_curve_speed_persecond;
     public float max_dash_speed_persecond;
     public float max_knockback_speed_persecond;
+    public float max_contact_speed_persecond;
 
 
     [Header("분대의 가속도 관련")]
@@ -20,6 +21,8 @@ public class Squad : MonoBehaviour {
 
     [Header("각도 관련")]
     public Transform rot_target;
+    public float curve_delay_time;
+    public bool isCurve_delay;
 
     [Space(20)]
    [SerializeField] protected float speed;
@@ -27,6 +30,8 @@ public class Squad : MonoBehaviour {
     protected bool curve_isright;
     protected bool isEnemy;
     protected bool isDash;
+    protected bool isContact;
+    protected bool isSturn;
     bool isActive;
     bool isCurving;
     bool isKnockback;
@@ -36,12 +41,6 @@ public class Squad : MonoBehaviour {
     int max_knockbackcount = 3;
     int knockbackcount = 0;
     Rigidbody rigid;
-    
-    /*
-    [SerializeField] float z1, z2;
-    [SerializeField] float time = 1.0f;
-    bool timer_active=false;
-    */
 
     void Awake()
     {
@@ -66,10 +65,16 @@ public class Squad : MonoBehaviour {
             if (dashcount == 0) Dash(false);
             speed = max_dash_speed_persecond;
         }
-        else if(isCurving)
+        else if(isCurving )
         {
             speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
             if (speed > max_curve_speed_persecond) speed -= curve_decel;
+            else speed += accel;
+        }
+        else if(isContact)
+        {
+            speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
+            if (speed > max_contact_speed_persecond) speed -= curve_decel;
             else speed += accel;
         }
         else
@@ -125,6 +130,20 @@ public class Squad : MonoBehaviour {
         {
             knockbackcount = max_knockbackcount;
             isKnockback = true;
+            Sturn(true);
+        }
+    }
+    public void Sturn(bool value)
+    {
+        if (!value)
+        {
+            isSturn = false;
+        }
+
+        if (isSturn) return;
+        else if (value)
+        {
+            isSturn = true;
         }
     }
     public void Turnback(bool value)
@@ -142,12 +161,21 @@ public class Squad : MonoBehaviour {
         }
     }
 
+    protected void Set_Curve_delay_On()
+    {
+        isCurve_delay = true;
+    }
+    protected void Set_Curve_delay_Off()
+    {
+        isCurve_delay = false;
+    }
+
     IEnumerator Active()
     {
         while (isActive)
         {
             Sum_speed(accel);
-            rigid.velocity = transform.forward * speed;
+            rigid.velocity = transform.forward * speed ;
 
             if (isTurnback)
             {
@@ -162,7 +190,7 @@ public class Squad : MonoBehaviour {
             {
                 if (isEnemy)
                 {
-                    Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rotation_speed);
+                    Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rotation_speed );
                     Quaternion ori_q = transform.rotation;
                     transform.rotation = q;
 
@@ -171,8 +199,8 @@ public class Squad : MonoBehaviour {
                 }
                 else
                 {
-                    if (curve_isright) transform.Rotate(0, rotation_speed, 0);
-                    else transform.Rotate(0, -rotation_speed, 0);
+                    if (curve_isright &&!isCurve_delay) transform.Rotate(0, rotation_speed , 0);
+                    else if(!isCurve_delay) transform.Rotate(0, -rotation_speed, 0);
                 }
             }
 
@@ -182,17 +210,4 @@ public class Squad : MonoBehaviour {
         }
         yield return new WaitForEndOfFrame();
     }
-
-    /*
-    IEnumerator Timer()
-    {
-        if (!timer_active)
-        {
-            timer_active = true;
-            z1 = transform.position.z;
-            yield return new WaitForSeconds(time);
-            z2 = transform.position.z;
-        }
-    }
-    */
 }

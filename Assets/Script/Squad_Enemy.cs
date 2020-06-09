@@ -10,6 +10,7 @@ public class Squad_Enemy : Squad {
     [Header("Enemy Option")]
     public bool isAttack;
     public float rot_speed;
+    public float sturn_time;
 
     void Start()
     {
@@ -46,8 +47,14 @@ public class Squad_Enemy : Squad {
         while(isAttack)
         {
             Curve(player.transform.position);
-
+            
             yield return new WaitForSeconds(1.0f);
         }
+    }
+    
+    IEnumerator Sturn_timer()
+    {
+        yield return new WaitForSeconds(sturn_time);
+        Sturn(false);
     }
 }

@@ -7,6 +7,7 @@ public class Soldier : MonoBehaviour {
     public Squad Squad;
     public float max_hp = 10.0f;
     public float attack_range;
+    public float attack_speed = 1.0f;
 
     protected float hp;
     protected bool isFighting;
@@ -17,6 +18,7 @@ public class Soldier : MonoBehaviour {
     {
         hp = max_hp;
         Set_Fighting(true);
+        GameManager.gm.Gen_hp_text(GetComponent<Soldier>());
     }
 
     public void Set_Fighting(bool value)
@@ -36,8 +38,7 @@ public class Soldier : MonoBehaviour {
         while (isFighting)
         {
             Attack();
-            for (int i = 0; i < 30; i++)
-                yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(attack_speed);
         }
         yield return null;
     }
