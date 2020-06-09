@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4358230887542792}
   - component: {fileID: 33421349243271390}
   - component: {fileID: 23410316236041960}
-  - component: {fileID: 136184268177237794}
   - component: {fileID: 114433344419149464}
+  - component: {fileID: 65125919318560144}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -84,7 +84,19 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1305431102877886}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65125919318560144
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305431102877886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114433344419149464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,18 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Squad: {fileID: 0}
   max_hp: 10
+  attack_damage: 1
   attack_range: 1
+  attack_speed: 1
+  soldier_sturn_time: 0
   isEnemy: 1
---- !u!136 &136184268177237794
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1305431102877886}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

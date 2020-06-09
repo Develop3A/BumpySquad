@@ -7,7 +7,7 @@ public class Squad_Player : Squad {
 
     [Space(15)]
     [Header("Player Option")]
-    [Header("스킬")]
+    [Header("스킬 - 쿨타임")]
     public float Dash_cooltime;
     bool can_dash;
     public float Turnback_cooltime;

@@ -20,4 +20,7 @@ public class GameManager : MonoBehaviour {
         g.GetComponent<TextFollow>().s = target_s;
     }
 
+
+
+
 }

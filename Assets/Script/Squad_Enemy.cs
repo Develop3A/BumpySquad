@@ -10,7 +10,6 @@ public class Squad_Enemy : Squad {
     [Header("Enemy Option")]
     public bool isAttack;
     public float rot_speed;
-    public float sturn_time;
 
     void Start()
     {
@@ -56,5 +55,27 @@ public class Squad_Enemy : Squad {
     {
         yield return new WaitForSeconds(sturn_time);
         Sturn(false);
+    }
+
+    void OnCollisionEnter(Collision c)
+    {
+        if (c.gameObject.tag == "Player")
+        {
+            isContact = true;
+        }
+    }
+    void OnCollisionStay(Collision c)
+    {
+        if (c.gameObject.tag == "Player")
+        {
+            isContact = true;
+        }
+    }
+    void OnCollisionExit(Collision c)
+    {
+        if (c.gameObject.tag == "Player")
+        {
+            isContact = false;
+        }
     }
 }

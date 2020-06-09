@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour {
 
+    [Header("여긴 조작 안하셔도됩니다.")]
     public Squad Squad;
+    protected bool isSturn;
+    [Space(20)]
+
+    [Header("용병 기본 옵션")]
     public float max_hp = 10.0f;
+    public float attack_damage;
     public float attack_range;
     public float attack_speed = 1.0f;
+    public float soldier_sturn_time = 0.0f;
 
     protected float hp;
     protected bool isFighting;
@@ -18,6 +25,9 @@ public class Soldier : MonoBehaviour {
     {
         hp = max_hp;
         Set_Fighting(true);
+    }
+    void Start()
+    {
         GameManager.gm.Gen_hp_text(GetComponent<Soldier>());
     }
 
@@ -56,13 +66,13 @@ public class Soldier : MonoBehaviour {
                 if (!isEnemy & s.isEnemy)
                 {
                     //Debug.Log(s.gameObject.name);
-                    s.Sum_hp(-1);
+                    s.Sum_hp(-attack_damage);
                     break;
                 }
                 else if (isEnemy & !s.isEnemy)
                 {
                     //Debug.Log(s.gameObject.name);
-                    s.Sum_hp(-1);
+                    s.Sum_hp(-attack_damage);
                     break; 
                 }
             }
@@ -72,6 +82,23 @@ public class Soldier : MonoBehaviour {
             }
         }
 
+    }
+
+    IEnumerator Soldier_Sturn()
+    {
+        if (!isSturn)
+        {
+            Color c = GetComponent<Material>().color;
+            isSturn = true;
+            Set_Fighting(false);
+            GetComponent<Material>().color = Color.black;
+
+            yield return new WaitForSeconds(soldier_sturn_time);
+
+            isSturn = false;
+            Set_Fighting(true);
+            GetComponent<Material>().color = c;
+        }
     }
 
     public void Sum_hp(float value)
