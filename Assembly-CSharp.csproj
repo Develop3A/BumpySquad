@@ -56,6 +56,7 @@
      <Compile Include="Assets\Script\Enemy\Proto_enemy.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
      <Compile Include="Assets\Script\Manager\Camera_Manager.cs" />
+     <Compile Include="Assets\Script\Manager\Cooltime_timer.cs" />
      <Compile Include="Assets\Script\Manager\Timer_Manager.cs" />
      <Compile Include="Assets\Script\Soldiers\Proto_Archer.cs" />
      <Compile Include="Assets\Script\Soldiers\Proto_sword.cs" />

@@ -19,6 +19,12 @@ public class Squad : MonoBehaviour {
     float accel;
     float curve_decel;
 
+    [Header("분대의 접촉판정 관련")]
+    public float yellowboxsize;
+    public float plus_z;
+    Vector3 box_pos;
+    Vector3 box_size;
+
     [Header("각도 관련")]
     public Transform rot_target;
     public float curve_delay_time;
@@ -51,6 +57,8 @@ public class Squad : MonoBehaviour {
         speed = 0;
         accel = accel_ / f;
         curve_decel = curve_decel_ / f;
+
+        box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
     }
 
     public void Set_soldier_num(GameObject soldier_obj,int num)
@@ -78,9 +86,9 @@ public class Squad : MonoBehaviour {
         }
         else if(isContact)
         {
-            if (speed > max_contact_speed_persecond) speed -= curve_decel;
+            if (speed > max_contact_speed_persecond) speed = max_contact_speed_persecond;
             else speed += accel;
-            speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
+            speed = Mathf.Clamp(speed, 0, max_contact_speed_persecond);
         }
         else
         {
@@ -108,6 +116,63 @@ public class Squad : MonoBehaviour {
     public virtual void Curve(Vector3 vec)
     {
         
+    }
+    public void Contact_Check()
+    {
+        box_pos = new Vector3(transform.position.x, transform.position.y, transform.position.z + plus_z);
+        Collider[] colliders = Physics.OverlapBox(box_pos, box_size * 0.5f, transform.rotation);
+
+        bool contact = false;
+
+        foreach (Collider c in colliders)
+        {
+            try
+            {
+                Soldier s = c.gameObject.GetComponent<Soldier>();
+
+
+                if (!isEnemy & s.isEnemy)
+                {
+                    if (isDash)
+                    {
+                        Squad enemeysquad = s.Squad;
+                        enemeysquad.Knockback(true);
+
+                        Dash(false);
+                        speed = 0;
+                    }
+                    else
+                    {
+                        isContact = true;
+                    }
+                    contact = true;
+                    break;
+                }
+                else if (isEnemy & !s.isEnemy)
+                {
+                    if (isDash)
+                    {
+                        Squad enemeysquad = s.Squad;
+                        enemeysquad.Knockback(true);
+
+                        Dash(false);
+                        speed = 0;
+                    }
+                    else
+                    {
+                        isContact = true;
+                    }
+                    contact = true;
+                    break;
+                }
+            }
+            catch
+            {
+                continue;
+            }
+
+            isContact = contact;
+        }
     }
     #region 플레이어의 특수상태나 스킬
     public void Dash(bool value)
@@ -239,8 +304,17 @@ public class Squad : MonoBehaviour {
                     else if(!isCurve_delay) transform.Rotate(0, -rotation_speed, 0);
                 }
             }
+            Contact_Check();
+
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForEndOfFrame();
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(Vector3.zero+ new Vector3(0,0,plus_z),box_size);
     }
 }

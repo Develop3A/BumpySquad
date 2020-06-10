@@ -57,6 +57,7 @@ public class Squad_Enemy : Squad {
         Sturn(false);
     }
 
+    /*
     void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.tag == "Player")
@@ -78,4 +79,5 @@ public class Squad_Enemy : Squad {
             isContact = false;
         }
     }
+    */
 }

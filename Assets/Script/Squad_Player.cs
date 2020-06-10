@@ -15,6 +15,7 @@ public class Squad_Player : Squad {
 
     [Space(20)]
     [Header("각도")]
+    public bool isAbs;
     public float rotate_persecond;
     Camera mainCamera;
 
@@ -91,13 +92,27 @@ public class Squad_Player : Squad {
     {
         rot_target.position = transform.position;
         rot_target.LookAt(vec);
-        if (rot_target.localEulerAngles.y >= 180 && rot_target.localEulerAngles.y < 359)
+        if (isAbs)
         {
-            curve_isright = false;
+            if (rot_target.eulerAngles.y >= 180 && rot_target.eulerAngles.y < 359)
+            {
+                curve_isright = false;
+            }
+            else if (rot_target.eulerAngles.y > 0 && rot_target.eulerAngles.y < 180)
+            {
+                curve_isright = true;
+            }
         }
-        else if (rot_target.localEulerAngles.y > 0 && rot_target.localEulerAngles.y < 180)
-                {
-            curve_isright = true;
+        else
+        {
+            if (rot_target.localEulerAngles.y >= 180 && rot_target.localEulerAngles.y < 359)
+            {
+                curve_isright = false;
+            }
+            else if (rot_target.localEulerAngles.y > 0 && rot_target.localEulerAngles.y < 180)
+            {
+                curve_isright = true;
+            }
         }
         Invoke("Set_Curve_delay_Off", curve_delay_time);
         Set_Curving(true);
@@ -128,6 +143,7 @@ public class Squad_Player : Squad {
         {
             can_dash = false;
             Dash(true);
+            GameManager.gm.Start_Cooltime_tiemr(0);
             yield return new WaitForSeconds(Dash_cooltime);
 
             can_dash = true;
@@ -139,12 +155,14 @@ public class Squad_Player : Squad {
         {
             can_turnback = false;
             Turnback(true);
+            GameManager.gm.Start_Cooltime_tiemr(1);
             yield return new WaitForSeconds(Turnback_cooltime);
 
             can_turnback = true;
         }
     }
 
+    /*
     void OnCollisionEnter(Collision c)
     {
         if (isDash&  c.gameObject.tag == "Enemy")
@@ -178,4 +196,5 @@ public class Squad_Player : Squad {
             isContact = false;
         }
     }
+    */
 }
