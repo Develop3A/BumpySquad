@@ -46,6 +46,7 @@ public class Squad_Player : Squad {
 
         if (Input.GetMouseButtonDown(0))
         {
+            if(!IsInvoking("Set_Curve_delay_Off") & isCurve_delay) Invoke("Set_Curve_delay_Off", curve_delay_time);
             m_pos_down = Input.mousePosition;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -114,7 +115,6 @@ public class Squad_Player : Squad {
                 curve_isright = true;
             }
         }
-        Invoke("Set_Curve_delay_Off", curve_delay_time);
         Set_Curving(true);
     }
 
@@ -161,40 +161,5 @@ public class Squad_Player : Squad {
             can_turnback = true;
         }
     }
-
-    /*
-    void OnCollisionEnter(Collision c)
-    {
-        if (isDash&  c.gameObject.tag == "Enemy")
-        {
-            Squad s = c.gameObject.GetComponent<Squad>();
-            s.Knockback(true);
-
-            Dash(false);
-            speed = 0;
-        }
-        if (c.gameObject.tag == "Enemy")
-        {
-            isContact = true;
-        }
-    }
-    void OnCollisionStay(Collision c)
-    {
-        if (isDash & c.gameObject.tag == "Enemy")
-        {
-            Squad s = c.gameObject.GetComponent<Squad>();
-            s.Knockback(true);
-
-            Dash(false);
-            speed = 0;
-        }
-    }
-    void OnCollisionExit(Collision c)
-    {
-        if (c.gameObject.tag == "Enemy")
-        {
-            isContact = false;
-        }
-    }
-    */
+    
 }

@@ -55,7 +55,6 @@ public class Proto_Archer : Soldier {
 
         if (target != null)
         {
-            target.GetComponent<Soldier>().Sum_hp(-attack_damage);
             GameObject g = Instantiate(arrow, null);
             g.transform.position = transform.position;
             Archers_arrow a = g.GetComponent<Archers_arrow>();

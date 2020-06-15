@@ -42,6 +42,7 @@ public class Squad : MonoBehaviour {
     protected bool isEnemy;
     protected bool isDash;
     protected bool isContact;
+    protected bool isColliderContact;
     protected bool isSturn;
     bool isActive;
     bool isCurving;
@@ -64,6 +65,7 @@ public class Squad : MonoBehaviour {
     public void Set_soldier_num(GameObject soldier_obj,int num)
     {
         soldiers[num] = soldier_obj.GetComponent<Soldier>();
+        soldier_obj.GetComponent<Soldier>().Squad = this;
     }
 
     public void Sum_speed(float value)
@@ -71,6 +73,10 @@ public class Squad : MonoBehaviour {
         if(isKnockback)
         {
             isCurving = false;
+            if (!IsInvoking("Knockback_Off"))
+            {
+                Invoke("Knockback_Off", knockback_time);
+            }
             speed = max_knockback_speed_persecond;
         }
         else if(isDash)
@@ -84,7 +90,7 @@ public class Squad : MonoBehaviour {
             else speed += accel;
             speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
         }
-        else if(isContact)
+        else if(isContact& isColliderContact)
         {
             if (speed > max_contact_speed_persecond) speed = max_contact_speed_persecond;
             else speed += accel;
@@ -133,35 +139,11 @@ public class Squad : MonoBehaviour {
 
                 if (!isEnemy & s.isEnemy)
                 {
-                    if (isDash)
-                    {
-                        Squad enemeysquad = s.Squad;
-                        enemeysquad.Knockback(true);
-
-                        Dash(false);
-                        speed = 0;
-                    }
-                    else
-                    {
-                        isContact = true;
-                    }
                     contact = true;
                     break;
                 }
                 else if (isEnemy & !s.isEnemy)
                 {
-                    if (isDash)
-                    {
-                        Squad enemeysquad = s.Squad;
-                        enemeysquad.Knockback(true);
-
-                        Dash(false);
-                        speed = 0;
-                    }
-                    else
-                    {
-                        isContact = true;
-                    }
                     contact = true;
                     break;
                 }
@@ -172,6 +154,7 @@ public class Squad : MonoBehaviour {
             }
 
             isContact = contact;
+            if (!isContact) isColliderContact = false;
         }
     }
     #region 플레이어의 특수상태나 스킬
@@ -202,9 +185,8 @@ public class Squad : MonoBehaviour {
         if (isKnockback) return;
         else if(value)
         {
-            if (!IsInvoking("Knockback_Off")) Invoke("Knockback_Off", knockback_time);
             isKnockback = true;
-            Sturn(true);
+            Invoke("Sturn", knockback_time);
         }
     }
     public void Knockback_Off()
@@ -212,6 +194,10 @@ public class Squad : MonoBehaviour {
         isKnockback = false;
     }
 
+    public void Sturn()
+    {
+        Sturn(true);
+    }
     public void Sturn(bool value)
     {
         if (!value)
@@ -222,17 +208,18 @@ public class Squad : MonoBehaviour {
         if (isSturn) return;
         else if (value)
         {
-
             isSturn = true;
+            Sturn_soldiers();
         }
     }
-    public void Strun_soldiers(float st)
+    public void Sturn_soldiers()
     {
         for(int i = 0; i<soldiers.Length; i++)
         {
             if (soldiers[i] == null) continue;
             else
             {
+                soldiers[i].Set_Fighting(false);
                 soldiers[i].soldier_sturn_time = sturn_time;
                 soldiers[i].StartCoroutine("Soldier_Sturn");
             }
@@ -258,6 +245,7 @@ public class Squad : MonoBehaviour {
     protected void Set_Curve_delay_On()
     {
         isCurve_delay = true;
+        CancelInvoke("Set_Curve_delay_Off");
     }
     protected void Set_Curve_delay_Off()
     {
@@ -268,15 +256,16 @@ public class Squad : MonoBehaviour {
     {
         while (isActive)
         {
-            if(isSturn)
+            Sum_speed(accel);
+            rigid.velocity = transform.forward * speed ;
+
+            if (isSturn)
             {
                 yield return new WaitForSeconds(sturn_time);
                 speed = 0.0f;
                 Sturn(false);
+                Knockback(false);
             }
-
-            Sum_speed(accel);
-            rigid.velocity = transform.forward * speed ;
 
             if (isTurnback)
             {
@@ -309,6 +298,48 @@ public class Squad : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForEndOfFrame();
+    }
+
+
+    void OnCollisionStay(Collision c)
+    {
+        if (!isEnemy)
+        {
+            if (c.gameObject.tag == "Enemy")
+            {
+                if (isDash)
+                {
+                    c.gameObject.GetComponent<Squad>().Knockback(true);
+
+                    Dash_Off();
+                    speed = 0;
+                }
+                isColliderContact = true;
+            }
+        }
+        else
+        {
+            if (c.gameObject.tag == "Player")
+            {
+                if (isDash)
+                {
+                    c.gameObject.GetComponent<Squad>().Knockback(true);
+
+                    Dash_Off();
+                    speed = 0;
+                }
+                isColliderContact = true;
+            }
+        }
+
+        if(isDash)
+        {
+            if(c.gameObject.tag =="rock")
+            {
+                Debug.Log("contact rock");
+                Dash_Off();
+            }
+        }
     }
 
     void OnDrawGizmos()

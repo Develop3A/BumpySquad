@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 65274120496061324}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,10 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fd8ea587daf014ab53f18a324da1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Squad: {fileID: 0}
   max_hp: 10
   attack_damage: 1
   attack_range: 1
   attack_speed: 1
   soldier_sturn_time: 0
+  Squad: {fileID: 0}
   isEnemy: 0

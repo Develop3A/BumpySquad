@@ -11,6 +11,7 @@ public class Squad_Generator : MonoBehaviour {
 
     void Awake()
     {
+        if (Soldiers_parent == null) Soldiers_parent = transform;
         Gen_Squad();
     }
 

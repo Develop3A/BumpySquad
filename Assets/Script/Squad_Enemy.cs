@@ -10,6 +10,7 @@ public class Squad_Enemy : Squad {
     [Header("Enemy Option")]
     public bool isAttack;
     public float rot_speed;
+    float min_dis=1.5f;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class Squad_Enemy : Squad {
     }
     public override void Curve(Vector3 vec)
     {
+        if (Vector3.Distance(transform.position, vec) < min_dis) return;
         rot_target.position = transform.position;
         rot_target.LookAt(vec);
         rot_target.eulerAngles = new Vector3(0, rot_target.eulerAngles.y, 0);
@@ -56,28 +58,5 @@ public class Squad_Enemy : Squad {
         yield return new WaitForSeconds(sturn_time);
         Sturn(false);
     }
-
-    /*
-    void OnCollisionEnter(Collision c)
-    {
-        if (c.gameObject.tag == "Player")
-        {
-            isContact = true;
-        }
-    }
-    void OnCollisionStay(Collision c)
-    {
-        if (c.gameObject.tag == "Player")
-        {
-            isContact = true;
-        }
-    }
-    void OnCollisionExit(Collision c)
-    {
-        if (c.gameObject.tag == "Player")
-        {
-            isContact = false;
-        }
-    }
-    */
+    
 }
