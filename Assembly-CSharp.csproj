@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\Enemy\Proto_enemy.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
+     <Compile Include="Assets\Script\hole.cs" />
      <Compile Include="Assets\Script\Manager\Camera_Manager.cs" />
      <Compile Include="Assets\Script\Manager\Cooltime_timer.cs" />
      <Compile Include="Assets\Script\Manager\Timer_Manager.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Script\Squad_Generator.cs" />
      <Compile Include="Assets\Script\Squad_Player.cs" />
      <Compile Include="Assets\Script\TextFollow.cs" />
+     <None Include="Assets\Shader\back.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/K-CY/Documents/Github_folder/BumpySquad/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

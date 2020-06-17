@@ -11,6 +11,7 @@ public class Squad : MonoBehaviour {
     public float max_dash_speed_persecond;
     public float max_knockback_speed_persecond;
     public float max_contact_speed_persecond;
+    [Range(0,1)]public float max_mire_speed_ratio;
 
 
     [Header("분대의 가속도 관련")]
@@ -44,6 +45,7 @@ public class Squad : MonoBehaviour {
     protected bool isContact;
     protected bool isColliderContact;
     protected bool isSturn;
+    bool isMire;
     bool isActive;
     bool isCurving;
     bool isKnockback;
@@ -89,6 +91,7 @@ public class Squad : MonoBehaviour {
             if (speed > max_curve_speed_persecond) speed -= curve_decel;
             else speed += accel;
             speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
+            if(isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_straight_speed_persecond));
         }
         else if(isContact& isColliderContact)
         {
@@ -100,6 +103,7 @@ public class Squad : MonoBehaviour {
         {
             speed += value;
             speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond);
+            if (isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_straight_speed_persecond));
         }
     }
 
@@ -239,6 +243,15 @@ public class Squad : MonoBehaviour {
             isCurving = false;
             isTurnback = true;
         }
+    }
+
+    public void Set_Mire(bool value)
+    {
+        isMire = value;
+    }
+    float Clamp_Mire_speed(float f)
+    {
+        return f * max_mire_speed_ratio;
     }
 #endregion
 
