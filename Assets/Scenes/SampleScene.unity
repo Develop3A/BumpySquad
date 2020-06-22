@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 743631346}
   - component: {fileID: 743631345}
   - component: {fileID: 743631347}
+  - component: {fileID: 743631348}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -807,6 +808,33 @@ MonoBehaviour:
   ReversTimer: 1
   limit_time: 10
   timer: {fileID: 616020520}
+--- !u!114 &743631348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 743631344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cf2702928c32e40bf39ce63d17e02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_straight_speed_persecond: 0
+  max_curve_speed_persecond: 0
+  max_dash_speed_persecond: 0
+  max_knockback_speed_persecond: 0
+  max_contact_speed_persecond: 0
+  max_mire_speed_ratio: 0
+  accel_: 0
+  curve_decel_: 0
+  yellowboxsize: 0
+  plus_z: 0
+  rot_target: {fileID: 0}
+  curve_delay_time: 0
+  isCurve_delay: 0
+  dash_time: 0
+  knockback_time: 0
+  sturn_time: 0
 --- !u!1 &811401027
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,9 +948,8 @@ MonoBehaviour:
   max_straight_speed_persecond: 7
   max_curve_speed_persecond: 2
   max_dash_speed_persecond: 12
-  max_knockback_speed_persecond: -30
   max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0
+  max_mire_speed_ratio: 0.5
   accel_: 5
   curve_decel_: 1.5
   yellowboxsize: 3.5
@@ -930,9 +957,6 @@ MonoBehaviour:
   rot_target: {fileID: 1678962820}
   curve_delay_time: 0
   isCurve_delay: 0
-  dash_time: 0.25
-  knockback_time: 0.1
-  sturn_time: 3
   speed: 0
   isAttack: 0
   rot_speed: 0.025
@@ -1738,9 +1762,8 @@ MonoBehaviour:
   max_straight_speed_persecond: 7
   max_curve_speed_persecond: 2
   max_dash_speed_persecond: 12
-  max_knockback_speed_persecond: -30
   max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0
+  max_mire_speed_ratio: 0.5
   accel_: 5
   curve_decel_: 1.5
   yellowboxsize: 3.5
@@ -1748,9 +1771,6 @@ MonoBehaviour:
   rot_target: {fileID: 811401028}
   curve_delay_time: 0
   isCurve_delay: 0
-  dash_time: 0.25
-  knockback_time: 0.1
-  sturn_time: 3
   speed: 0
   isAttack: 0
   rot_speed: 0.025
@@ -1839,7 +1859,6 @@ MonoBehaviour:
   max_straight_speed_persecond: 7
   max_curve_speed_persecond: 2
   max_dash_speed_persecond: 12
-  max_knockback_speed_persecond: -30
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5
   accel_: 5
@@ -1849,11 +1868,12 @@ MonoBehaviour:
   rot_target: {fileID: 1788818549}
   curve_delay_time: 0.2
   isCurve_delay: 0
-  dash_time: 0.25
-  knockback_time: 0.1
-  sturn_time: 3
   speed: 0
   Dash_cooltime: 5
+  Dash_duration: 0.25
+  Dash_knockback_time: 0.1
+  Dash_knockback_speed: -30
+  Dash_sturn_duration: 3
   Turnback_cooltime: 10
   isAbs: 0
   rotate_persecond: 90
