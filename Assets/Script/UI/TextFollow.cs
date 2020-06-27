@@ -40,13 +40,21 @@ public class TextFollow : MonoBehaviour {
 
     void Update()
     {
-        if (target == null)
+        try
         {
+            if (target == null)
+            {
+                Destroy(this.gameObject);
+            }
+            Vector3 v = target.position;
+            transform.position = new Vector3(v.x, v.y + 1, v.z);
+            transform.eulerAngles = new Vector3(80, target.eulerAngles.y, target.eulerAngles.z);
+            t.text = s.Get_hp().ToString();
+        }
+        catch
+        {
+
             Destroy(this.gameObject);
         }
-        Vector3 v = target.position;
-        transform.position = new Vector3(v.x, v.y + 1, v.z);
-        transform.eulerAngles = new Vector3(80, target.eulerAngles.y, target.eulerAngles.z);
-        t.text = s.Get_hp().ToString();
     }
 }

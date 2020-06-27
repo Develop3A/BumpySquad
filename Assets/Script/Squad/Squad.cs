@@ -38,7 +38,7 @@ public class Squad : Squad_property
     //public float sturn_time;
 
     //    [Header("넉백 관련")]
-    
+
     #region 보이지 않는 값
     [Space(10)]
    [SerializeField] protected float speed;
@@ -57,7 +57,7 @@ public class Squad : Squad_property
     bool isKnockback;
     bool isTurnback;
     Rigidbody rigid;
-    Soldier[] soldiers = new Soldier[9];
+    protected Soldier[] soldiers = new Soldier[9];
 #endregion
 
     void Awake()
@@ -331,8 +331,8 @@ public class Squad : Squad_property
                 }
                 else
                 {
-                    if (curve_isright &&!isCurve_delay) transform.Rotate(0, rotation_speed , 0);
-                    else if(!isCurve_delay) transform.Rotate(0, -rotation_speed, 0);
+                    if (curve_isright &&!isCurve_delay) rigid.AddTorque(Vector3.up * rotation_speed);
+                    else if(!isCurve_delay) rigid.AddTorque(Vector3.up *-rotation_speed);
                 }
             }
             Contact_Check();

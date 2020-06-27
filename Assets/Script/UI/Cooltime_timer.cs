@@ -7,7 +7,6 @@ public class Cooltime_timer : MonoBehaviour {
 
     public string skillname;
     public float limit_time;
-    float max_limit_time;
     float present =0.0f;
     public Text timer;
 
@@ -17,7 +16,7 @@ public class Cooltime_timer : MonoBehaviour {
         if (timer == null) timer = GetComponent<Text>();
         if (skillname == "Dash") limit_time =  sp.Dash_cooltime;
         else if (skillname == "Turnback") limit_time = sp.Turnback_cooltime;
-        max_limit_time = limit_time;
+
     }
 
     public void Start_Cooltime()

@@ -21,7 +21,6 @@ public class Camera_Manager : MonoBehaviour {
         if(value)
         {
             isActive = true;
-            StartCoroutine("Active");
         }
         else
         {
@@ -29,17 +28,12 @@ public class Camera_Manager : MonoBehaviour {
         }
     }
 
-    IEnumerator Active()
+    void Update()
     {
-        while(isActive)
-        {
-            Vector3 t_pos = new Vector3(target.position.x + Sum_pos.x, target.position.y + Sum_pos.y, target.position.z + Sum_pos.z);
-            transform.position = Vector3.Lerp(transform.position, t_pos, move_speed);
-            transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, rot_speed) ;
-            yield return new WaitForEndOfFrame();
-        }
-
-        yield return new WaitForEndOfFrame();
+        Vector3 t_pos = new Vector3(target.position.x + Sum_pos.x, target.position.y + Sum_pos.y, target.position.z + Sum_pos.z);
+        transform.position = Vector3.Lerp(transform.position, t_pos, move_speed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, rot_speed);
     }
+
 
 }

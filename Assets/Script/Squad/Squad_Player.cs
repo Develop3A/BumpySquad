@@ -20,7 +20,8 @@ public class Squad_Player : Squad {
     [Space(20)]
     [Header("각도")]
     public bool isAbs;
-    public float rotate_persecond;
+    public float rotate_force;
+    public float maxangular;
     Camera mainCamera;
 
     [Space(20)]
@@ -35,9 +36,10 @@ public class Squad_Player : Squad {
     
     void Start()
     {
+        GetComponent<Rigidbody>().maxAngularVelocity = maxangular;
         int f = Application.targetFrameRate;
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        rotation_speed = rotate_persecond / f;
+        rotation_speed = rotate_force / f;
         Set_Curve_delay_On();
         Set_Active(true);
         can_dash = true;
@@ -139,6 +141,58 @@ public class Squad_Player : Squad {
     {
         can_swipe = false;
         CancelInvoke("Can_Swipe_Off");
+    }
+
+    public void Dash_FrontLine(Soldier s,Collision c)
+    {
+        for(int i = 0; i<soldiers.Length; i++)
+        {
+            if(soldiers[i] == s)
+            {
+                if (i == 0 || i == 1 || i == 2)
+                {
+                    if (soldiers[0] != null || soldiers[1] != null || soldiers[2] != null)
+                    {
+                            if (isDash)
+                            {
+                                c.gameObject.GetComponent<Squad>().Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration);
+
+                                Dash_Off();
+                                speed = 0;
+                            }
+                            isColliderContact = true;
+                    }
+                }
+                else if(i == 3 || i == 4 || i == 5)
+                {
+                    if (soldiers[3] != null || soldiers[4] != null || soldiers[5] != null)
+                    {
+                            if (isDash)
+                            {
+                                c.gameObject.GetComponent<Squad>().Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration);
+
+                                Dash_Off();
+                                speed = 0;
+                            }
+                            isColliderContact = true;
+                    }
+                }
+                else if (i == 6 || i == 7 || i == 8)
+                {
+                    if (soldiers[6] != null || soldiers[7] != null || soldiers[8] != null)
+                    {
+                            if (isDash)
+                            {
+                                c.gameObject.GetComponent<Squad>().Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration);
+
+                                Dash_Off();
+                                speed = 0;
+                            }
+                            isColliderContact = true;
+                    }
+                }
+            }
+        }
     }
 
     IEnumerator Use_Dash()

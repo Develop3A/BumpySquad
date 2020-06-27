@@ -70,6 +70,7 @@
      <Compile Include="Assets\Script\UI\Cooltime_timer.cs" />
      <Compile Include="Assets\Script\UI\TextFollow.cs" />
      <None Include="Assets\Script\Shader\back.shader" />
+     <None Include="Assets\Import Asset\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/K-CY/Documents/Github_folder/BumpySquad/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

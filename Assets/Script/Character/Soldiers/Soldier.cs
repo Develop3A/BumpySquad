@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier : MonoBehaviour {
+public class Soldier : MonoBehaviour
+{
 
 
     [Header("용병 기본 옵션")]
@@ -59,7 +60,7 @@ public class Soldier : MonoBehaviour {
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, attack_range);
 
-        foreach(Collider c in colliders)
+        foreach (Collider c in colliders)
         {
             try
             {
@@ -76,7 +77,7 @@ public class Soldier : MonoBehaviour {
                 {
                     //Debug.Log(s.gameObject.name);
                     s.Sum_hp(-attack_damage);
-                    break; 
+                    break;
                 }
             }
             catch
@@ -119,5 +120,14 @@ public class Soldier : MonoBehaviour {
     {
         Destroy(this.gameObject);
     }
-
+    void OnCollisionStay(Collision c)
+    {
+        if (!isEnemy)
+        {
+            if (c.gameObject.tag == "Enemy")
+            {
+                Squad.GetComponent<Squad_Player>().Dash_FrontLine(this, c);
+            }
+        }
+    }
 }
