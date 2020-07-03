@@ -145,10 +145,12 @@ public class Squad_Player : Squad {
 
     public void Dash_FrontLine(Soldier s,Collision c)
     {
+        bool end = false;
         for(int i = 0; i<soldiers.Length; i++)
         {
             if(soldiers[i] == s)
             {
+                if (end) break;
                 if (i == 0 || i == 1 || i == 2)
                 {
                     if (soldiers[0] != null || soldiers[1] != null || soldiers[2] != null)
@@ -161,6 +163,7 @@ public class Squad_Player : Squad {
                                 speed = 0;
                             }
                             isColliderContact = true;
+                        end = true;
                     }
                 }
                 else if(i == 3 || i == 4 || i == 5)
@@ -175,6 +178,7 @@ public class Squad_Player : Squad {
                                 speed = 0;
                             }
                             isColliderContact = true;
+                        end = true;
                     }
                 }
                 else if (i == 6 || i == 7 || i == 8)
@@ -189,6 +193,7 @@ public class Squad_Player : Squad {
                                 speed = 0;
                             }
                             isColliderContact = true;
+                        end = true;
                     }
                 }
             }

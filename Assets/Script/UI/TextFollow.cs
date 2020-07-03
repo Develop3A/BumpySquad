@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class TextFollow : MonoBehaviour {
     
     Transform target;
-    Text t;
+    Image img;
+    float max_hp;
     public Soldier s;
 
     void Start()
     {
-        t = GetComponent<Text>();
+        img = transform.GetChild(0).GetComponent<Image>();
         target = s.transform;
+        max_hp = s.Get_hp();
         //StartCoroutine("Active");
     }
 
@@ -47,9 +49,9 @@ public class TextFollow : MonoBehaviour {
                 Destroy(this.gameObject);
             }
             Vector3 v = target.position;
-            transform.position = new Vector3(v.x, v.y + 1, v.z);
+            transform.position = new Vector3(v.x, v.y + 2, v.z);
             transform.eulerAngles = new Vector3(80, target.eulerAngles.y, target.eulerAngles.z);
-            t.text = s.Get_hp().ToString();
+            img.fillAmount = s.Get_hp() / max_hp;
         }
         catch
         {

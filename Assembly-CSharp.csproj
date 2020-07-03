@@ -54,10 +54,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\Character\Enemy\Proto_enemy.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\Archer.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Proto_Archer.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Proto_sword.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Soldier.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Soldier&apos;s obj\Archers_arrow.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\Sword.cs" />
      <Compile Include="Assets\Script\Manager\Camera_Manager.cs" />
      <Compile Include="Assets\Script\Manager\GameManager.cs" />
      <Compile Include="Assets\Script\Manager\Timer_Manager.cs" />

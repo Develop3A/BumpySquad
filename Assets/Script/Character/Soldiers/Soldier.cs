@@ -18,6 +18,7 @@ public class Soldier : MonoBehaviour
     [Header("여긴 조작 안하셔도됩니다.")]
     public Squad Squad;
     protected bool isSturn;
+    public Animator anim;
 
     protected float hp;
     protected bool isFighting;
@@ -52,7 +53,7 @@ public class Soldier : MonoBehaviour
         while (isFighting)
         {
             Attack();
-            yield return new WaitForSeconds(attack_speed);
+            yield return null;
         }
         yield return null;
     }
@@ -71,12 +72,16 @@ public class Soldier : MonoBehaviour
                 {
                     //Debug.Log(s.gameObject.name);
                     s.Sum_hp(-attack_damage);
+                    Set_Fighting(false);
+                    Invoke("attack_delay",attack_speed);
                     break;
                 }
                 else if (isEnemy & !s.isEnemy)
                 {
                     //Debug.Log(s.gameObject.name);
                     s.Sum_hp(-attack_damage);
+                    Set_Fighting(false);
+                    Invoke("attack_delay", attack_speed);
                     break;
                 }
             }
@@ -85,7 +90,10 @@ public class Soldier : MonoBehaviour
                 continue;
             }
         }
-
+    }
+    protected void attack_delay()
+    {
+        Set_Fighting(true);
     }
 
     public IEnumerator Soldier_Sturn()

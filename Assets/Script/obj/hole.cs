@@ -6,7 +6,7 @@ public class hole : MonoBehaviour {
 
     void OnTriggerEnter(Collider c)
     {
-        Debug.Log(c.gameObject.name+ " in hole ");
+        //Debug.Log(c.gameObject.name+ " in hole ");
 
         if(c.gameObject.tag == "Enemy"|| c.gameObject.tag == "Player")
         {

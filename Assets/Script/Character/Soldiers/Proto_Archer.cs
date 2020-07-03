@@ -30,6 +30,8 @@ public class Proto_Archer : Soldier {
                     {
                         target = s.gameObject;
                     }
+                    Set_Fighting(false);
+                    Invoke("attack_delay", attack_speed);
                     break;
                 }
                 else if (isEnemy & !s.isEnemy)
@@ -43,6 +45,8 @@ public class Proto_Archer : Soldier {
                     {
                         target = s.gameObject;
                     }
+                    Set_Fighting(false);
+                    Invoke("attack_delay", attack_speed);
                     break;
                 }
 

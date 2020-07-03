@@ -65,8 +65,8 @@ public class Squad : Squad_property
         rigid = GetComponent<Rigidbody>();
         float f = Application.targetFrameRate;
         speed = 0;
-        accel = accel_ / f;
-        curve_decel = curve_decel_ / f;
+        accel = accel_ ;
+        curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
     }
@@ -129,6 +129,11 @@ public class Squad : Squad_property
     public void Set_Curving(bool value)
     {
         isCurving = value;
+        if(!isEnemy)
+        {
+            if (value) rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            else rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
     }
     public virtual void Curve(Vector3 vec)
     {
@@ -196,7 +201,7 @@ public class Squad : Squad_property
         if (isKnockback) return;
         else if(value)
         {
-            Debug.Log(gameObject.name + time.ToString() + knockback_speed.ToString() + sturn_time.ToString());
+            //Debug.Log(gameObject.name + time.ToString() + knockback_speed.ToString() + sturn_time.ToString());
             isKnockback = true;
             max_knockback_speed_persecond = knockback_speed;
             knockback_time = time;
@@ -299,7 +304,7 @@ public class Squad : Squad_property
         while (isActive)
         {
             Sum_speed(accel);
-            rigid.velocity = transform.forward * speed ;
+            rigid.velocity = transform.forward * speed;
 
             if (isSturn)
             {
@@ -331,8 +336,8 @@ public class Squad : Squad_property
                 }
                 else
                 {
-                    if (curve_isright &&!isCurve_delay) rigid.AddTorque(Vector3.up * rotation_speed);
-                    else if(!isCurve_delay) rigid.AddTorque(Vector3.up *-rotation_speed);
+                    if (curve_isright &&!isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
+                    else if(!isCurve_delay) transform.Rotate(Vector3.up *-rotation_speed);
                 }
             }
             Contact_Check();
