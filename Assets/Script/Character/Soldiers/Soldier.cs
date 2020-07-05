@@ -32,7 +32,7 @@ public class Soldier : MonoBehaviour
     }
     void Start()
     {
-        GameManager.gm.Gen_hp_text(GetComponent<Soldier>());
+        PlayerManager.pm.Gen_hp_text(GetComponent<Soldier>());
     }
 
     public void Set_Fighting(bool value)
@@ -42,9 +42,11 @@ public class Soldier : MonoBehaviour
         {
             isFighting = true;
             StartCoroutine("Fighting");
+            StartCoroutine("Soldier_running");
         }
         else
         {
+            StopCoroutine("Soldier_running");
             isFighting = false;
         }
     }
@@ -93,9 +95,36 @@ public class Soldier : MonoBehaviour
     }
     protected void attack_delay()
     {
-        Set_Fighting(true);
+        if (!isSturn)
+        {
+            Set_Fighting(true);
+        }
     }
 
+    public IEnumerator Soldier_running()
+    {
+        bool co = true;
+        bool updown = true;
+        if (anim != null)
+        {
+            while (co)
+            {
+                if (updown)
+                {
+                    anim.transform.Translate(Vector3.up * 0.2f);
+                    updown = false;
+                }
+                else
+                {
+                    anim.transform.Translate(Vector3.down * 0.2f);
+                    updown = true;
+                }
+
+                yield return new WaitForSeconds(0.166f);
+            }
+        }
+        yield return null;
+    }
     public IEnumerator Soldier_Sturn()
     {
         if (!isSturn)
@@ -116,8 +145,13 @@ public class Soldier : MonoBehaviour
     public void Sum_hp(float value)
     {
         hp += value;
+        if (value < 0) hit();
 
         if (hp <= 0) Death();
+    }
+    void hit()
+    {
+        ParticleManager.pm.Gen_hit_particle(transform,0);
     }
     public float Get_hp()
     {
@@ -127,15 +161,5 @@ public class Soldier : MonoBehaviour
     protected void Death()
     {
         Destroy(this.gameObject);
-    }
-    void OnCollisionStay(Collision c)
-    {
-        if (!isEnemy)
-        {
-            if (c.gameObject.tag == "Enemy")
-            {
-                Squad.GetComponent<Squad_Player>().Dash_FrontLine(this, c);
-            }
-        }
     }
 }

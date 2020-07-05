@@ -62,8 +62,14 @@
      <Compile Include="Assets\Script\Character\Soldiers\Sword.cs" />
      <Compile Include="Assets\Script\Manager\Camera_Manager.cs" />
      <Compile Include="Assets\Script\Manager\GameManager.cs" />
+     <Compile Include="Assets\Script\Manager\ParticleManager.cs" />
+     <Compile Include="Assets\Script\Manager\PlayerManager.cs" />
      <Compile Include="Assets\Script\Manager\Timer_Manager.cs" />
+     <Compile Include="Assets\Script\Manager\UserDataManager.cs" />
      <Compile Include="Assets\Script\obj\hole.cs" />
+     <Compile Include="Assets\Script\Skill\Skill.cs" />
+     <Compile Include="Assets\Script\Skill\Skill_Dash.cs" />
+     <Compile Include="Assets\Script\Skill\Skill_Turnback.cs" />
      <Compile Include="Assets\Script\Squad\Squad.cs" />
      <Compile Include="Assets\Script\Squad\Squad_Enemy.cs" />
      <Compile Include="Assets\Script\Squad\Squad_Generator.cs" />

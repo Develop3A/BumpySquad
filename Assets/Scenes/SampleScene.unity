@@ -98,21 +98,21 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 1
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 11.7
+    agentClimb: 0.16
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.33333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 225e74806c9ebdc438f8e23545590732, type: 2}
 --- !u!1001 &4128499
 Prefab:
   m_ObjectHideFlags: 0
@@ -702,7 +702,7 @@ Transform:
   - {fileID: 1842184351}
   - {fileID: 10694509}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260139921
 GameObject:
@@ -720,7 +720,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &260139922
 BoxCollider:
@@ -1014,7 +1014,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.158363
+      value: 8.24
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1022,7 +1022,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -274.3295
+      value: -276.92
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1369,6 +1369,48 @@ Transform:
   m_Father: {fileID: 534098252}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
+--- !u!1 &546554638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546554640}
+  - component: {fileID: 546554639}
+  m_Layer: 0
+  m_Name: UserDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &546554639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546554638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a5e88106953524ab57dcdf91f09290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userskillA: 0
+  userskillB: 1
+--- !u!4 &546554640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 546554638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.077869, y: 1.8176959, z: 7.883102}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &570137748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1862,7 @@ GameObject:
   - component: {fileID: 743631345}
   - component: {fileID: 743631347}
   - component: {fileID: 743631348}
+  - component: {fileID: 743631349}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1838,11 +1881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6935f42eedcf64bb2b6bf7ffd08ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp_parent: {fileID: 1761833102}
-  hp: {fileID: 1779310995385252, guid: ce62be9f6d996bf4c85f595f83e1941a, type: 2}
-  squad_player: {fileID: 0}
-  Dash: {fileID: 1576870457}
-  Turnback: {fileID: 970759684}
+  squads: []
 --- !u!4 &743631346
 Transform:
   m_ObjectHideFlags: 0
@@ -1878,9 +1917,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 743631344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0cf2702928c32e40bf39ce63d17e02d, type: 3}
+  m_Script: {fileID: 11500000, guid: 757f6bc6560b88f4097888564b245e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp_parent: {fileID: 1761833102}
+  hp: {fileID: 1779310995385252, guid: ce62be9f6d996bf4c85f595f83e1941a, type: 2}
+  sp: {fileID: 0}
+  timers:
+  - {fileID: 1576870457}
+  - {fileID: 970759684}
+--- !u!114 &743631349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 743631344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90582e4e1bd15a444a9b4bbd83934447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit_particles:
+  - {fileID: 1040253577817978, guid: e05d2f628a3c2e942b49554fafaac71c, type: 2}
 --- !u!1 &762767460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2061,20 +2119,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_straight_speed_persecond: 7
-  max_curve_speed_persecond: 2
-  max_dash_speed_persecond: 12
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5
   accel_: 5
-  curve_decel_: 1.5
   yellowboxsize: 3.5
   plus_z: 0
   rot_target: {fileID: 1678962820}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
+  skills: []
   isAttack: 0
-  rot_speed: 0.025
+  rot_speed: 0.456
 --- !u!1 &842488694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2243,7 +2299,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.94
+      value: 8.61
       objectReference: {fileID: 0}
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2251,7 +2307,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -264.07193
+      value: -262.68
       objectReference: {fileID: 0}
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2575,8 +2631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2617f772663464e853f9dbac0da5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillname: Turnback
-  limit_time: 0
+  Skill_Order: 1
+  cool_time: 0
+  present: 0
   timer: {fileID: 595792613}
 --- !u!114 &970759685
 MonoBehaviour:
@@ -2617,7 +2674,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 743631345}
+      - m_Target: {fileID: 743631348}
         m_MethodName: Use_skill
         m_Mode: 3
         m_Arguments:
@@ -2839,8 +2896,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1000297593}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.86, y: -0.47, z: 1.65}
-  m_LocalScale: {x: 5.6, y: 0.01, z: 4.75}
+  m_LocalPosition: {x: 8.57, y: -0.47, z: 1.2}
+  m_LocalScale: {x: 5.6, y: 0.01, z: 8.3315}
   m_Children: []
   m_Father: {fileID: 1059252881}
   m_RootOrder: 0
@@ -3008,7 +3065,7 @@ Transform:
   - {fileID: 260139925}
   - {fileID: 1694609031}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1071391257
 Prefab:
@@ -3383,8 +3440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2617f772663464e853f9dbac0da5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillname: Dash
-  limit_time: 0
+  Skill_Order: 0
+  cool_time: 0
+  present: 0
   timer: {fileID: 842488695}
 --- !u!114 &1576870458
 MonoBehaviour:
@@ -3425,7 +3483,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 743631345}
+      - m_Target: {fileID: 743631348}
         m_MethodName: Use_skill
         m_Mode: 3
         m_Arguments:
@@ -3705,7 +3763,7 @@ Transform:
   - {fileID: 570137751}
   - {fileID: 170076735}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1678962819
 GameObject:
@@ -4073,20 +4131,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_straight_speed_persecond: 7
-  max_curve_speed_persecond: 2
-  max_dash_speed_persecond: 12
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5
   accel_: 5
-  curve_decel_: 1.5
   yellowboxsize: 3.5
   plus_z: 0
   rot_target: {fileID: 811401028}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
+  skills: []
   isAttack: 0
-  rot_speed: 0.025
+  rot_speed: 0
 --- !u!54 &1808313426
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4109,7 +4165,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1808313424}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -18.84, y: 0, z: 20}
+  m_LocalPosition: {x: -6.5, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 811401028}
@@ -4229,32 +4285,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_straight_speed_persecond: 7
-  max_curve_speed_persecond: 7
-  max_dash_speed_persecond: 12
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5
   accel_: 5
-  curve_decel_: 0
   yellowboxsize: 3.5
   plus_z: 0.2
   rot_target: {fileID: 1788818549}
   curve_delay_time: 0.2
   isCurve_delay: 0
   speed: 0
-  Dash_cooltime: 5
-  Dash_duration: 0.25
-  Dash_knockback_time: 0.1
-  Dash_knockback_speed: -30
-  Dash_sturn_duration: 3
-  Turnback_cooltime: 10
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
   isAbs: 0
-  rotate_force: 90
+  rotate_force: 50
   maxangular: 2
-  doubletap_time: 0.5
-  swipe_distance: 500
-  swipe_time: 0.2
-  m_pos: {x: 0, y: 0, z: 0}
-  m_pos_down: {x: 0, y: 0, z: 0}
 --- !u!114 &1842184349
 MonoBehaviour:
   m_ObjectHideFlags: 0

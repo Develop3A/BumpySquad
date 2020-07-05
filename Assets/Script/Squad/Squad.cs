@@ -4,50 +4,21 @@ using UnityEngine;
 
 public class Squad : Squad_property
 {
-
-    //[Header("Squad Option")]
-    //[Header("분대의 최대속도 관련")]
-    //public float max_straight_speed_persecond;
-    //public float max_curve_speed_persecond;
-    //public float max_dash_speed_persecond;
-    //public float max_knockback_speed_persecond;
-    //public float max_contact_speed_persecond;
-    //[Range(0,1)]public float max_mire_speed_ratio;
-
-
-    //[Header("분대의 가속도 관련")]
-    //public float accel_;
-    //public float curve_decel_;
     float accel;
-    float curve_decel;
-
-    //[Header("분대의 접촉판정 관련")]
-    //public float yellowboxsize;
-    //public float plus_z;
+    //float curve_decel;
+    
     Vector3 box_pos;
     Vector3 box_size;
-
-    //[Header("각도 관련")]
-    //public Transform rot_target;
-    //public float curve_delay_time;
-    //public bool isCurve_delay;
-
-    //[Header("지속시간 관련")]
-    //public float dash_time;
-    //public float knockback_time;
-    //public float sturn_time;
-
-    //    [Header("넉백 관련")]
+    Vector3 knockback_dir;
 
     #region 보이지 않는 값
     [Space(10)]
-   [SerializeField] protected float speed;
+    public float speed;
     protected float knockback_time;
     protected float max_knockback_speed_persecond;
     protected float rotation_speed = 0.025f;
     protected bool curve_isright;
     protected bool isEnemy;
-    protected bool isDash;
     protected bool isContact;
     protected bool isColliderContact;
     protected bool isSturn;
@@ -55,18 +26,17 @@ public class Squad : Squad_property
     bool isActive;
     bool isCurving;
     bool isKnockback;
-    bool isTurnback;
-    Rigidbody rigid;
+    public Rigidbody rigid { get; set; }
     protected Soldier[] soldiers = new Soldier[9];
-#endregion
+    public Skill[] skills;
+    #endregion
 
-    void Awake()
+    public virtual void Ready()
     {
         rigid = GetComponent<Rigidbody>();
-        float f = Application.targetFrameRate;
         speed = 0;
         accel = accel_ ;
-        curve_decel = curve_decel_ ;
+        //curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
     }
@@ -75,6 +45,10 @@ public class Squad : Squad_property
     {
         soldiers[num] = soldier_obj.GetComponent<Soldier>();
         soldier_obj.GetComponent<Soldier>().Squad = this;
+    }
+    public Soldier[] Get_soldier()
+    {
+        return soldiers;
     }
 
     public void Sum_speed(float value)
@@ -88,15 +62,11 @@ public class Squad : Squad_property
             }
             speed = max_knockback_speed_persecond;
         }
-        else if(isDash)
-        {
-            isCurving = false;
-            speed = max_dash_speed_persecond;
-        }
         else if(isCurving )
         {
-            if (speed > max_curve_speed_persecond) speed -= curve_decel;
-            else speed += accel;
+            //if (speed > max_curve_speed_persecond) speed -= curve_decel;
+            //else 
+            speed += accel;
             if(isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_straight_speed_persecond));
             else speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond); ;
         }
@@ -112,6 +82,11 @@ public class Squad : Squad_property
             if (isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_straight_speed_persecond));
             else speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond); ;
         }
+    }
+    public void Set_speed(float value)
+    {
+        speed = value;
+        speed = Mathf.Clamp(speed, speed, value);
     }
 
     public void Set_Active(bool value)
@@ -173,26 +148,64 @@ public class Squad : Squad_property
             if (!isContact) isColliderContact = false;
         }
     }
-    #region 플레이어의 특수상태나 스킬
-    public void Dash(bool value,float duration)
+    public void Contact_check(out List<Squad> ss)
     {
-        if (!value)
-        {
-            if (!IsInvoking("Dash_Off")) Invoke("Dash_Off", duration);
-        }
-        if (isDash) return;
-        else if (value)
-        {
-            if (!IsInvoking("Dash_Off")) Invoke("Dash_Off", duration);
-            isDash = true;
-        }
-    }
-    public void Dash_Off()
-    {
-        isDash = false;
-    }
+        //뒤로 돌아스킬을 사용할때 접촉한 적이 있는지 판단하고 넉백을 주기위한 함수임.
+        box_pos = new Vector3(transform.position.x, transform.position.y, transform.position.z + plus_z);
+        Collider[] colliders = Physics.OverlapBox(box_pos, box_size * 0.5f, transform.rotation);
 
-    public void Knockback(bool value, float time, float knockback_speed,float sturn_time)
+        bool contact = false;
+        ss = new List<Squad>();
+        foreach (Collider c in colliders)
+        {
+            try
+            {
+                Soldier s = c.gameObject.GetComponent<Soldier>();
+
+
+                if (!isEnemy & s.isEnemy)
+                {
+                    contact = true;
+                    //s가 적 용병일경우 
+                    if (ss.Count != 0)
+                    {
+                        bool dupli = false;
+                        foreach (Squad squad in ss)
+                        {
+                            if (s.Squad != squad) continue;
+                            else dupli = true;
+                        }
+
+                        if(!dupli)
+                        {
+                            ss.Add(s.Squad);
+                        }
+                    }
+                    else
+                    {
+                        ss.Add(s.Squad);
+                    }
+                    break;
+                }
+                else if (isEnemy & !s.isEnemy)
+                {
+                    contact = true;
+                    break;
+                }
+
+            }
+            catch
+            {
+                continue;
+            }
+
+            isContact = contact;
+            if (!isContact) isColliderContact = false;
+        }
+    }
+    #region 플레이어의 특수상태나 스킬
+
+    public void Knockback(bool value, float time, float knockback_speed,float sturn_time,Transform player)
     {
         if(!value)
         {
@@ -201,30 +214,24 @@ public class Squad : Squad_property
         if (isKnockback) return;
         else if(value)
         {
-            //Debug.Log(gameObject.name + time.ToString() + knockback_speed.ToString() + sturn_time.ToString());
+            /*
+            if (sturn_time == 0)
+            {
+                GameObject g = new GameObject();
+                g.transform.position = transform.position;
+                g.transform.LookAt(player);
+                knockback_dir = g.transform.rotation.eulerAngles;
+            }
+            else
+            {
+            }
+            */
+            knockback_dir = player.forward;
             isKnockback = true;
             max_knockback_speed_persecond = knockback_speed;
             knockback_time = time;
             sturn_duration = sturn_time;
-            Invoke("Sturn", time);
-        }
-    }
-    public void Knockback(bool value)
-    {
-        if(value)
-        {
-            Debug.LogError("예전 넉백 함수를 쓰고있습니다");
-            return;
-        }
-        if (!value)
-        {
-            if (!IsInvoking("Knockback_Off")) Invoke("Knockback_Off", knockback_time);
-        }
-        if (isKnockback) return;
-        else if (value)
-        {
-            isKnockback = true;
-            Invoke("Sturn", knockback_time);
+            Invoke("Knockback_Off", time);
         }
     }
     public void Knockback_Off()
@@ -263,21 +270,7 @@ public class Squad : Squad_property
             }
         }
     }
-
-    public void Turnback(bool value)
-    {
-        if (!value)
-        {
-            isTurnback = false;
-        }
-
-        if (isTurnback) return;
-        else if (value)
-        {
-            isCurving = false;
-            isTurnback = true;
-        }
-    }
+    
 
     public void Set_Mire(bool value)
     {
@@ -304,24 +297,17 @@ public class Squad : Squad_property
         while (isActive)
         {
             Sum_speed(accel);
-            rigid.velocity = transform.forward * speed;
+            if (isKnockback)
+                rigid.velocity = knockback_dir * -speed * Application.targetFrameRate * Time.deltaTime;
+            else
+                rigid.velocity = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
 
             if (isSturn)
             {
                 yield return new WaitForSeconds(sturn_duration);
                 speed = 0.0f;
                 Sturn(false);
-                Knockback(false);
-            }
-
-            if (isTurnback)
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    transform.Rotate(0, 180, 0);
-                }
-
-                Turnback(false);
+                Knockback_Off();
             }
             else if (isCurving)
             {

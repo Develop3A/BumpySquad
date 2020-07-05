@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Squad_Enemy : Squad {
 
@@ -12,13 +13,13 @@ public class Squad_Enemy : Squad {
     public float rot_speed;
     float min_dis=1.5f;
 
-    void Start()
+    public override void Ready()
     {
+        base.Ready();
         isEnemy = true;
         player = GameObject.FindObjectOfType<Squad_Player>();
-        Set_Attack(true);
+        Set_Move(true);
         rotation_speed = rot_speed;
-        Set_Active(true);
     }
     public override void Curve(Vector3 vec)
     {
@@ -29,12 +30,12 @@ public class Squad_Enemy : Squad {
         Set_Curving(true);
     }
 
-    public void Set_Attack(bool value)
+    public void Set_Move(bool value)
     {
         if(value)
         {
             isAttack = true;
-            StartCoroutine("Attack_to_player");
+            StartCoroutine("Move_to_player");
 
         }
         else
@@ -43,7 +44,7 @@ public class Squad_Enemy : Squad {
         }
     }
 
-    IEnumerator Attack_to_player()
+    IEnumerator Move_to_player()
     {
         while(isAttack)
         {

@@ -24,7 +24,7 @@ public class hole : MonoBehaviour {
 
     void OnTriggerExit(Collider c)
     {
-        Debug.Log(c.gameObject.name + " out hole ");
+        //Debug.Log(c.gameObject.name + " out hole ");
 
         if (c.gameObject.tag == "Enemy" || c.gameObject.tag == "Player")
         {

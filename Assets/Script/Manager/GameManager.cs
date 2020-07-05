@@ -5,56 +5,54 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gm;
-
-    public Transform hp_parent;
-    public GameObject hp;
-
-    public Squad_Player squad_player;
-    public Cooltime_timer Dash, Turnback;
-
+    public List<Squad> squads;
+    
     void Awake()
     {
         gm = this;
-    }
-    void Start()
-    {
-        squad_player = GameObject.FindObjectOfType<Squad_Player>();
+
+        StartCoroutine("Init_game");
     }
 
-    public void Gen_hp_text(Soldier target_s)
+    public void Squad_List_Refresh()
     {
-        GameObject g = Instantiate(hp, hp_parent);
-        g.GetComponent<TextFollow>().s = target_s;
+        squads.Clear();
+        Squad[] ss = FindObjectsOfType<Squad>();
+
+        foreach (Squad s in ss)
+            squads.Add(s);
     }
-
-    public void Use_skill(int value)
+    public void Squad_Ready()
     {
-
-        switch (value)
+        foreach(Squad s in squads)
         {
-            case 0:
-                squad_player.StartCoroutine("Use_Dash");
-                break;
-            case 1:
-                squad_player.StartCoroutine("Use_Turnback");
-                break;
-
+            s.Ready();
         }
     }
-    public void Start_Cooltime_tiemr(int value)
+    public void Squad_SetActive(bool value)
     {
-        switch (value)
+        foreach(Squad s in squads)
         {
-            case 0:
-                Dash.Start_Cooltime();
-                break;
-            case 1:
-                Turnback.Start_Cooltime();
-                break;
-
+            s.Set_Active(value);
         }
-
     }
+
+    IEnumerator Init_game()
+    {
+        Squad_List_Refresh();
+        //Debug.Log("Refresh");
+        yield return new WaitForSeconds(0.5f);
+        Squad_Ready();
+        //Debug.Log("Ready");
+        yield return new WaitForSeconds(0.5f);
+        Squad_SetActive(true);
+
+
+        yield return null;
+    }
+
+
+    
 
 
 
