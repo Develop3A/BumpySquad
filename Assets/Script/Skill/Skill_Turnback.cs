@@ -18,6 +18,7 @@ public class Skill_Turnback : Skill {
         base.First();
 
         //임시로 여기에 붙임
+        Skill_Number = 1;
         turnback_knockback_time = 0.1f;
         turnback_knockback_speed = -30.0f;
 
@@ -79,7 +80,7 @@ public class Skill_Turnback : Skill {
             squad.Contact_check(out contact_squads);
             foreach (Squad s in contact_squads)
             {
-                s.Knockback(true, turnback_knockback_time, turnback_knockback_speed, 0, transform);
+                s.Set_Knockback(true, turnback_knockback_time, turnback_knockback_speed, 0, transform);
             }
             transform.Rotate(0, 180, 0);
             #endregion

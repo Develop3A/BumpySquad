@@ -616,15 +616,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -53.36
+      value: -52.8
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -274.06195
+      value: -274
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1014,7 +1014,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.24
+      value: 6.56
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1022,7 +1022,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -276.92
+      value: -281.67
       objectReference: {fileID: 0}
     - target: {fileID: 4704306853079640, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2061,7 +2061,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 824896442}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 20}
+  m_LocalPosition: {x: 0, y: -0.28999996, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1678962820}
@@ -2118,6 +2118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1cfbf895abfe44ba15efcfb42b3e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Squad_Type: 0
   max_straight_speed_persecond: 7
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5
@@ -2299,7 +2300,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.61
+      value: 8.68
       objectReference: {fileID: 0}
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2307,7 +2308,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -262.68
+      value: -256.91
       objectReference: {fileID: 0}
     - target: {fileID: 4396772501203524, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2814,7 +2815,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1000297598}
   - component: {fileID: 1000297597}
-  - component: {fileID: 1000297596}
   - component: {fileID: 1000297595}
   - component: {fileID: 1000297594}
   m_Layer: 0
@@ -2822,7 +2822,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!114 &1000297594
 MonoBehaviour:
@@ -2847,41 +2847,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1000297596
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1000297593}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 2100000, guid: 7ca2efaec0e1f3a4c8ee75ed770c8284, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!33 &1000297597
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4112,6 +4077,7 @@ GameObject:
   - component: {fileID: 1808313426}
   - component: {fileID: 1808313425}
   - component: {fileID: 1808313428}
+  - component: {fileID: 1808313430}
   m_Layer: 0
   m_Name: Squad(Enemy) (1)
   m_TagString: Enemy
@@ -4130,6 +4096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1cfbf895abfe44ba15efcfb42b3e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Squad_Type: 0
   max_straight_speed_persecond: 7
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5
@@ -4165,7 +4132,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1808313424}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -6.5, y: 0, z: 20}
+  m_LocalPosition: {x: -14.65, y: -0.29, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 811401028}
@@ -4196,6 +4163,27 @@ MonoBehaviour:
   - sword
   - sword
   - sword
+--- !u!195 &1808313430
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1808313424}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 2
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &1835988089
 Prefab:
   m_ObjectHideFlags: 0
@@ -4284,6 +4272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ebf95b89b7dc98469123a5b2350350e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Squad_Type: 0
   max_straight_speed_persecond: 7
   max_contact_speed_persecond: 1
   max_mire_speed_ratio: 0.5

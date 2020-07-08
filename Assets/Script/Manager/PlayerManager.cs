@@ -35,12 +35,14 @@ public class PlayerManager : MonoBehaviour {
                 sp.gameObject.AddComponent<Skill_Dash>();
                 //엑셀을 참조하든 어쩌든 수치수정가능하게
                 sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Dash>();
+                sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
                 ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
                 break;
             case 1:
                 sp.gameObject.AddComponent<Skill_Turnback>();
                 //엑셀을 참조하든 어쩌든 수치수정가능하게
                 sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Turnback>();
+                sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
                 ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
                 break;
         }

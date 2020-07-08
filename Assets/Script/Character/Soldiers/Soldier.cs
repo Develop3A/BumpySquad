@@ -111,12 +111,12 @@ public class Soldier : MonoBehaviour
             {
                 if (updown)
                 {
-                    anim.transform.Translate(Vector3.up * 0.2f);
+                    anim.transform.Translate(transform.position + Vector3.up * 0.2f);
                     updown = false;
                 }
                 else
                 {
-                    anim.transform.Translate(Vector3.down * 0.2f);
+                    anim.transform.position = (transform.position);
                     updown = true;
                 }
 

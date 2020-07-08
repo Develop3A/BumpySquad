@@ -7,10 +7,6 @@ public class Squad_Player : Squad {
 
     [Space(15)]
     [Header("Player Option")]
-    [Header("스킬 옵션")]
-    
-
-    [Space(20)]
     [Header("각도")]
     public bool isAbs;
     public float rotate_force;
@@ -28,6 +24,38 @@ public class Squad_Player : Squad {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         rotation_speed = rotate_force / f;
         Set_Curve_delay_On();
+    }
+
+    public override void Set_Active(bool value)
+    {
+        if (value)
+        {
+            isActive = true;
+            StartCoroutine("Active");
+        }
+        else
+        {
+            isActive = false;
+        }
+    }
+
+    protected override IEnumerator Active()
+    {
+        while (isActive)
+        {
+            Sum_speed(accel);
+            rigid.velocity = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
+
+            if (isCurving)
+            {
+                if (curve_isright && !isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
+                else if (!isCurve_delay) transform.Rotate(Vector3.up * -rotation_speed);
+            }
+            Contact_Check();
+
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForEndOfFrame();
     }
 
     void Update()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Squad : Squad_property
 {
-    float accel;
+    protected float accel;
     //float curve_decel;
     
     Vector3 box_pos;
@@ -14,18 +14,18 @@ public class Squad : Squad_property
     #region 보이지 않는 값
     [Space(10)]
     public float speed;
-    protected float knockback_time;
-    protected float max_knockback_speed_persecond;
+    protected float knockback_time; //넉백되는 시간
+    protected float max_knockback_speed_persecond; //넉백되는 속도 (초당 N만큼)
     protected float rotation_speed = 0.025f;
     protected bool curve_isright;
     protected bool isEnemy;
     protected bool isContact;
     protected bool isColliderContact;
     protected bool isSturn;
-    bool isMire;
-    bool isActive;
-    bool isCurving;
-    bool isKnockback;
+    protected bool isMire;
+    protected bool isActive;
+    protected bool isCurving;
+    protected bool isKnockback;
     public Rigidbody rigid { get; set; }
     protected Soldier[] soldiers = new Soldier[9];
     public Skill[] skills;
@@ -39,6 +39,11 @@ public class Squad : Squad_property
         //curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
+    }
+
+    public virtual void Set_Active(bool value)
+    {
+        Debug.Log("활성화 됐을 때의 코드를 작성해 주세요.");
     }
 
     public void Set_soldier_num(GameObject soldier_obj,int num)
@@ -89,18 +94,6 @@ public class Squad : Squad_property
         speed = Mathf.Clamp(speed, speed, value);
     }
 
-    public void Set_Active(bool value)
-    {
-        if(value)
-        {
-            isActive = true;
-            StartCoroutine("Active");
-        }
-        else
-        {
-            isActive = false;
-        }
-    }
     public void Set_Curving(bool value)
     {
         isCurving = value;
@@ -205,7 +198,7 @@ public class Squad : Squad_property
     }
     #region 플레이어의 특수상태나 스킬
 
-    public void Knockback(bool value, float time, float knockback_speed,float sturn_time,Transform player)
+    public virtual void Set_Knockback(bool value, float time, float knockback_speed,float sturn_time,Transform player)
     {
         if(!value)
         {
@@ -227,23 +220,23 @@ public class Squad : Squad_property
             }
             */
             knockback_dir = player.forward;
-            isKnockback = true;
             max_knockback_speed_persecond = knockback_speed;
             knockback_time = time;
             sturn_duration = sturn_time;
-            Invoke("Knockback_Off", time);
+            isKnockback = true;
+            StartCoroutine("Knockback");
         }
     }
-    public void Knockback_Off()
+    public virtual void Set_Knockback_Off()
     {
         isKnockback = false;
     }
 
-    public void Sturn()
+    public void Set_Sturn()
     {
-        Sturn(true);
+        Set_Sturn(true);
     }
-    public void Sturn(bool value)
+    public void Set_Sturn(bool value)
     {
         if (!value)
         {
@@ -254,6 +247,7 @@ public class Squad : Squad_property
         else if (value)
         {
             isSturn = true;
+            StartCoroutine("Sturn");
             Sturn_soldiers();
         }
     }
@@ -292,48 +286,33 @@ public class Squad : Squad_property
         isCurve_delay = false;
     }
 
-    IEnumerator Active()
+    protected virtual IEnumerator Active()
     {
-        while (isActive)
-        {
-            Sum_speed(accel);
-            if (isKnockback)
-                rigid.velocity = knockback_dir * -speed * Application.targetFrameRate * Time.deltaTime;
-            else
-                rigid.velocity = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
-
-            if (isSturn)
-            {
-                yield return new WaitForSeconds(sturn_duration);
-                speed = 0.0f;
-                Sturn(false);
-                Knockback_Off();
-            }
-            else if (isCurving)
-            {
-                if (isEnemy)
-                {
-                    Quaternion q = Quaternion.Slerp(transform.rotation, rot_target.rotation, rotation_speed );
-                    Quaternion ori_q = transform.rotation;
-                    transform.rotation = q;
-
-                    if (Mathf.Abs(Mathf.Abs(transform.eulerAngles.y) - Mathf.Abs(ori_q.eulerAngles.y)) < 0.1f)
-                        isCurving = false;
-                }
-                else
-                {
-                    if (curve_isright &&!isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
-                    else if(!isCurve_delay) transform.Rotate(Vector3.up *-rotation_speed);
-                }
-            }
-            Contact_Check();
-
-            yield return new WaitForEndOfFrame();
-        }
         yield return new WaitForEndOfFrame();
     }
-
-
+    IEnumerator Knockback()
+    {
+        float present_time = Time.time;
+        while ((Time.time < present_time + knockback_time))
+        {
+            if (!isKnockback) break;
+            rigid.velocity = knockback_dir * -max_knockback_speed_persecond * Application.targetFrameRate * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        rigid.velocity = Vector3.zero;
+        Set_Knockback_Off();
+        Set_Sturn(true);
+        yield return null;
+    }
+    IEnumerator Sturn()
+    {
+        if (isSturn)
+        {
+            yield return new WaitForSeconds(sturn_duration);
+            speed = 0.0f;
+            Set_Sturn(false);
+        }
+    }
 
     void OnDrawGizmos()
     {

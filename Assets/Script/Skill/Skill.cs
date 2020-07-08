@@ -6,8 +6,8 @@ using UnityEngine;
 public class Skill : MonoBehaviour {
 
     public int Skill_Number;
+    public int Skill_Order;
     protected Squad squad;
-    protected int skill_sequence;
     public float cooltime;
 
     void Awake()

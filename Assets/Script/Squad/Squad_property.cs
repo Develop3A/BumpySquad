@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Squad_property : MonoBehaviour {
     
-
+    public enum Squad_Category { Full_squad,Solo_squad }
     [Header("Squad Option")]
+    public Squad_Category Squad_Type = Squad_Category.Full_squad;
+    [Space(10)]
     [Header("분대의 최대속도 관련")]
     public float max_straight_speed_persecond;
     //public float max_curve_speed_persecond;

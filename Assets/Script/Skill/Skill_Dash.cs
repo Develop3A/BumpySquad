@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Skill_Dash : Skill
 {
-
     bool can_dash;
     public float max_dash_speed_persecond;
-
     protected bool isDash;
     public float Dash_duration;
     public float Dash_knockback_time;
@@ -22,6 +20,7 @@ public class Skill_Dash : Skill
     {
         base.First();
 
+        Skill_Number = 0;
         max_dash_speed_persecond = 15;
         cooltime = 5;
         Dash_duration = 0.25f;
@@ -43,7 +42,7 @@ public class Skill_Dash : Skill
             else if (can_doubletap && !isDash)
             {
                 Can_Doubletap_Off();
-                StartCoroutine("Use_Dash");
+                Use();
                 return;
             }
         }
@@ -65,6 +64,7 @@ public class Skill_Dash : Skill
         else
         {
             isDash = true;
+            PlayerManager.pm.Start_Cooltime_timer(Skill_Order);
             StartCoroutine("Use_Dash");
         }
     }
@@ -88,6 +88,7 @@ public class Skill_Dash : Skill
             isDash = false;
             #endregion
             yield return new WaitForSeconds(cooltime);
+            isDash = false;
             can_dash = true;
         }
 
@@ -108,11 +109,14 @@ public class Skill_Dash : Skill
                 {
                     if (soldiers[0] != null | soldiers[1] != null | soldiers[2] != null)
                     {
-                        Debug.Log(i);
+                        //Debug.Log(i);
                         if (target.tag == "Enemy")
                         {
-                            target.GetComponent<Squad>().Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration, transform);
-                            target.GetComponent<Squad>().Invoke("Sturn", Dash_knockback_time);
+                            target.GetComponent<Squad>().Set_Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration, transform);
+                            if (target.GetComponent<Squad>().Squad_Type == Squad_property.Squad_Category.Solo_squad)
+                            {
+                                continue;
+                            }
                         }
                         isDash = false;
                         squad.Set_speed(0);
@@ -126,8 +130,11 @@ public class Skill_Dash : Skill
                         Debug.Log(i);
                         if (target.tag == "Enemy")
                         {
-                            target.GetComponent<Squad>().Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration, transform);
-                            target.GetComponent<Squad>().Invoke("Sturn", Dash_knockback_time);
+                            target.GetComponent<Squad>().Set_Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration, transform);
+                            if (target.GetComponent<Squad>().Squad_Type == Squad_property.Squad_Category.Solo_squad)
+                            {
+                                continue;
+                            }
                         }
                         isDash = false;
                         squad.Set_speed(0);
@@ -141,8 +148,11 @@ public class Skill_Dash : Skill
                         Debug.Log(i);
                         if (target.tag == "Enemy")
                         {
-                            target.GetComponent<Squad>().Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration, transform);
-                            target.GetComponent<Squad>().Invoke("Sturn", Dash_knockback_time);
+                            target.GetComponent<Squad>().Set_Knockback(true, Dash_knockback_time, Dash_knockback_speed, Dash_sturn_duration, transform);
+                            if (target.GetComponent<Squad>().Squad_Type == Squad_property.Squad_Category.Solo_squad)
+                            {
+                                continue;
+                            }
                         }
                         isDash = false;
                         squad.Set_speed(0);
