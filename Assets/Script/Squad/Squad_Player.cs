@@ -44,7 +44,9 @@ public class Squad_Player : Squad {
         while (isActive)
         {
             Sum_speed(accel);
-            rigid.velocity = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
+            float yv = rigid.velocity.y;
+            Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
+            rigid.velocity = new Vector3(vel.x, yv, vel.z);
 
             if (isCurving)
             {

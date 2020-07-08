@@ -59,6 +59,7 @@ public class Skill_Turnback : Skill {
     public override void Use()
     {
         StartCoroutine("Use_Turnback");
+        base.Use();
     }
 
     void Can_Swipe_On()

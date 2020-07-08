@@ -64,9 +64,9 @@ public class Skill_Dash : Skill
         else
         {
             isDash = true;
-            PlayerManager.pm.Start_Cooltime_timer(Skill_Order);
             StartCoroutine("Use_Dash");
         }
+        base.Use();
     }
     IEnumerator Use_Dash()
     {

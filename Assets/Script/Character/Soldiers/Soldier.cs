@@ -24,14 +24,11 @@ public class Soldier : MonoBehaviour
     protected bool isFighting;
 
     public bool isEnemy;
-
-    void Awake()
+    
+    public void Ready()
     {
         hp = max_hp;
         Set_Fighting(true);
-    }
-    void Start()
-    {
         PlayerManager.pm.Gen_hp_text(GetComponent<Soldier>());
     }
 
@@ -111,12 +108,12 @@ public class Soldier : MonoBehaviour
             {
                 if (updown)
                 {
-                    anim.transform.Translate(transform.position + Vector3.up * 0.2f);
+                    anim.transform.position = transform.position + (Vector3.up * 0.2f) +(Vector3.up*-0.5f);
                     updown = false;
                 }
                 else
                 {
-                    anim.transform.position = (transform.position);
+                    anim.transform.position = transform.position + (Vector3.up * -0.5f);
                     updown = true;
                 }
 

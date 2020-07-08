@@ -39,6 +39,9 @@ public class Squad : Squad_property
         //curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
+
+        foreach(Soldier s in soldiers)
+            s.Ready();
     }
 
     public virtual void Set_Active(bool value)
@@ -270,7 +273,7 @@ public class Squad : Squad_property
     {
         isMire = value;
     }
-    float Clamp_Mire_speed(float f)
+    protected float Clamp_Mire_speed(float f)
     {
         return f * max_mire_speed_ratio;
     }
@@ -304,7 +307,7 @@ public class Squad : Squad_property
         Set_Sturn(true);
         yield return null;
     }
-    IEnumerator Sturn()
+    public virtual IEnumerator Sturn()
     {
         if (isSturn)
         {

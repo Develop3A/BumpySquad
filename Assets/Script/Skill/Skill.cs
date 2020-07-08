@@ -22,7 +22,7 @@ public class Skill : MonoBehaviour {
 
     public virtual void Use()
     {
-
+        PlayerManager.pm.Start_Cooltime_timer(Skill_Order);
     }
 
 }

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         gm = this;
-
+        Application.targetFrameRate = 40;
         StartCoroutine("Init_game");
     }
 
