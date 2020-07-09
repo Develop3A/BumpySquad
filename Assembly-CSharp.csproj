@@ -70,8 +70,11 @@
      <Compile Include="Assets\Script\Skill\Skill.cs" />
      <Compile Include="Assets\Script\Skill\Skill_Dash.cs" />
      <Compile Include="Assets\Script\Skill\Skill_Turnback.cs" />
+     <Compile Include="Assets\Script\Squad\Enemy_AI\AI_Chase.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\AI_ChaseInRange.cs" />
+     <Compile Include="Assets\Script\Squad\Enemy_AI\AI_KeepDistance.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\AI_Patrol.cs" />
+     <Compile Include="Assets\Script\Squad\Enemy_AI\AI_Stay.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\Enemy_AI.cs" />
      <Compile Include="Assets\Script\Squad\Squad.cs" />
      <Compile Include="Assets\Script\Squad\Squad_Enemy.cs" />

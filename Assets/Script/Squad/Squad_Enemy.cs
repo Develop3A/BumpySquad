@@ -13,10 +13,9 @@ public class Squad_Enemy : Squad {
     [Space(15)]
     [Header("Enemy Option")]
     public bool isMoving;
-
-    [Space(20)]
-    [Header("인공지능 타입 - 공백 시 기본 AI")]
-    public Enemy_AI AI;
+    
+    //이 적분대의 AI
+    protected Enemy_AI AI;
 
     public override void Ready()
     {
@@ -33,6 +32,7 @@ public class Squad_Enemy : Squad {
     public override void Set_Active(bool value)
     {
         isActive = value;
+        StartCoroutine("Active");
         Set_Move(value);
     }
     /*Curve 이전 각도 계산

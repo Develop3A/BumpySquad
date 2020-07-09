@@ -8,12 +8,9 @@ public class AI_ChaseInRange : Enemy_AI {
 
     public override void AI_Act()
     {
-        if (isActive) return;
-        else
-        {
-            isActive = true;
-            StartCoroutine("Chase_In_Range");
-        }
+        base.AI_Act();
+        isActive = true;
+        StartCoroutine("Chase_In_Range");
     }
     public override void AI_Act_off()
     {
