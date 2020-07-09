@@ -2383,8 +2383,8 @@ GameObject:
   - component: {fileID: 824896443}
   - component: {fileID: 824896444}
   - component: {fileID: 824896446}
-  - component: {fileID: 824896448}
   - component: {fileID: 824896445}
+  - component: {fileID: 824896448}
   - component: {fileID: 824896447}
   m_Layer: 0
   m_Name: Squad(Enemy) CirclePatrol
@@ -2392,7 +2392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &824896443
 Transform:
   m_ObjectHideFlags: 0
@@ -2462,13 +2462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_straight_speed_persecond: 7
-  max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0.5
+  max_speed: 10
+  mire_speed_ratio: 0.5
   accel_: 5
-  yellowboxsize: 3.5
-  plus_z: 0
-  rot_target: {fileID: 1678962820}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
@@ -3296,8 +3292,8 @@ GameObject:
   - component: {fileID: 974983009}
   - component: {fileID: 974983014}
   - component: {fileID: 974983013}
-  - component: {fileID: 974983012}
   - component: {fileID: 974983011}
+  - component: {fileID: 974983012}
   - component: {fileID: 974983010}
   m_Layer: 0
   m_Name: Squad(Enemy) OrdinalPatrol (1)
@@ -3305,7 +3301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &974983009
 Transform:
   m_ObjectHideFlags: 0
@@ -3404,13 +3400,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_straight_speed_persecond: 7
-  max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0.5
+  max_speed: 10
+  mire_speed_ratio: 0.5
   accel_: 5
-  yellowboxsize: 3.5
-  plus_z: 0
-  rot_target: {fileID: 941237020}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
@@ -3880,8 +3872,8 @@ GameObject:
   - component: {fileID: 1101625720}
   - component: {fileID: 1101625725}
   - component: {fileID: 1101625724}
-  - component: {fileID: 1101625723}
   - component: {fileID: 1101625722}
+  - component: {fileID: 1101625723}
   - component: {fileID: 1101625721}
   m_Layer: 0
   m_Name: Squad(Enemy) Stay
@@ -3889,7 +3881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1101625720
 Transform:
   m_ObjectHideFlags: 0
@@ -3973,13 +3965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_straight_speed_persecond: 7
-  max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0.5
+  max_speed: 10
+  mire_speed_ratio: 0.5
   accel_: 5
-  yellowboxsize: 3.5
-  plus_z: 0
-  rot_target: {fileID: 439593233}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
@@ -4119,15 +4107,15 @@ GameObject:
   - component: {fileID: 1218612444}
   - component: {fileID: 1218612443}
   - component: {fileID: 1218612442}
-  - component: {fileID: 1218612441}
   - component: {fileID: 1218612440}
+  - component: {fileID: 1218612441}
   m_Layer: 0
   m_Name: Squad(Enemy) KeepDistance
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1218612439
 Transform:
   m_ObjectHideFlags: 0
@@ -4217,13 +4205,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_straight_speed_persecond: 7
-  max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0.5
+  max_speed: 10
+  mire_speed_ratio: 0.5
   accel_: 5
-  yellowboxsize: 3.5
-  plus_z: 0
-  rot_target: {fileID: 1493109138}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
@@ -4666,10 +4650,6 @@ Prefab:
     - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -48.000004
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
@@ -5491,8 +5471,8 @@ GameObject:
   - component: {fileID: 1808313427}
   - component: {fileID: 1808313426}
   - component: {fileID: 1808313425}
-  - component: {fileID: 1808313429}
   - component: {fileID: 1808313428}
+  - component: {fileID: 1808313429}
   - component: {fileID: 1808313430}
   m_Layer: 0
   m_Name: Squad(Enemy) ChaseInRange
@@ -5513,13 +5493,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_straight_speed_persecond: 7
-  max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0.5
+  max_speed: 10
+  mire_speed_ratio: 0.5
   accel_: 5
-  yellowboxsize: 3.5
-  plus_z: 0
-  rot_target: {fileID: 811401028}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
@@ -5976,8 +5952,8 @@ GameObject:
   - component: {fileID: 1948638430}
   - component: {fileID: 1948638435}
   - component: {fileID: 1948638434}
-  - component: {fileID: 1948638433}
   - component: {fileID: 1948638432}
+  - component: {fileID: 1948638433}
   - component: {fileID: 1948638431}
   m_Layer: 0
   m_Name: Squad(Enemy) Chase
@@ -5985,7 +5961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1948638430
 Transform:
   m_ObjectHideFlags: 0
@@ -6069,13 +6045,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_straight_speed_persecond: 7
-  max_contact_speed_persecond: 1
-  max_mire_speed_ratio: 0.5
+  max_speed: 10
+  mire_speed_ratio: 0.5
   accel_: 5
-  yellowboxsize: 3.5
-  plus_z: 0
-  rot_target: {fileID: 163437698}
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0

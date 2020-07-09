@@ -14,6 +14,9 @@ public class Squad : Squad_property
     #region 보이지 않는 값
     [Space(10)]
     public float speed;
+    public Skill[] skills;
+    public Rigidbody rigid { get; set; }
+
     protected float knockback_time; //넉백되는 시간
     protected float max_knockback_speed_persecond; //넉백되는 속도 (초당 N만큼)
     protected float rotation_speed = 0.025f;
@@ -26,16 +29,15 @@ public class Squad : Squad_property
     protected bool isActive;
     protected bool isCurving;
     protected bool isKnockback;
-    public Rigidbody rigid { get; set; }
     protected Soldier[] soldiers = new Soldier[9];
-    public Skill[] skills;
     #endregion
 
     public virtual void Ready()
     {
         rigid = GetComponent<Rigidbody>();
+        if (!rot_target) rot_target = transform.GetChild(0);
         speed = 0;
-        accel = accel_ ;
+        accel = accel_;
         //curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
@@ -48,7 +50,7 @@ public class Squad : Squad_property
     {
         Debug.Log("활성화 됐을 때의 코드를 작성해 주세요.");
     }
-
+    
     public void Set_soldier_num(GameObject soldier_obj,int num)
     {
         soldiers[num] = soldier_obj.GetComponent<Soldier>();
@@ -75,20 +77,22 @@ public class Squad : Squad_property
             //if (speed > max_curve_speed_persecond) speed -= curve_decel;
             //else 
             speed += accel;
-            if(isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_straight_speed_persecond));
-            else speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond); ;
+            if(isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_speed));
+            else speed = Mathf.Clamp(speed, 0, max_speed); ;
         }
+        /*
         else if(isContact& isColliderContact)
         {
             if (speed > max_contact_speed_persecond) speed = max_contact_speed_persecond;
             else speed += accel;
             speed = Mathf.Clamp(speed, 0, max_contact_speed_persecond);
         }
+        */
         else
         {
             speed += value;
-            if (isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_straight_speed_persecond));
-            else speed = Mathf.Clamp(speed, 0, max_straight_speed_persecond); ;
+            if (isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_speed));
+            else speed = Mathf.Clamp(speed, 0, max_speed); ;
         }
     }
     public void Set_speed(float value)
@@ -210,19 +214,11 @@ public class Squad : Squad_property
         if (isKnockback) return;
         else if(value)
         {
-            /*
-            if (sturn_time == 0)
-            {
                 GameObject g = new GameObject();
                 g.transform.position = transform.position;
                 g.transform.LookAt(player);
-                knockback_dir = g.transform.rotation.eulerAngles;
-            }
-            else
-            {
-            }
-            */
-            knockback_dir = player.forward;
+                knockback_dir = -g.transform.forward;
+            //knockback_dir = player.forward;
             max_knockback_speed_persecond = knockback_speed;
             knockback_time = time;
             sturn_duration = sturn_time;
@@ -275,7 +271,7 @@ public class Squad : Squad_property
     }
     protected float Clamp_Mire_speed(float f)
     {
-        return f * max_mire_speed_ratio;
+        return f * mire_speed_ratio;
     }
 #endregion
 

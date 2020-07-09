@@ -18,6 +18,7 @@ public class Cooltime_timer : MonoBehaviour {
 
     public void Start_Cooltime()
     {
+        if (present > 0) return;
         present = cool_time;
         StartCoroutine("Active");
     }

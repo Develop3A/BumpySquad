@@ -10,7 +10,7 @@ public class Squad_Player : Squad {
     [Header("각도")]
     public bool isAbs;
     public float rotate_force;
-    public float maxangular;
+    protected float maxangular =2;
     Camera mainCamera;
 
 
@@ -18,9 +18,10 @@ public class Squad_Player : Squad {
     
     public override void Ready()
     {
-        base.Ready();
-        GetComponent<Rigidbody>().maxAngularVelocity = maxangular;
         int f = Application.targetFrameRate;
+        base.Ready();
+        accel = accel_ / f;
+        GetComponent<Rigidbody>().maxAngularVelocity = maxangular;
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         rotation_speed = rotate_force / f;
         Set_Curve_delay_On();

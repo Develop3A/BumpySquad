@@ -23,7 +23,7 @@ public class Squad_Enemy : Squad {
         isEnemy = true;
         player = FindObjectOfType<Squad_Player>();
         nav = GetComponent<NavMeshAgent>();
-        nav.speed = max_straight_speed_persecond;
+        nav.speed = max_speed;
         nav.acceleration = accel;
 
         AI = GetComponent<Enemy_AI>();
@@ -98,8 +98,8 @@ public override void Curve(Vector3 vec)
             if(isSturn)
                 rigid.velocity = Vector3.zero;
             
-            float x = 0; x = Mathf.Clamp(x, -max_straight_speed_persecond, max_straight_speed_persecond);
-            float z = 0; z = Mathf.Clamp(z, -max_straight_speed_persecond, max_straight_speed_persecond);
+            float x = 0; x = Mathf.Clamp(x, -max_speed, max_speed);
+            float z = 0; z = Mathf.Clamp(z, -max_speed, max_speed);
             if (isMire)
             {
                 x = Clamp_Mire_speed(x);
@@ -111,27 +111,41 @@ public override void Curve(Vector3 vec)
         }
     }
 
+    public override void Set_Knockback(bool value, float time, float knockback_speed, float sturn_time, Transform player)
+    {
+        base.Set_Knockback(value, time, knockback_speed, sturn_time, player);
+        if(value)
+        {
+            nav_Sturn(true);
+        }
+    }
     public void nav_Sturn(bool value)
     {
         //스턴일때 네비게이션을 멈춤
-        if(value)
+        nav.isStopped = value;
+        if (value)
         {
+            Set_Active(false);
             nav.velocity = Vector3.zero;
-            nav.SetDestination(transform.position);
-            Set_Move(false);
+            rigid.velocity = Vector3.zero;
         }
         else
         {
-            //Set_Move를 안썼을경우에 대비해서 써둠.
-            Set_Move(true);
         }
     }
     public override IEnumerator Sturn()
     {
-        nav_Sturn(true);
-        yield return new WaitForSeconds(sturn_duration);
+        float present_time = Time.time;
+        //Debug.Log(sturn_duration);
+        while (Time.time < present_time + sturn_duration)
+        {
+            nav_Sturn(true);
+            yield return new WaitForEndOfFrame();
+        }
         Set_Sturn(false);
         nav_Sturn(false);
+        Set_Active(true);
+
         yield return null;
     }
 

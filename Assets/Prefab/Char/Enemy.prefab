@@ -114,4 +114,6 @@ MonoBehaviour:
   attack_speed: 1
   soldier_sturn_time: 3
   Squad: {fileID: 0}
+  anim: {fileID: 0}
+  running_particle: {fileID: 0}
   isEnemy: 1

@@ -6,6 +6,7 @@ public class Skill_Turnback : Skill {
 
     bool can_turnback;
     bool can_swipe = false;
+    public float turnback_knockback_range= 3;
     float turnback_knockback_time;
     float turnback_knockback_speed;
     public float swipe_distance;
@@ -77,18 +78,29 @@ public class Skill_Turnback : Skill {
         {
             can_turnback = false;
             #region 스킬의 내용
-            List<Squad> contact_squads;
-            squad.Contact_check(out contact_squads);
-            foreach (Squad s in contact_squads)
+            Collider[] contacts = Physics.OverlapSphere(transform.position, turnback_knockback_range);
+            foreach(Collider c in contacts)
             {
-                s.Set_Knockback(true, turnback_knockback_time, turnback_knockback_speed, 0, transform);
+                if (c.tag == "Enemy")
+                {
+                    c.GetComponent<Soldier>().Squad.Set_Knockback(true, turnback_knockback_time, turnback_knockback_speed, 0, transform);
+                    //Debug.Log(c.gameObject.name);
+                }
             }
             transform.Rotate(0, 180, 0);
+            squad.Set_speed(0);
             #endregion
             yield return new WaitForSeconds(cooltime);
 
             can_turnback = true;
         }
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Vector3.zero, turnback_knockback_range);
+    }
+
     #endregion
 }
