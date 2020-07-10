@@ -1,0 +1,4 @@
+obj_name,transform_parent,position.x,position.y,position.z,rotation.x,rotation.y,rotation.z,scale.x,scale.y,scale.z
+Rock02,objs,-17.75,-0.5,7.43,0,-79,0,1,1,1
+Rock03,objs,5,0,5,0,0,0,1,1,1
+TallRock00,objs,-5,0,-5,0,0,0,1,1,1

@@ -319,4 +319,5 @@ public class Squad : Squad_property
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(Vector3.zero+ new Vector3(0,0,plus_z),box_size);
     }
+
 }

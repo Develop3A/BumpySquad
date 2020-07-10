@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1552422339058982}
+  m_IsPrefabAsset: 1
+--- !u!1 &1552422339058982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4941643360813698}
+  - component: {fileID: 114905764566216364}
+  - component: {fileID: 114481551418861244}
+  m_Layer: 0
+  m_Name: Obj_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4941643360813698
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1552422339058982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114481551418861244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1552422339058982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d29d2c926f0cea4db03f5d193642d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: test
+--- !u!114 &114905764566216364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1552422339058982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb662ebe3da51c49877eeb3d5a7dc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rock:
+  - {fileID: 1917295897332428, guid: 1c24fc023c681aa428ef01f45c1da0b2, type: 2}
+  - {fileID: 1024915172130328, guid: b646c967da3d34448b1be007b73314e5, type: 2}
+  - {fileID: 1516299692183166, guid: f88f62117958bb14497e721885afce02, type: 2}
+  - {fileID: 1872461114597780, guid: b37ef060283c5a548a22db34e4fa0e79, type: 2}
+  TallRock:
+  - {fileID: 1458256343171992, guid: 1e5f6223d14a2ed4d956bc2cd2d0270b, type: 2}
+  - {fileID: 1413014141993378, guid: 5b3c1e08e709b4c4e868e7e3ec70dd30, type: 2}
+  - {fileID: 1547203818879082, guid: b4b315390c6050448a1a8c736df50029, type: 2}

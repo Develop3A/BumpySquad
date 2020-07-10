@@ -12,9 +12,6 @@ public class Squad_Player : Squad {
     public float rotate_force;
     protected float maxangular =2;
     Camera mainCamera;
-
-
-    
     
     public override void Ready()
     {
