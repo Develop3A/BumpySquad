@@ -12,7 +12,8 @@ public class Squad_Enemy : Squad {
 
     [Space(15)]
     [Header("Enemy Option")]
-    public bool isMoving;
+    [HideInInspector]public bool isMoving;
+    public float Angular_speed= 45.0f;
     
     //이 적분대의 AI
     protected Enemy_AI AI;
@@ -128,9 +129,12 @@ public override void Curve(Vector3 vec)
             Set_Active(false);
             nav.velocity = Vector3.zero;
             rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
+            //nav.angularSpeed = 0.0f;
         }
         else
         {
+            //nav.angularSpeed = Angular_speed;
         }
     }
     public override IEnumerator Sturn()

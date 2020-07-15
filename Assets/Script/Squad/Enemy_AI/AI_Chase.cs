@@ -18,7 +18,7 @@ public class AI_Chase : Enemy_AI {
 
     IEnumerator Chase()
     {
-        while(isActive)
+        while (isActive)
         {
             if(!se._isActive)
             {

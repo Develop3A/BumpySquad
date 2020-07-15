@@ -27,24 +27,31 @@ public class PlayerManager : MonoBehaviour {
     public void Set_skill(int skill_number, Cooltime_timer ct)
     {
         //게임시작 이전에 UDM에서 호출하여 플레이어의 스킬을 설정함.
-        switch (skill_number)
+        if (sp)
         {
-            case -1:
-                break;
-            case 0:
-                sp.gameObject.AddComponent<Skill_Dash>();
-                //엑셀을 참조하든 어쩌든 수치수정가능하게
-                sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Dash>();
-                sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
-                ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
-                break;
-            case 1:
-                sp.gameObject.AddComponent<Skill_Turnback>();
-                //엑셀을 참조하든 어쩌든 수치수정가능하게
-                sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Turnback>();
-                sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
-                ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
-                break;
+            switch (skill_number)
+            {
+                case -1:
+                    break;
+                case 0:
+                    sp.gameObject.AddComponent<Skill_Dash>();
+                    //엑셀을 참조하든 어쩌든 수치수정가능하게
+                    sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Dash>();
+                    sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
+                    ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
+                    break;
+                case 1:
+                    sp.gameObject.AddComponent<Skill_Turnback>();
+                    //엑셀을 참조하든 어쩌든 수치수정가능하게
+                    sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Turnback>();
+                    sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
+                    ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("스킬 : 플레이어 스쿼드를 찾을 수 없습니다");
         }
     }
     public void Use_skill(int value)

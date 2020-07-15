@@ -62,11 +62,11 @@
      <Compile Include="Assets\Script\Character\Soldiers\Sword.cs" />
      <Compile Include="Assets\Script\gimmik\hole.cs" />
      <Compile Include="Assets\Script\Manager\Camera_Manager.cs" />
-     <Compile Include="Assets\Script\Manager\Csv_Manager\CsvReader.cs" />
-     <Compile Include="Assets\Script\Manager\Csv_Manager\obj_Generator.cs" />
-     <Compile Include="Assets\Script\Manager\Csv_Manager\obj_Save.cs" />
-     <Compile Include="Assets\Script\Manager\Csv_Manager\objNumberManager.cs" />
      <Compile Include="Assets\Script\Manager\GameManager.cs" />
+     <Compile Include="Assets\Script\Manager\Level_Editor\CsvReader.cs" />
+     <Compile Include="Assets\Script\Manager\Level_Editor\obj_Generator.cs" />
+     <Compile Include="Assets\Script\Manager\Level_Editor\obj_Save.cs" />
+     <Compile Include="Assets\Script\Manager\Level_Editor\objNumberManager.cs" />
      <Compile Include="Assets\Script\Manager\ParticleManager.cs" />
      <Compile Include="Assets\Script\Manager\PlayerManager.cs" />
      <Compile Include="Assets\Script\Manager\Timer_Manager.cs" />
@@ -85,6 +85,7 @@
      <Compile Include="Assets\Script\Squad\Squad_Generator.cs" />
      <Compile Include="Assets\Script\Squad\Squad_Player.cs" />
      <Compile Include="Assets\Script\Squad\Squad_property.cs" />
+     <Compile Include="Assets\Script\Squad\Squad_SpeedTester.cs" />
      <Compile Include="Assets\Script\UI\Cooltime_timer.cs" />
      <Compile Include="Assets\Script\UI\TextFollow.cs" />
      <None Include="Assets\Script\Shader\back.shader" />

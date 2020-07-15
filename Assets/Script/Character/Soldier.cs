@@ -165,4 +165,28 @@ public class Soldier : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+    void OnCollisionEnter(Collision c)
+    {
+        if (!isEnemy)
+        {
+            if (c.gameObject.tag == "rock" || c.gameObject.tag == "Enemy")
+            {
+                Debug.Log(c.gameObject.tag);
+                Squad.Bounce_byObject(c.contacts[0].point);
+                GameObject g = new GameObject();
+                g.transform.position = c.contacts[0].point;
+            }
+        }
+        else
+        {
+            if (c.gameObject.tag == "rock" || c.gameObject.tag == "Player")
+            {
+                Debug.Log(c.gameObject.tag);
+                Squad.Bounce_byObject(c.contacts[0].point);
+                GameObject g = new GameObject();
+                g.transform.position = c.contacts[0].point;
+            }
+        }
+    }
 }

@@ -16,7 +16,7 @@ public class Squad_property : MonoBehaviour {
     [Range(0, 1)] public float mire_speed_ratio;
 
     [Header("분대의 가속도 관련")]
-    public float accel_;
+    public float accel;
     //public float curve_decel_;
 
     //[Header("분대의 접촉판정 관련")]

@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Squad : Squad_property
 {
-    protected float accel;
-    //float curve_decel;
-    
     Vector3 box_pos;
     Vector3 box_size;
     Vector3 knockback_dir;
 
     #region 보이지 않는 값
     [Space(10)]
-    public float speed;
-    public Skill[] skills;
-    public Rigidbody rigid { get; set; }
+    [HideInInspector]public float speed;
+    [HideInInspector]public Skill[] skills;
+    [HideInInspector]public Rigidbody rigid;
+    public float back_;
 
     protected float knockback_time; //넉백되는 시간
     protected float max_knockback_speed_persecond; //넉백되는 속도 (초당 N만큼)
@@ -37,7 +35,6 @@ public class Squad : Squad_property
         rigid = GetComponent<Rigidbody>();
         if (!rot_target) rot_target = transform.GetChild(0);
         speed = 0;
-        accel = accel_;
         //curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
@@ -48,7 +45,7 @@ public class Squad : Squad_property
 
     public virtual void Set_Active(bool value)
     {
-        Debug.Log("활성화 됐을 때의 코드를 작성해 주세요.");
+        Debug.Log("스쿼드 : 활성화 됐을 때의 코드를 작성해 주세요.");
     }
     
     public void Set_soldier_num(GameObject soldier_obj,int num)
@@ -61,8 +58,13 @@ public class Squad : Squad_property
         return soldiers;
     }
 
+    public void Clamp_speed(float value)
+    {
+
+    }
     public void Sum_speed(float value)
     {
+        /*
         if(isKnockback)
         {
             isCurving = false;
@@ -80,20 +82,13 @@ public class Squad : Squad_property
             if(isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_speed));
             else speed = Mathf.Clamp(speed, 0, max_speed); ;
         }
-        /*
-        else if(isContact& isColliderContact)
-        {
-            if (speed > max_contact_speed_persecond) speed = max_contact_speed_persecond;
-            else speed += accel;
-            speed = Mathf.Clamp(speed, 0, max_contact_speed_persecond);
-        }
-        */
         else
         {
             speed += value;
             if (isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_speed));
             else speed = Mathf.Clamp(speed, 0, max_speed); ;
         }
+        */
     }
     public void Set_speed(float value)
     {
@@ -287,6 +282,25 @@ public class Squad : Squad_property
 
     protected virtual IEnumerator Active()
     {
+        while (isActive)
+        {
+            /*
+            Sum_speed(accel);
+            float yv = rigid.velocity.y;
+            Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
+            rigid.velocity = new Vector3(vel.x, yv, vel.z);
+            */
+            rigid.AddForce(transform.forward * accel * Time.deltaTime * Application.targetFrameRate, ForceMode.Acceleration);
+            //Debug.Log(rigid.GetPointVelocity(transform.forward) + "  " + transform.forward);
+            if (isCurving)
+            {
+                if (curve_isright && !isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
+                else if (!isCurve_delay) transform.Rotate(Vector3.up * -rotation_speed);
+            }
+            Contact_Check();
+
+            yield return new WaitForEndOfFrame();
+        }
         yield return new WaitForEndOfFrame();
     }
     IEnumerator Knockback()
@@ -318,6 +332,15 @@ public class Squad : Squad_property
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(Vector3.zero+ new Vector3(0,0,plus_z),box_size);
+    }
+    public virtual void Bounce_byObject(Vector3 contactPoint)
+    {
+        Debug.Log("qwe");
+        Quaternion q = new Quaternion();
+        q.SetLookRotation(contactPoint);
+        Debug.Log(transform.eulerAngles);
+        Debug.Log(q.eulerAngles);
+        rigid.velocity = -q.eulerAngles * back_;
     }
 
 }

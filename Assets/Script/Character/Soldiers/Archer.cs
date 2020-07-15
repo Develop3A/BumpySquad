@@ -68,4 +68,5 @@ public class Archer : Soldier {
             anim.SetTrigger("Attack");
         }
     }
+
 }

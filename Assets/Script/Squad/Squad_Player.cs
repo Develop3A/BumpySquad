@@ -17,7 +17,6 @@ public class Squad_Player : Squad {
     {
         int f = Application.targetFrameRate;
         base.Ready();
-        accel = accel_ / f;
         GetComponent<Rigidbody>().maxAngularVelocity = maxangular;
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         rotation_speed = rotate_force / f;
@@ -30,6 +29,7 @@ public class Squad_Player : Squad {
         {
             isActive = true;
             StartCoroutine("Active");
+            //Debug.Log(gameObject.name + " Active");
         }
         else
         {
@@ -37,6 +37,7 @@ public class Squad_Player : Squad {
         }
     }
 
+    /*
     protected override IEnumerator Active()
     {
         while (isActive)
@@ -57,12 +58,13 @@ public class Squad_Player : Squad {
         }
         yield return new WaitForEndOfFrame();
     }
+    */
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(!IsInvoking("Set_Curve_delay_Off") & isCurve_delay) Invoke("Set_Curve_delay_Off", curve_delay_time);
+            if (!IsInvoking("Set_Curve_delay_Off") & isCurve_delay) Invoke("Set_Curve_delay_Off", curve_delay_time);
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10000f))
@@ -70,12 +72,17 @@ public class Squad_Player : Squad {
                 Curve(hit.point);
             }
 
-            
+
         }
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Set_Curve_delay_On();
             Set_Curving(false);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+
+            rigid.velocity = -rigid.velocity ;
         }
     }
 
@@ -107,6 +114,11 @@ public class Squad_Player : Squad {
         }
         Set_Curving(true);
     }
-    
+
+    public override void Bounce_byObject(Vector3 contactPoint)
+    {
+        base.Bounce_byObject(contactPoint);
+    }
+
 
 }

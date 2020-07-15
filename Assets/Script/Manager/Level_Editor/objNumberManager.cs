@@ -41,6 +41,7 @@ public class objNumberManager : MonoBehaviour {
 
     public GameObject Find_Prefab(string obj_name)
     {
+        if (obj_list.Count < 1) Initialize();
         foreach (GameObject g in obj_list)
         {
             //Debug.Log(g.name);
@@ -49,8 +50,22 @@ public class objNumberManager : MonoBehaviour {
                 return g;
             }
         }
+
         Debug.LogWarning(gameObject.name+": "+obj_name + "을 찾는데에 실패하였습니다.");
 
+        return null;
+    }
+    public GameObject Search_Prefab(string obj_name)
+    {
+        if (obj_list.Count < 1) Initialize();
+        foreach (GameObject g in obj_list)
+        {
+            //Debug.Log(g.name);
+            if (g.name == obj_name)
+            {
+                return g;
+            }
+        }
         return null;
     }
 

@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class obj_Generator : CsvReader {
 
-    public bool act = false;
-    void Update()
-    {
-        if (act)
-        {
-            act = false;
-            Read();
-        }
-    }
+    [Header("생성할 오브젝트 이름")]
+    [SerializeField] public string Objectname;
+    Vector3 gen_pos;
+
     void Start()
     {
         //Read();
@@ -61,16 +56,54 @@ public class obj_Generator : CsvReader {
             g.transform.parent = GameObject.FindWithTag(parent_name).transform;
         }
 
-#if UNITY_EDITOR
+    }
+
+    public void Editor_generate()
+    {
+        GameObject g =  Instantiate(objNumberManager.instance.Find_Prefab(Objectname));
+        g.transform.parent = GameObject.FindWithTag("objs").transform;
+        g.transform.position = gen_pos;
+    }
+    public GameObject Editor_generate(GameObject obj)
+    {
+        GameObject g = Instantiate(obj);
+        g.transform.parent = GameObject.FindWithTag("objs").transform;
+        g.transform.position = new Vector3();
+        g.transform.position = gen_pos;
+        return g;
+    }
+    public void ReadAndGenerateAll()
+    {
+        GameObject objs = GameObject.FindWithTag("objs");
+
+        while(objs.transform.childCount > 0)
         {
-            //Debug.Log("this is Editor");
+            Destroy(objs.transform.GetChild(0));
         }
+        Read();
+    }
+    
+#if UNITY_EDITOR
+void OnDrawGizmos()
+    {
+        //Camera.current.transform.position, Camera.current.transform.forward, Color.red);
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.current.transform.position, Camera.current.transform.forward, out hit))
+        {
+            gen_pos = hit.point;
+        }
+        else
+        {
+            gen_pos = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+    }
+}
 #endif
 #if UNITY_ANDROID
         {
             Destroy(this.gameObject);
         }
 #endif
-    }
 
-}
+
+

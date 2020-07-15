@@ -5,7 +5,6 @@ using System.IO;
 
 public class obj_Save : CsvReader
 {
-    public int row_count = 11;
     public GameObject[] save;
     public bool act =false;
 
