@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class Editor_objGen_window : EditorWindow
 {
@@ -16,12 +17,6 @@ public class Editor_objGen_window : EditorWindow
         GetWindow<Editor_objGen_window>("Obj Spawner");
         var window = GetWindow<Editor_objGen_window>();
         window.maxSize = window.minSize = new Vector2(300, 220);
-    }
-
-    static void Open()
-    {
-        var window = GetWindow<Editor_objGen_window>();
-        window.maxSize = window.minSize = new Vector2(300, 250);
     }
 
     void OnGUI()

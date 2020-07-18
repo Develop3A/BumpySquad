@@ -33,6 +33,7 @@ public class objNumberManager : MonoBehaviour {
     List<GameObject> obj_list = new List<GameObject>();
     public GameObject[] Rock;
     public GameObject[] TallRock;
+    public GameObject[] etc;
 
     void Awake()
     {
@@ -74,6 +75,7 @@ public class objNumberManager : MonoBehaviour {
         obj_list.Clear();
         Add_list(Rock);
         Add_list(TallRock);
+        Add_list(etc);
     }
 
     public void Add_list(GameObject[] objs)

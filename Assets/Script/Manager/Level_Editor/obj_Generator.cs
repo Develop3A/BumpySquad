@@ -6,54 +6,93 @@ public class obj_Generator : CsvReader {
 
     [Header("생성할 오브젝트 이름")]
     [SerializeField] public string Objectname;
+    string load_filename = "";
     Vector3 gen_pos;
-
-    void Start()
-    {
-        //Read();
-    }
-
+    
     public override void Read()
     {
         base.Read();
+        Set_filename(load_filename);
+
+        List<GameObject> objects = new List<GameObject>();
+        List<string> parent_name = new List<string>();
 
         for (int column = 1; column < all_words.GetLength(1); column++)
         {
-            GameObject g;
+            GameObject g = null;
             List<string> values = new List<string>();
 
             if (all_words[0, column] == "" | all_words[0, column] == null)
             {
-                //Debug.Log("end");
-                break;
+                //Debug.Log("con");
+                //continue;
             }
             for (int row = 0; row < all_words.GetLength(0); row++)
             {
-                values.Add(all_words[row, column]);
+                if (all_words[row, column] == "" | all_words[row, column] == null)
+                    values.Add("0");
+                else
+                    values.Add(all_words[row, column]);
                 //Debug.Log(all_words[row, column]);
             }
 
             //Pop<string>(values)
-            g = Instantiate(objNumberManager.instance.Find_Prefab(Pop<string>(values)), null);//A
-            string parent_name = Pop<string>(values);//B
+            string A = Pop<string>(values);
+            GameObject ins = objNumberManager.instance.Find_Prefab(A);            //A
+            if (ins != null)
+            {
+                g = Instantiate(ins, null);
+            }
+            else
+            {
+                g = new GameObject();
+                g.name = A;
+            }
+
+            parent_name.Add(Pop<string>(values));                                               //B
             float x, y, z;
 
-            x = float.Parse(Pop<string>(values));//C
-            y = float.Parse(Pop<string>(values));//D
-            z = float.Parse(Pop<string>(values));//E
+            x = float.Parse(Pop<string>(values));                                                   //C
+            y = float.Parse(Pop<string>(values));                                                   //D
+            z = float.Parse(Pop<string>(values));                                                   //E
             g.transform.position = new Vector3(x, y, z);
 
-            x = float.Parse(Pop<string>(values));//F
-            y = float.Parse(Pop<string>(values));//G
-            z = float.Parse(Pop<string>(values));//H
+            x = float.Parse(Pop<string>(values));                                                   //F
+            y = float.Parse(Pop<string>(values));                                                   //G
+            z = float.Parse(Pop<string>(values));                                                   //H
             g.transform.rotation = Quaternion.Euler(new Vector3(x, y, z));
 
-            x = float.Parse(Pop<string>(values));//I
-            y = float.Parse(Pop<string>(values));//J
-            z = float.Parse(Pop<string>(values));//K
+            x = float.Parse(Pop<string>(values));                                                   //I
+            y = float.Parse(Pop<string>(values));                                                   //J
+            z = float.Parse(Pop<string>(values));                                                   //K
             g.transform.localScale = new Vector3(x, y, z);
 
-            g.transform.parent = GameObject.FindWithTag(parent_name).transform;
+            objects.Add(g);
+
+            /*
+            if (parent_name == "objs") //부모의 이름이 objs라면
+                g.transform.parent = GameObject.FindWithTag(parent_name).transform;
+            else
+            {//아니라면
+                Debug.Log("123");
+                GameObject search = GameObject.Find(parent_name); //우선 그 이름의 오브젝트가 있는지 검색
+                if (search)
+                {//있으면 그걸로
+                    Debug.Log(search.name);
+                    g.transform.parent = search.transform;
+                }
+                else
+                {//없으면 에러
+                    Debug.LogWarning("그럴일 없겠지만 부모 음슴");
+                    g.transform.parent = GameObject.FindWithTag("objs").transform;
+                }
+            }
+            */
+        }
+        for(int i=0;i<objects.Count;i++)
+        {
+            Debug.Log(objects[i].name + "  " + parent_name[i]);
+            objects[i].transform.parent = GameObject.Find(parent_name[i]).transform;
         }
 
     }
@@ -72,14 +111,10 @@ public class obj_Generator : CsvReader {
         g.transform.position = gen_pos;
         return g;
     }
-    public void ReadAndGenerateAll()
+    public void Load(string load_filename_)
     {
+        load_filename = load_filename_;
         GameObject objs = GameObject.FindWithTag("objs");
-
-        while(objs.transform.childCount > 0)
-        {
-            Destroy(objs.transform.GetChild(0));
-        }
         Read();
     }
     

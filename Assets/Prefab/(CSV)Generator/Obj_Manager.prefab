@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4941643360813698}
-  - component: {fileID: 114905764566216364}
   - component: {fileID: 114481551418861244}
+  - component: {fileID: 114905764566216364}
   m_Layer: 0
   m_Name: Obj_Manager
   m_TagString: Untagged
@@ -52,7 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d29d2c926f0cea4db03f5d193642d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filename: test
+  filename: test_save
+  Objectname: Rock03
 --- !u!114 &114905764566216364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,3 +74,5 @@ MonoBehaviour:
   - {fileID: 1458256343171992, guid: 1e5f6223d14a2ed4d956bc2cd2d0270b, type: 2}
   - {fileID: 1413014141993378, guid: 5b3c1e08e709b4c4e868e7e3ec70dd30, type: 2}
   - {fileID: 1547203818879082, guid: b4b315390c6050448a1a8c736df50029, type: 2}
+  etc:
+  - {fileID: 1419702058784544, guid: d506df6f86e7c7b4a9cfa74ac5c40d00, type: 2}

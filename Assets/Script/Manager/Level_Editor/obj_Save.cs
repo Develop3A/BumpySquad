@@ -5,18 +5,6 @@ using System.IO;
 
 public class obj_Save : CsvReader
 {
-    public GameObject[] save;
-    public bool act =false;
-
-    void Update()
-    {
-        if(act)
-        {
-            act = false;
-            Write();
-        }
-    }
-
     void Start()
     {
         //Write();
@@ -28,16 +16,7 @@ public class obj_Save : CsvReader
         sw = new StreamWriter("Assets/Resources/" + filename + ".csv", false, System.Text.Encoding.Default);
 
         List<GameObject> objs = new List<GameObject>();
-
-        foreach(GameObject g in save) //objs 에 세이브할 오브젝트들 추가
-        {
-            if (g.transform.childCount == 0) continue;
-
-            for(int child_num =0; child_num<g.transform.childCount;child_num++)
-            {
-                objs.Add(g.transform.GetChild(child_num).gameObject);
-            }
-        }
+        GameObject objs_gameobject = GameObject.FindWithTag("objs");
 
         sw.WriteLine("obj_name,transform_parent,position.x,position.y,position.z,rotation.x,rotation.y,rotation.z,scale.x,scale.y,scale.z");
         foreach (GameObject obj in objs)
@@ -81,6 +60,19 @@ public class obj_Save : CsvReader
             sw.WriteLine(result);
         }
 
+        Save_Childs(objs_gameobject, objs);
         sw.Close();
+    }
+
+    public void Save_Childs(GameObject parent_obj,List<GameObject> objs)
+    {
+        for (int child_num = 0; child_num < parent_obj.transform.childCount; child_num++)
+        {
+            objs.Add(parent_obj.transform.GetChild(child_num).gameObject);
+            if(parent_obj.transform.GetChild(child_num).childCount >0)
+            {
+                Save_Childs(parent_obj.transform.GetChild(child_num).gameObject, objs);
+            }
+        }
     }
 }

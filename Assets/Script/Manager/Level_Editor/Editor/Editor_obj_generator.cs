@@ -6,6 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(obj_Generator))]
 public class Editor_obj_generator : Editor {
 
+    string filename_;
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -16,9 +17,13 @@ public class Editor_obj_generator : Editor {
         {
             generator.Editor_generate();
         }
-        if(GUILayout.Button("Read And Generate All"))
-        {
-            generator.ReadAndGenerateAll();
+        EditorGUILayout.BeginHorizontal();
+        filename_ = EditorGUILayout.TextField("Filename", filename_);
+        bool isButton = GUILayout.Button("Load");
+        EditorGUILayout.EndHorizontal();
+        if (isButton) {
+            isButton = false;
+        generator.Load(filename_);
         }
 
     }

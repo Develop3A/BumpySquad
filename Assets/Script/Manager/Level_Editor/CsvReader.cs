@@ -6,10 +6,13 @@ using System.IO;
 [SerializeField]
 public class CsvReader : MonoBehaviour {
 
-    public string filename;
+    [HideInInspector]public string filename;
     protected string[,] all_words;
 
-
+    public void Set_filename(string filename_)
+    {
+        filename = filename_;
+    }
     public void Read_csv()
     {
         Read();
