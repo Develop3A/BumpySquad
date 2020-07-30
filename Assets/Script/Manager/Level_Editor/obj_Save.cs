@@ -17,6 +17,7 @@ public class obj_Save : CsvReader
 
         List<GameObject> objs = new List<GameObject>();
         GameObject objs_gameobject = GameObject.FindWithTag("objs");
+        Save_Childs(objs_gameobject, objs);
 
         sw.WriteLine("obj_name,transform_parent,position.x,position.y,position.z,rotation.x,rotation.y,rotation.z,scale.x,scale.y,scale.z");
         foreach (GameObject obj in objs)
@@ -28,8 +29,8 @@ public class obj_Save : CsvReader
 
             //B
             string parent_tag;
-            parent_tag = obj.transform.parent.tag;
-            if (parent_tag == "Untagged") parent_tag = obj.transform.parent.name;
+            parent_tag = "objs";
+            //if (parent_tag == "Untagged") parent_tag = obj.transform.parent.name;
             values.Add(parent_tag);
 
             //C D E
@@ -57,10 +58,10 @@ public class obj_Save : CsvReader
 
                 result += values[i];
             }
+            Debug.Log(result);
             sw.WriteLine(result);
         }
 
-        Save_Childs(objs_gameobject, objs);
         sw.Close();
     }
 

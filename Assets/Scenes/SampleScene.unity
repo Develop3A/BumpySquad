@@ -200,7 +200,7 @@ Transform:
   - {fileID: 1218612439}
   - {fileID: 1101625720}
   m_Father: {fileID: 259504077}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &21278495 stripped
 Transform:
@@ -806,48 +806,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4552420187876544, guid: b4b315390c6050448a1a8c736df50029,
     type: 2}
   m_PrefabInternal: {fileID: 237452538}
---- !u!1001 &253265821
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1951649331}
-    m_Modifications:
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 728e1178c22ab0b44909442d13f8bb1e, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1001 &255396603
 Prefab:
   m_ObjectHideFlags: 0
@@ -941,7 +899,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1842184351}
-  - {fileID: 1951649331}
   - {fileID: 10694509}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2518,18 +2475,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0.5
+  maxSpeedReachTime: 0
+  maxSpeed: 0
+  minSpeed: 0
   accel: 0
+  turnDecelSpeed: 0
+  rotateDecelTime: 0
+  rotateDecelSpeed: 0
+  collisionPower: 0
+  mire_speed_ratio: 0.5
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
   back_: 0
-  player_squad: {fileID: 0}
-  _isActive: 0
   isMoving: 0
+  Angular_speed: 45
 --- !u!195 &824896447
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3464,18 +3426,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0.5
+  maxSpeedReachTime: 0
+  maxSpeed: 0
+  minSpeed: 0
   accel: 0
+  turnDecelSpeed: 0
+  rotateDecelTime: 0
+  rotateDecelSpeed: 0
+  collisionPower: 0
+  mire_speed_ratio: 0.5
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
   back_: 0
-  player_squad: {fileID: 0}
-  _isActive: 0
   isMoving: 0
+  Angular_speed: 45
 --- !u!54 &974983014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4034,18 +4001,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0.5
+  maxSpeedReachTime: 0
+  maxSpeed: 0
+  minSpeed: 0
   accel: 8
+  turnDecelSpeed: 0
+  rotateDecelTime: 0
+  rotateDecelSpeed: 0
+  collisionPower: 0
+  mire_speed_ratio: 0.5
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
   back_: 0
-  player_squad: {fileID: 0}
-  _isActive: 0
   isMoving: 0
+  Angular_speed: 45
 --- !u!54 &1101625725
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4282,18 +4254,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0.5
+  maxSpeedReachTime: 0
+  maxSpeed: 0
+  minSpeed: 0
   accel: 0
+  turnDecelSpeed: 0
+  rotateDecelTime: 0
+  rotateDecelSpeed: 0
+  collisionPower: 0
+  mire_speed_ratio: 0.5
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
   back_: 0
-  player_squad: {fileID: 0}
-  _isActive: 0
   isMoving: 0
+  Angular_speed: 45
 --- !u!54 &1218612444
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4800,55 +4777,6 @@ Prefab:
     - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1849378925804252, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: accel_
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: max_speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: accel
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 54140436136690956, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 54140436136690956, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: m_Drag
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 54140436136690956, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: back_
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 54140436136690956, guid: a29e86638d0dc1f43950feee39e16b83,
-        type: 2}
-      propertyPath: m_CollisionDetection
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
@@ -5697,18 +5625,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0.5
+  maxSpeedReachTime: 0
+  maxSpeed: 0
+  minSpeed: 0
   accel: 0
+  turnDecelSpeed: 0
+  rotateDecelTime: 0
+  rotateDecelSpeed: 0
+  collisionPower: 0
+  mire_speed_ratio: 0.5
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
   back_: 0
-  player_squad: {fileID: 0}
-  _isActive: 0
   isMoving: 0
+  Angular_speed: 45
 --- !u!54 &1808313426
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6253,18 +6186,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0.5
+  maxSpeedReachTime: 0
+  maxSpeed: 0
+  minSpeed: 0
   accel: 8
+  turnDecelSpeed: 0
+  rotateDecelTime: 0
+  rotateDecelSpeed: 0
+  collisionPower: 0
+  mire_speed_ratio: 0.5
   curve_delay_time: 0
   isCurve_delay: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
   back_: 0
-  player_squad: {fileID: 0}
-  _isActive: 0
   isMoving: 0
+  Angular_speed: 45
 --- !u!54 &1948638435
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6280,78 +6218,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &1951649330
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1951649331}
-  - component: {fileID: 1951649333}
-  - component: {fileID: 1951649332}
-  m_Layer: 0
-  m_Name: Squad_SpeedTester
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1951649331
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1951649330}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.08, y: 7.145035, z: -9.57}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2011821767}
-  m_Father: {fileID: 259504077}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1951649332
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1951649330}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.5
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!114 &1951649333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1951649330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5089239a603eb8340bf3b4d1a90fae88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Squad_Type: 0
-  max_speed: 10
-  mire_speed_ratio: 0
-  accel: 8
-  curve_delay_time: 0
-  isCurve_delay: 0
-  speed: 5
-  skills: []
-  rigid: {fileID: 0}
-  back_: 0
---- !u!4 &2011821767 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4694032476751540, guid: 728e1178c22ab0b44909442d13f8bb1e,
-    type: 2}
-  m_PrefabInternal: {fileID: 253265821}
 --- !u!1 &2012448385
 GameObject:
   m_ObjectHideFlags: 0

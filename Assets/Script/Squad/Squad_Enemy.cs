@@ -24,7 +24,7 @@ public class Squad_Enemy : Squad {
         isEnemy = true;
         player = FindObjectOfType<Squad_Player>();
         nav = GetComponent<NavMeshAgent>();
-        nav.speed = max_speed;
+        nav.speed = maxSpeed;
         nav.acceleration = accel;
 
         AI = GetComponent<Enemy_AI>();
@@ -99,8 +99,8 @@ public override void Curve(Vector3 vec)
             if(isSturn)
                 rigid.velocity = Vector3.zero;
             
-            float x = 0; x = Mathf.Clamp(x, -max_speed, max_speed);
-            float z = 0; z = Mathf.Clamp(z, -max_speed, max_speed);
+            float x = 0; x = Mathf.Clamp(x, -maxSpeed, maxSpeed);
+            float z = 0; z = Mathf.Clamp(z, -maxSpeed, maxSpeed);
             if (isMire)
             {
                 x = Clamp_Mire_speed(x);

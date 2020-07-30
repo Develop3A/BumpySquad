@@ -27,6 +27,8 @@ public class Squad : Squad_property
     protected bool isActive;
     protected bool isCurving;
     protected bool isKnockback;
+    protected enum Direction { front,back,left,right}
+    protected Direction direction = Direction.front;
     protected Soldier[] soldiers = new Soldier[9];
     #endregion
 
@@ -62,7 +64,7 @@ public class Squad : Squad_property
     {
 
     }
-    public void Sum_speed(float value)
+    public float Update_speed(float value)
     {
         /*
         if(isKnockback)
@@ -74,36 +76,52 @@ public class Squad : Squad_property
             }
             speed = max_knockback_speed_persecond;
         }
-        else if(isCurving )
+        */
+        float speed_ = speed;
+        if(isCurving && !isEnemy)
         {
-            //if (speed > max_curve_speed_persecond) speed -= curve_decel;
-            //else 
-            speed += accel;
-            if(isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_speed));
-            else speed = Mathf.Clamp(speed, 0, max_speed); ;
+            speed_ += value;
+            if (speed_ > maxSpeed - rotateDecelSpeed)
+            {
+                Sum_speed(turnDecelSpeed);
+            }
+
+            speed_ = Mathf.Clamp(speed_, 0, maxSpeed); ;
         }
         else
         {
-            speed += value;
-            if (isMire) speed = Mathf.Clamp(speed, 0, Clamp_Mire_speed(max_speed));
-            else speed = Mathf.Clamp(speed, 0, max_speed); ;
+            speed_ += value;
+            speed_ = Mathf.Clamp(speed_, 0, maxSpeed); ;
         }
-        */
+
+        Debug.Log(speed_);
+        if (isMire) return speed_ * mire_speed_ratio;
+        else return speed_;
+    }
+    public void Sum_speed(float value)
+    {
+        speed += value;
     }
     public void Set_speed(float value)
     {
         speed = value;
         speed = Mathf.Clamp(speed, speed, value);
     }
+    public float Cal_accel()
+    {
+        return maxSpeed / maxSpeedReachTime;
+    }
 
     public void Set_Curving(bool value)
     {
         isCurving = value;
+        /*
         if(!isEnemy)
         {
             if (value) rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             else rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
+        */
     }
     public virtual void Curve(Vector3 vec)
     {
@@ -284,19 +302,29 @@ public class Squad : Squad_property
     {
         while (isActive)
         {
-            /*
+            /*1번째
             Sum_speed(accel);
             float yv = rigid.velocity.y;
             Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
             rigid.velocity = new Vector3(vel.x, yv, vel.z);
             */
-            rigid.AddForce(transform.forward * accel * Time.deltaTime * Application.targetFrameRate, ForceMode.Acceleration);
+
+            //2번째
+            //rigid.AddForce(transform.forward * accel * Time.deltaTime * Application.targetFrameRate, ForceMode.Acceleration);
+            accel = Cal_accel() ;
+            speed = Update_speed(accel);
+            float yv = rigid.velocity.y;
+            Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
+            rigid.velocity = new Vector3(vel.x, yv, vel.z);
+
             //Debug.Log(rigid.GetPointVelocity(transform.forward) + "  " + transform.forward);
+            /*
             if (isCurving)
             {
                 if (curve_isright && !isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
                 else if (!isCurve_delay) transform.Rotate(Vector3.up * -rotation_speed);
             }
+            */
             Contact_Check();
 
             yield return new WaitForEndOfFrame();

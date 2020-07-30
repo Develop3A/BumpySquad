@@ -24,54 +24,58 @@ public class obj_Generator : CsvReader {
 
             if (all_words[0, column] == "" | all_words[0, column] == null)
             {
-                //Debug.Log("con");
-                //continue;
+                continue;
             }
             for (int row = 0; row < all_words.GetLength(0); row++)
             {
+                //Debug.Log(all_words[row, column]);
                 if (all_words[row, column] == "" | all_words[row, column] == null)
-                    values.Add("0");
+                    continue;
                 else
                     values.Add(all_words[row, column]);
                 //Debug.Log(all_words[row, column]);
             }
+            
 
             //Pop<string>(values)
             string A = Pop<string>(values);
-            GameObject ins = objNumberManager.instance.Find_Prefab(A);            //A
+            GameObject ins = objNumberManager.instance.Find_Prefab(A);                              //A
             if (ins != null)
             {
                 g = Instantiate(ins, null);
+                //Debug.Log("a");
             }
             else
             {
                 g = new GameObject();
                 g.name = A;
+                //Debug.Log("b");
             }
 
-            parent_name.Add(Pop<string>(values));                                               //B
+            string B = Pop<string>(values);
+            parent_name.Add(B);                                                                    //B
             float x, y, z;
 
-            x = float.Parse(Pop<string>(values));                                                   //C
-            y = float.Parse(Pop<string>(values));                                                   //D
-            z = float.Parse(Pop<string>(values));                                                   //E
+            x = float.Parse(Pop<string>(values));                                                  //C
+            y = float.Parse(Pop<string>(values));                                                  //D
+            z = float.Parse(Pop<string>(values));                                                  //E
             g.transform.position = new Vector3(x, y, z);
 
-            x = float.Parse(Pop<string>(values));                                                   //F
-            y = float.Parse(Pop<string>(values));                                                   //G
-            z = float.Parse(Pop<string>(values));                                                   //H
+            x = float.Parse(Pop<string>(values));                                                  //F
+            y = float.Parse(Pop<string>(values));                                                  //G
+            z = float.Parse(Pop<string>(values));                                                  //H
             g.transform.rotation = Quaternion.Euler(new Vector3(x, y, z));
 
-            x = float.Parse(Pop<string>(values));                                                   //I
-            y = float.Parse(Pop<string>(values));                                                   //J
-            z = float.Parse(Pop<string>(values));                                                   //K
+            x = float.Parse(Pop<string>(values));                                                  //I
+            y = float.Parse(Pop<string>(values));                                                  //J
+            z = float.Parse(Pop<string>(values));                                                  //K
             g.transform.localScale = new Vector3(x, y, z);
 
             objects.Add(g);
-
+            
+            if (B == "objs") //부모의 이름이 objs라면
+                g.transform.parent = GameObject.FindWithTag("objs").transform;
             /*
-            if (parent_name == "objs") //부모의 이름이 objs라면
-                g.transform.parent = GameObject.FindWithTag(parent_name).transform;
             else
             {//아니라면
                 Debug.Log("123");
@@ -88,11 +92,6 @@ public class obj_Generator : CsvReader {
                 }
             }
             */
-        }
-        for(int i=0;i<objects.Count;i++)
-        {
-            Debug.Log(objects[i].name + "  " + parent_name[i]);
-            objects[i].transform.parent = GameObject.Find(parent_name[i]).transform;
         }
 
     }
