@@ -21,7 +21,7 @@ public class Squad_property : MonoBehaviour {
 
     [Header("커브 관련")]
     public float curve_delay_time;
-    [HideInInspector]public bool isCurve_delay;
+    public bool isCurve_delay;
 
     //[Header("지속시간 관련")]
     protected float sturn_duration;

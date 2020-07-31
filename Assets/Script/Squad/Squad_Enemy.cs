@@ -25,7 +25,6 @@ public class Squad_Enemy : Squad {
         player = FindObjectOfType<Squad_Player>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = maxSpeed;
-        nav.acceleration = accel;
 
         AI = GetComponent<Enemy_AI>();
         AI.Ready();
@@ -66,27 +65,6 @@ public override void Curve(Vector3 vec)
     }
     IEnumerator Move_to_player()
     {
-        /* 이전 플레이어 추적 코드
-        while (isMoving)
-        {
-            if (!nav)
-            {
-                Debug.LogWarning("not have nav");
-                StopCoroutine("Move_to_player");
-            }
-            if (!AI) 
-            {
-                AI.AI_Act();
-            }
-            else
-            {
-                Set_Nav_Destination(player.transform.position);
-            }
-
-            yield return new WaitForSeconds(1.0f);
-        }
-        */
-
         AI.AI_Act();
 
         yield return null;
@@ -98,18 +76,29 @@ public override void Curve(Vector3 vec)
         {
             if(isSturn)
                 rigid.velocity = Vector3.zero;
-            
             float x = 0; x = Mathf.Clamp(x, -maxSpeed, maxSpeed);
             float z = 0; z = Mathf.Clamp(z, -maxSpeed, maxSpeed);
-            if (isMire)
+
+            if (isColliderContact)
             {
-                x = Clamp_Mire_speed(x);
-                z = Clamp_Mire_speed(z);
+                nav.speed = 0;
+                x = 0; z = 0;
             }
+            else nav.speed = maxSpeed;
+
+            if (isMire) Set_speed(maxSpeed * mire_speed_ratio);
+            else Set_speed(maxSpeed * mire_speed_ratio);
             rigid.velocity = new Vector3(x, rigid.velocity.y, z);
+
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public override void Set_speed(float value)
+    {
+        base.Set_speed(value);
+        nav.speed = value;
     }
 
     public override void Set_Knockback(bool value, float time, float knockback_speed, float sturn_time, Transform player)

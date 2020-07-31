@@ -70,6 +70,7 @@
      <Compile Include="Assets\Script\Manager\Level_Editor\objNumberManager.cs" />
      <Compile Include="Assets\Script\Manager\ParticleManager.cs" />
      <Compile Include="Assets\Script\Manager\PlayerManager.cs" />
+     <Compile Include="Assets\Script\Manager\SpeedBarManager.cs" />
      <Compile Include="Assets\Script\Manager\Timer_Manager.cs" />
      <Compile Include="Assets\Script\Manager\UserDataManager.cs" />
      <Compile Include="Assets\Script\Skill\Skill.cs" />

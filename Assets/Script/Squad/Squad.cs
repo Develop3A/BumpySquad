@@ -10,10 +10,11 @@ public class Squad : Squad_property
 
     #region 보이지 않는 값
     [Space(10)]
-    [HideInInspector]public float speed;
-    [HideInInspector]public Skill[] skills;
-    [HideInInspector]public Rigidbody rigid;
-    public float back_;
+    [HideInInspector]
+    public float speed;
+    [HideInInspector] public Skill[] skills;
+    [HideInInspector] public Rigidbody rigid;
+    //public float back_;
 
     protected float knockback_time; //넉백되는 시간
     protected float max_knockback_speed_persecond; //넉백되는 속도 (초당 N만큼)
@@ -27,7 +28,7 @@ public class Squad : Squad_property
     protected bool isActive;
     protected bool isCurving;
     protected bool isKnockback;
-    protected enum Direction { front,back,left,right}
+    protected enum Direction { front, back, left, right }
     protected Direction direction = Direction.front;
     protected Soldier[] soldiers = new Soldier[9];
     #endregion
@@ -41,7 +42,7 @@ public class Squad : Squad_property
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
 
-        foreach(Soldier s in soldiers)
+        foreach (Soldier s in soldiers)
             s.Ready();
     }
 
@@ -49,8 +50,8 @@ public class Squad : Squad_property
     {
         Debug.Log("스쿼드 : 활성화 됐을 때의 코드를 작성해 주세요.");
     }
-    
-    public void Set_soldier_num(GameObject soldier_obj,int num)
+
+    public void Set_soldier_num(GameObject soldier_obj, int num)
     {
         soldiers[num] = soldier_obj.GetComponent<Soldier>();
         soldier_obj.GetComponent<Soldier>().Squad = this;
@@ -66,19 +67,8 @@ public class Squad : Squad_property
     }
     public float Update_speed(float value)
     {
-        /*
-        if(isKnockback)
-        {
-            isCurving = false;
-            if (!IsInvoking("Knockback_Off"))
-            {
-                Invoke("Knockback_Off", knockback_time);
-            }
-            speed = max_knockback_speed_persecond;
-        }
-        */
         float speed_ = speed;
-        if(isCurving && !isEnemy)
+        if (isCurving && !isEnemy)
         {
             speed_ += value;
             if (speed_ > maxSpeed - rotateDecelSpeed)
@@ -93,8 +83,6 @@ public class Squad : Squad_property
             speed_ += value;
             speed_ = Mathf.Clamp(speed_, 0, maxSpeed); ;
         }
-
-        Debug.Log(speed_);
         if (isMire) return speed_ * mire_speed_ratio;
         else return speed_;
     }
@@ -102,16 +90,51 @@ public class Squad : Squad_property
     {
         speed += value;
     }
-    public void Set_speed(float value)
+    public void Sum_speed(float value,float min)
+    {
+        speed += value;
+        speed = Mathf.Clamp(speed, min, maxSpeed);
+    }
+    public virtual void Set_speed(float value)
     {
         speed = value;
         speed = Mathf.Clamp(speed, speed, value);
     }
     public float Cal_accel()
     {
-        return maxSpeed / maxSpeedReachTime;
+        return (maxSpeed / maxSpeedReachTime) / Application.targetFrameRate;
     }
 
+    protected void Set_Direction(Direction d)
+    {
+        Sum_speed(-turnDecelSpeed,minSpeed);
+
+        direction = d;
+        Vector3 dir = Get_Direction();
+        foreach (Soldier s in Get_soldier())
+        {
+
+        }
+    }
+    Vector3 Get_Direction()
+    {
+        switch (direction)
+        {
+            case Direction.front:
+                return Vector3.forward;
+            case Direction.back:
+                return Vector3.back;
+            case Direction.left:
+                return Vector3.left;
+            case Direction.right:
+                return Vector3.right;
+            default:
+                Debug.Log("None Direction");
+                break;
+        }
+        Debug.Log("None Direction");
+        return Vector3.zero;
+    }
     public void Set_Curving(bool value)
     {
         isCurving = value;
@@ -125,7 +148,11 @@ public class Squad : Squad_property
     }
     public virtual void Curve(Vector3 vec)
     {
-        
+
+    }
+    public void Set_Collider_Contact(bool value)
+    {
+        isColliderContact = value;
     }
     public void Contact_Check()
     {
@@ -189,7 +216,7 @@ public class Squad : Squad_property
                             else dupli = true;
                         }
 
-                        if(!dupli)
+                        if (!dupli)
                         {
                             ss.Add(s.Squad);
                         }
@@ -218,19 +245,19 @@ public class Squad : Squad_property
     }
     #region 플레이어의 특수상태나 스킬
 
-    public virtual void Set_Knockback(bool value, float time, float knockback_speed,float sturn_time,Transform player)
+    public virtual void Set_Knockback(bool value, float time, float knockback_speed, float sturn_time, Transform player)
     {
-        if(!value)
+        if (!value)
         {
             if (!IsInvoking("Knockback_Off")) Invoke("Knockback_Off", time);
         }
         if (isKnockback) return;
-        else if(value)
+        else if (value)
         {
-                GameObject g = new GameObject();
-                g.transform.position = transform.position;
-                g.transform.LookAt(player);
-                knockback_dir = -g.transform.forward;
+            GameObject g = new GameObject();
+            g.transform.position = transform.position;
+            g.transform.LookAt(player);
+            knockback_dir = -g.transform.forward;
             //knockback_dir = player.forward;
             max_knockback_speed_persecond = knockback_speed;
             knockback_time = time;
@@ -265,7 +292,7 @@ public class Squad : Squad_property
     }
     public void Sturn_soldiers()
     {
-        for(int i = 0; i<soldiers.Length; i++)
+        for (int i = 0; i < soldiers.Length; i++)
         {
             if (soldiers[i] == null) continue;
             else
@@ -276,7 +303,7 @@ public class Squad : Squad_property
             }
         }
     }
-    
+
 
     public void Set_Mire(bool value)
     {
@@ -286,16 +313,17 @@ public class Squad : Squad_property
     {
         return f * mire_speed_ratio;
     }
-#endregion
+    #endregion
 
     protected void Set_Curve_delay_On()
     {
         isCurve_delay = true;
         CancelInvoke("Set_Curve_delay_Off");
     }
-    protected void Set_Curve_delay_Off()
+    protected virtual void Set_Curve_delay_Off()
     {
         isCurve_delay = false;
+
     }
 
     protected virtual IEnumerator Active()
@@ -311,11 +339,20 @@ public class Squad : Squad_property
 
             //2번째
             //rigid.AddForce(transform.forward * accel * Time.deltaTime * Application.targetFrameRate, ForceMode.Acceleration);
-            accel = Cal_accel() ;
+            accel = Cal_accel();
             speed = Update_speed(accel);
+            if (speed == maxSpeed) collisionPower = true;
+            else collisionPower = false;
             float yv = rigid.velocity.y;
-            Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
-            rigid.velocity = new Vector3(vel.x, yv, vel.z);
+            SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+            Vector3 vel = Vector3.zero;
+                vel = Get_Direction() * speed * Application.targetFrameRate * Time.deltaTime;
+            if (isColliderContact)
+            {
+                vel = Vector3.zero;
+                Debug.Log("Contact");
+            }
+                rigid.velocity = new Vector3(vel.x, yv, vel.z);
 
             //Debug.Log(rigid.GetPointVelocity(transform.forward) + "  " + transform.forward);
             /*
@@ -359,7 +396,7 @@ public class Squad : Squad_property
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(Vector3.zero+ new Vector3(0,0,plus_z),box_size);
+        Gizmos.DrawWireCube(Vector3.zero + new Vector3(0, 0, plus_z), box_size);
     }
     public virtual void Bounce_byObject(Vector3 contactPoint)
     {
@@ -368,7 +405,43 @@ public class Squad : Squad_property
         q.SetLookRotation(contactPoint);
         Debug.Log(transform.eulerAngles);
         Debug.Log(q.eulerAngles);
-        rigid.velocity = -q.eulerAngles * back_;
+        rigid.velocity = -q.eulerAngles 
+            //* back_
+            ;
     }
 
+    void OnCollisionEnter(Collision c)
+    {
+        if (!isEnemy)
+        {
+            if (c.gameObject.tag == "Enemy")
+            {
+                Set_Collider_Contact(true);
+            }
+        }
+        else
+        {
+            if (c.gameObject.tag == "Player")
+            {
+                Set_Collider_Contact(true);
+            }
+        }
+    }
+    void OnCollisionStay(Collision c)
+    {
+        if (!isEnemy)
+        {
+            if (c.gameObject.tag == "Enemy")
+            {
+                Set_Collider_Contact(true);
+            }
+        }
+        else
+        {
+            if (c.gameObject.tag == "Player")
+            {
+                Set_Collider_Contact(true);
+            }
+        }
+    }
 }

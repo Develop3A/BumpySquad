@@ -102,9 +102,9 @@ MonoBehaviour:
   maxSpeed: 5
   minSpeed: 1
   accel: 0
-  turnDecelSpeed: 0
-  rotateDecelTime: 0
-  rotateDecelSpeed: 0
+  turnDecelSpeed: 2
+  rotateDecelTime: 1
+  rotateDecelSpeed: 4
   collisionPower: 0
   mire_speed_ratio: 0.5
   curve_delay_time: 0.2
@@ -114,9 +114,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   rigid: {fileID: 0}
-  back_: 10
   isAbs: 0
-  rotate_force: 50
 --- !u!114 &114565912052410768
 MonoBehaviour:
   m_ObjectHideFlags: 1
