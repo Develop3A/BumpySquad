@@ -38,7 +38,6 @@ public class Squad : Squad_property
         rigid = GetComponent<Rigidbody>();
         if (!rot_target) rot_target = transform.GetChild(0);
         speed = 0;
-        //curve_decel = curve_decel_ ;
 
         box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
 
@@ -330,15 +329,6 @@ public class Squad : Squad_property
     {
         while (isActive)
         {
-            /*1번째
-            Sum_speed(accel);
-            float yv = rigid.velocity.y;
-            Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
-            rigid.velocity = new Vector3(vel.x, yv, vel.z);
-            */
-
-            //2번째
-            //rigid.AddForce(transform.forward * accel * Time.deltaTime * Application.targetFrameRate, ForceMode.Acceleration);
             accel = Cal_accel();
             speed = Update_speed(accel);
             if (speed == maxSpeed) collisionPower = true;
@@ -346,22 +336,9 @@ public class Squad : Squad_property
             float yv = rigid.velocity.y;
             SpeedBarManager.sbm.Refresh(speed / maxSpeed);
             Vector3 vel = Vector3.zero;
-                vel = Get_Direction() * speed * Application.targetFrameRate * Time.deltaTime;
-            if (isColliderContact)
-            {
-                vel = Vector3.zero;
-                Debug.Log("Contact");
-            }
-                rigid.velocity = new Vector3(vel.x, yv, vel.z);
-
-            //Debug.Log(rigid.GetPointVelocity(transform.forward) + "  " + transform.forward);
-            /*
-            if (isCurving)
-            {
-                if (curve_isright && !isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
-                else if (!isCurve_delay) transform.Rotate(Vector3.up * -rotation_speed);
-            }
-            */
+                vel = Get_Direction() * speed *  Time.deltaTime;
+            //rigid.velocity = new Vector3(vel.x, yv, vel.z);
+            transform.position += vel;
             Contact_Check();
 
             yield return new WaitForEndOfFrame();
@@ -391,13 +368,14 @@ public class Squad : Squad_property
             Set_Sturn(false);
         }
     }
-
+    /*
     void OnDrawGizmos()
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(Vector3.zero + new Vector3(0, 0, plus_z), box_size);
     }
+    */
     public virtual void Bounce_byObject(Vector3 contactPoint)
     {
         Debug.Log("qwe");
@@ -409,39 +387,5 @@ public class Squad : Squad_property
             //* back_
             ;
     }
-
-    void OnCollisionEnter(Collision c)
-    {
-        if (!isEnemy)
-        {
-            if (c.gameObject.tag == "Enemy")
-            {
-                Set_Collider_Contact(true);
-            }
-        }
-        else
-        {
-            if (c.gameObject.tag == "Player")
-            {
-                Set_Collider_Contact(true);
-            }
-        }
-    }
-    void OnCollisionStay(Collision c)
-    {
-        if (!isEnemy)
-        {
-            if (c.gameObject.tag == "Enemy")
-            {
-                Set_Collider_Contact(true);
-            }
-        }
-        else
-        {
-            if (c.gameObject.tag == "Player")
-            {
-                Set_Collider_Contact(true);
-            }
-        }
-    }
+    
 }
