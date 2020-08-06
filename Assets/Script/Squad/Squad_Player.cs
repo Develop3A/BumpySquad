@@ -68,17 +68,21 @@ public class Squad_Player : Squad
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10000f))
             {
-                Curve(hit.point);
+                Detect_input_rotate(hit.point);
             }
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if (is_rotate_able)
+            {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 10000f))
+                {
+                    Curve(hit.point);
+                }
+            } 
             Set_Curve_delay_On();
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-
-            rigid.velocity = -rigid.velocity;
         }
     }
 
@@ -105,6 +109,12 @@ public class Squad_Player : Squad
         {
             Set_Direction(Direction.left);
         }
+        
+    }
+    public void Detect_input_rotate(Vector3 vec)
+    {
+        rot_target.position = transform.position;
+        rot_target.LookAt(vec);
 
         //누르는 위치 계산해서 분대기준 왼쪽인지 오른쪽인지
         if (rot_target.localEulerAngles.y >= 225 && rot_target.localEulerAngles.y < 315)

@@ -322,7 +322,6 @@ public class Squad : Squad_property
     protected virtual void Set_Curve_delay_Off()
     {
         is_rotate_able = false;
-
     }
 
     protected virtual IEnumerator Active()
