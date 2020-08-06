@@ -47,8 +47,8 @@ public class Squad_SpeedTester : Squad {
 
             if (isCurving)
             {
-                if (curve_isright && !isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
-                else if (!isCurve_delay) transform.Rotate(Vector3.up * -rotation_speed);
+                if (curve_isright && !is_rotate_able) transform.Rotate(Vector3.up * rotation_speed);
+                else if (!is_rotate_able) transform.Rotate(Vector3.up * -rotation_speed);
             }
             Contact_Check();
 

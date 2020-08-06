@@ -20,8 +20,9 @@ public class Squad_property : MonoBehaviour {
     [Range(0, 1)] public float mire_speed_ratio;
 
     [Header("커브 관련")]
-    public float curve_delay_time;
-    public bool isCurve_delay;
+    public float rotate_push_time;
+    public bool is_rotate_able;
+    protected bool input_rotate;
 
     //[Header("지속시간 관련")]
     protected float sturn_duration;

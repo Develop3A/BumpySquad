@@ -48,8 +48,8 @@ public class Squad_Player : Squad
 
             if (isCurving)
             {
-                if (curve_isright && !isCurve_delay) transform.Rotate(Vector3.up * rotation_speed);
-                else if (!isCurve_delay) transform.Rotate(Vector3.up * -rotation_speed);
+                if (curve_isright && !is_rotate_able) transform.Rotate(Vector3.up * rotation_speed);
+                else if (!is_rotate_able) transform.Rotate(Vector3.up * -rotation_speed);
             }
             Contact_Check();
 
@@ -63,7 +63,7 @@ public class Squad_Player : Squad
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!IsInvoking("Set_Curve_delay_Off") & isCurve_delay) Invoke("Set_Curve_delay_Off", curve_delay_time);
+            if (!IsInvoking("Set_Curve_delay_Off") & is_rotate_able) Invoke("Set_Curve_delay_Off", rotate_push_time);
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10000f))
@@ -107,13 +107,20 @@ public class Squad_Player : Squad
         }
 
         //누르는 위치 계산해서 분대기준 왼쪽인지 오른쪽인지
-        if (rot_target.localEulerAngles.y >= 180 && rot_target.localEulerAngles.y < 359)
+        if (rot_target.localEulerAngles.y >= 225 && rot_target.localEulerAngles.y < 315)
         {
             curve_isright = false;
+            input_rotate = true;
         }
-        else if (rot_target.localEulerAngles.y > 0 && rot_target.localEulerAngles.y < 180)
+        else if (rot_target.localEulerAngles.y >= 45 && rot_target.localEulerAngles.y < 135)
         {
             curve_isright = true;
+            input_rotate = true;
+        }
+        else
+        {
+            Debug.Log("is front or back");
+            input_rotate = false;
         }
     }
 
@@ -121,7 +128,7 @@ public class Squad_Player : Squad
     {
         //진영을 회전시키는것은 커브딜레이가 꺼질때에 쓸거기때문에 오버라이딩
         base.Set_Curve_delay_Off();
-        StartCoroutine("Rotate_Squad");
+        if(input_rotate)StartCoroutine("Rotate_Squad");
     }
     IEnumerator Rotate_Squad()//진영을 회전시킬때
     {

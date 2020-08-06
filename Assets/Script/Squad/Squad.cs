@@ -109,7 +109,7 @@ public class Squad : Squad_property
         Sum_speed(-turnDecelSpeed,minSpeed);
 
         direction = d;
-        Vector3 dir = Get_Direction();
+        //Vector3 dir = Get_Direction();
         foreach (Soldier s in Get_soldier())
         {
 
@@ -316,12 +316,12 @@ public class Squad : Squad_property
 
     protected void Set_Curve_delay_On()
     {
-        isCurve_delay = true;
+        is_rotate_able = true;
         CancelInvoke("Set_Curve_delay_Off");
     }
     protected virtual void Set_Curve_delay_Off()
     {
-        isCurve_delay = false;
+        is_rotate_able = false;
 
     }
 
@@ -333,7 +333,7 @@ public class Squad : Squad_property
             speed = Update_speed(accel);
             if (speed == maxSpeed) collisionPower = true;
             else collisionPower = false;
-            float yv = rigid.velocity.y;
+            //float yv = rigid.velocity.y;
             SpeedBarManager.sbm.Refresh(speed / maxSpeed);
             Vector3 vel = Vector3.zero;
                 vel = Get_Direction() * speed *  Time.deltaTime;

@@ -2484,8 +2484,8 @@ MonoBehaviour:
   rotateDecelSpeed: 0
   collisionPower: 0
   mire_speed_ratio: 0.5
-  curve_delay_time: 0
-  isCurve_delay: 0
+  rotate_push_time: 0
+  is_rotate_able: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
@@ -3434,8 +3434,8 @@ MonoBehaviour:
   rotateDecelSpeed: 0
   collisionPower: 0
   mire_speed_ratio: 0.5
-  curve_delay_time: 0
-  isCurve_delay: 0
+  rotate_push_time: 0
+  is_rotate_able: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
@@ -4008,8 +4008,8 @@ MonoBehaviour:
   rotateDecelSpeed: 0
   collisionPower: 0
   mire_speed_ratio: 0.5
-  curve_delay_time: 0
-  isCurve_delay: 0
+  rotate_push_time: 0
+  is_rotate_able: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
@@ -4260,8 +4260,8 @@ MonoBehaviour:
   rotateDecelSpeed: 0
   collisionPower: 0
   mire_speed_ratio: 0.5
-  curve_delay_time: 0
-  isCurve_delay: 0
+  rotate_push_time: 0
+  is_rotate_able: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
@@ -4783,6 +4783,11 @@ Prefab:
         type: 2}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
+        type: 2}
+      propertyPath: rotate_push_time
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
@@ -5745,8 +5750,8 @@ MonoBehaviour:
   rotateDecelSpeed: 0
   collisionPower: 0
   mire_speed_ratio: 0.5
-  curve_delay_time: 0
-  isCurve_delay: 0
+  rotate_push_time: 0
+  is_rotate_able: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
@@ -6305,8 +6310,8 @@ MonoBehaviour:
   rotateDecelSpeed: 0
   collisionPower: 0
   mire_speed_ratio: 0.5
-  curve_delay_time: 0
-  isCurve_delay: 0
+  rotate_push_time: 0
+  is_rotate_able: 0
   speed: 0
   skills: []
   rigid: {fileID: 0}
