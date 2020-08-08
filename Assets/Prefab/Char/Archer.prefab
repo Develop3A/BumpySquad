@@ -50,8 +50,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4272809785532070}
-  - component: {fileID: 136670545441501042}
   - component: {fileID: 114543844182683994}
+  - component: {fileID: 65799043362747930}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -1164,6 +1164,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422840481344674}
   m_Mesh: {fileID: 4300174, guid: 714fac36dcf2d5f49b8baca0fe9dea9b, type: 3}
+--- !u!65 &65799043362747930
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034052250147372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95051157985644936
 Animator:
   serializedVersion: 3
@@ -1198,25 +1210,14 @@ MonoBehaviour:
   attack_range: 4
   attack_speed: 2
   soldier_sturn_time: 0
+  box_size: {x: 1, y: 0.5, z: 0.5}
+  box_center: {x: 0, y: 0, z: 0.3}
   Squad: {fileID: 0}
   anim: {fileID: 95051157985644936}
   running_particle: {fileID: 1159905061553742, guid: f185a65242bb1644e8290b7d0135862d,
     type: 2}
   isEnemy: 0
   arrow: {fileID: 1415622128918402, guid: 89fa65a44fcd38841ae4f10d2242abde, type: 2}
---- !u!136 &136670545441501042
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1034052250147372}
-  m_Material: {fileID: 13400000, guid: 2f9856429355c0042b4727326a1f155a, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!137 &137070859395646340
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

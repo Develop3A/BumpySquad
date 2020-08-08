@@ -113,6 +113,8 @@ MonoBehaviour:
   attack_range: 1
   attack_speed: 1
   soldier_sturn_time: 3
+  box_size: {x: 1, y: 0.5, z: 0.5}
+  box_center: {x: 0, y: 0, z: 0.3}
   Squad: {fileID: 0}
   anim: {fileID: 0}
   running_particle: {fileID: 0}

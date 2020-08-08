@@ -142,28 +142,31 @@ public class Squad_Player : Squad
     }
     IEnumerator Rotate_Squad()//진영을 회전시킬때
     {
-        Set_Curving(true);
-        //Debug.Log("Start Rotate_squad");
-        Quaternion target_rot = Quaternion.identity;
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + 360, transform.eulerAngles.z);
-
-        if (curve_isright)
-            target_rot = Quaternion.Euler(0, transform.eulerAngles.y + 90, 0);
-        else
-            target_rot = Quaternion.Euler(0, transform.eulerAngles.y - 90, 0);
-
-        Set_speed(speed - rotateDecelSpeed);
-        float max_time = rotateDecelTime ;
-        for (float f = 0; f<max_time; f +=Time.deltaTime)
+        if (!isCurving)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, target_rot, f / max_time);
-            if(f / rotateDecelTime > 0.5f && isCurving)
+            Set_Curving(true);
+            //Debug.Log("Start Rotate_squad");
+            Quaternion target_rot = Quaternion.identity;
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + 360, transform.eulerAngles.z);
+
+            if (curve_isright)
+                target_rot = Quaternion.Euler(0, transform.eulerAngles.y + 90, 0);
+            else
+                target_rot = Quaternion.Euler(0, transform.eulerAngles.y - 90, 0);
+
+            Set_speed(speed - rotateDecelSpeed);
+            float max_time = rotateDecelTime;
+            for (float f = 0; f < max_time; f += Time.deltaTime)
             {
-                Set_Curving(false);
+                transform.rotation = Quaternion.Lerp(transform.rotation, target_rot, f / max_time);
+                if (f / rotateDecelTime > 0.5f && isCurving)
+                {
+                    Set_Curving(false);
+                }
+                yield return new WaitForEndOfFrame();
             }
-            yield return new WaitForEndOfFrame();
+            transform.rotation = target_rot;
         }
-        transform.rotation = target_rot;
         yield return null;
     }
 

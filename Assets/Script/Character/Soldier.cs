@@ -13,6 +13,11 @@ public class Soldier : MonoBehaviour
     public float attack_speed = 1.0f;
     public float soldier_sturn_time = 0.0f;
 
+    [Header("충돌박스")]
+    public Vector3 box_size = new Vector3(1, 0.5f, 0.5f);
+    public Vector3 box_center = new Vector3(0, 0, 0.3f);
+    Vector3 center;
+
 
     [Space(20)]
     [Header("여긴 조작 안하셔도됩니다.")]
@@ -25,7 +30,7 @@ public class Soldier : MonoBehaviour
     protected bool isFighting;
 
     public bool isEnemy;
-    
+
     public void Ready()
     {
         hp = max_hp;
@@ -78,7 +83,7 @@ public class Soldier : MonoBehaviour
                     //Debug.Log(s.gameObject.name);
                     s.Sum_hp(-attack_damage);
                     Set_Fighting(false);
-                    Invoke("attack_delay",attack_speed);
+                    Invoke("attack_delay", attack_speed);
                     break;
                 }
                 else if (isEnemy & !s.isEnemy)
@@ -114,7 +119,7 @@ public class Soldier : MonoBehaviour
             {
                 if (updown)
                 {
-                    anim.transform.position = transform.position + (Vector3.up * 0.2f) +(Vector3.up*-0.5f);
+                    anim.transform.position = transform.position + (Vector3.up * 0.2f) + (Vector3.up * -0.5f);
                     updown = false;
                 }
                 else
@@ -154,7 +159,7 @@ public class Soldier : MonoBehaviour
     }
     void hit()
     {
-        ParticleManager.pm.Gen_hit_particle(transform,0);
+        ParticleManager.pm.Gen_hit_particle(transform, 0);
     }
     public float Get_hp()
     {
@@ -166,4 +171,58 @@ public class Soldier : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+
+    public bool Front_contact()
+    {
+        bool contact = false;
+        try
+        {
+            Collider[] colliders = Physics.OverlapBox(transform.TransformPoint(box_center), box_size * 0.5f, transform.rotation);
+
+            foreach (Collider c in colliders)
+            {
+                try
+                {
+                    Soldier s = c.gameObject.GetComponent<Soldier>();
+
+
+                    if (!isEnemy & s.isEnemy)
+                    {
+                        contact = true;
+                        Debug.Log(c.gameObject.name);
+                        //s가 적 용병일경우 
+                        break;
+                    }
+                    else if (isEnemy & !s.isEnemy)
+                    {
+                        contact = true;
+                        Debug.Log(c.gameObject.name);
+                        break;
+                    }
+
+                }
+                catch
+                {
+                    if (c.gameObject.tag == "rock")
+                    {
+                        contact = true;
+                        Debug.Log(c.gameObject.name);
+                    }
+                    continue;
+                }
+            }
+        }
+        catch
+        {
+
+        }
+
+        return contact;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(Vector3.zero + new Vector3(box_center.x, box_center.y, box_center.z), box_size);
+    }
 }

@@ -59,6 +59,21 @@ public class Squad : Squad_property
     {
         return soldiers;
     }
+    public bool Front_check()
+    {
+        bool contact = false;
+
+        Soldier[] soldiers = Get_soldier();
+        foreach(Soldier s in soldiers)
+        {
+            if(s.Front_contact())
+            {
+                contact = true;
+                break;
+            }
+        }
+        return contact;
+    }
 
     public void Clamp_speed(float value)
     {
@@ -109,10 +124,15 @@ public class Squad : Squad_property
         Sum_speed(-turnDecelSpeed,minSpeed);
 
         direction = d;
-        //Vector3 dir = Get_Direction();
-        foreach (Soldier s in Get_soldier())
-        {
 
+        Vector3 dir =Vector3.zero;
+        if (d == Direction.front) dir = new Vector3(0, 0, 0);
+        else if (d == Direction.back) dir = new Vector3(0, 180, 0);
+        else if (d == Direction.left) dir = new Vector3(0, 270, 0);
+        else if (d == Direction.right) dir = new Vector3(0, 90, 0);
+            foreach (Soldier s in Get_soldier())
+            {
+            s.gameObject.transform.eulerAngles = dir;
         }
     }
     Vector3 Get_Direction()
@@ -328,16 +348,20 @@ public class Squad : Squad_property
     {
         while (isActive)
         {
-            accel = Cal_accel();
-            speed = Update_speed(accel);
-            if (speed == maxSpeed) collisionPower = true;
-            else collisionPower = false;
-            //float yv = rigid.velocity.y;
-            SpeedBarManager.sbm.Refresh(speed / maxSpeed);
-            Vector3 vel = Vector3.zero;
-                vel = Get_Direction() * speed *  Time.deltaTime;
-            //rigid.velocity = new Vector3(vel.x, yv, vel.z);
-            transform.position += vel;
+            bool front = Front_check();
+            if (!front)
+            {
+                accel = Cal_accel();
+                speed = Update_speed(accel);
+                if (speed == maxSpeed) collisionPower = true;
+                else collisionPower = false;
+                //float yv = rigid.velocity.y;
+                SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+                Vector3 vel = Vector3.zero;
+                vel = Get_Direction() * speed * Time.deltaTime;
+                //rigid.velocity = new Vector3(vel.x, yv, vel.z);
+                transform.position += vel;
+            }
             Contact_Check();
 
             yield return new WaitForEndOfFrame();
