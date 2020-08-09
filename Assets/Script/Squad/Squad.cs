@@ -142,6 +142,25 @@ public class Squad : Squad_property
             }
         }
     }
+    protected void Set_Direction()
+    {
+        Vector3 dir = Vector3.zero;
+        if (direction == Direction.front) dir = new Vector3(0, 0, 0);
+        else if (direction == Direction.back) dir = new Vector3(0, 180, 0);
+        else if (direction == Direction.left) dir = new Vector3(0, 270, 0);
+        else if (direction == Direction.right) dir = new Vector3(0, 90, 0);
+        foreach (Soldier s in Get_soldier())
+        {
+            try
+            {
+                s.gameObject.transform.eulerAngles = dir;
+            }
+            catch
+            {
+
+            }
+        }
+    }
     Vector3 Get_Direction()
     {
         switch (direction)

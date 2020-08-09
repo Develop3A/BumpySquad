@@ -148,6 +148,9 @@ public class Squad_Player : Squad
         if (!isCurving)
         {
             Set_Curving(true);
+            GetComponent<BoxCollider>().enabled = true;
+            rigid.isKinematic = false;
+
             //Debug.Log("Start Rotate_squad");
             Quaternion target_rot = Quaternion.identity;
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
@@ -162,6 +165,7 @@ public class Squad_Player : Squad
             for (float f = 0; f < max_time; f += Time.deltaTime)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, target_rot, f / max_time);
+                Set_Direction();
                 if (f / rotateDecelTime > 0.5f && isCurving)
                 {
                     Set_Curving(false);
@@ -169,6 +173,9 @@ public class Squad_Player : Squad
                 yield return new WaitForEndOfFrame();
             }
             transform.rotation = target_rot;
+
+            rigid.isKinematic = true;
+            GetComponent<BoxCollider>().enabled = false;
         }
         yield return null;
     }
