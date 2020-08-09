@@ -189,24 +189,23 @@ public class Soldier : MonoBehaviour
                     if (!isEnemy & s.isEnemy)
                     {
                         contact = true;
-                        Debug.Log(c.gameObject.name);
+                        //Debug.Log(c.gameObject.name);
                         //s가 적 용병일경우 
                         break;
                     }
                     else if (isEnemy & !s.isEnemy)
                     {
                         contact = true;
-                        Debug.Log(c.gameObject.name);
+                        //Debug.Log(c.gameObject.name);
                         break;
                     }
-
                 }
                 catch
                 {
                     if (c.gameObject.tag == "rock")
                     {
                         contact = true;
-                        Debug.Log(c.gameObject.name);
+                        //Debug.Log(c.gameObject.name);
                     }
                     continue;
                 }
@@ -219,10 +218,12 @@ public class Soldier : MonoBehaviour
 
         return contact;
     }
+    /*
     void OnDrawGizmos()
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(Vector3.zero + new Vector3(box_center.x, box_center.y, box_center.z), box_size);
     }
+    */
 }

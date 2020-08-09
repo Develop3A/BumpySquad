@@ -61,29 +61,32 @@ public class Squad_Player : Squad
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isCurving)
         {
-            if (!IsInvoking("Set_Curve_delay_Off") & is_rotate_able) Invoke("Set_Curve_delay_Off", rotate_push_time);
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10000f))
+            if (Input.GetMouseButtonDown(0))
             {
-                Detect_input_rotate(hit.point);
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (is_rotate_able)
-            {
+                if (!IsInvoking("Set_Curve_delay_Off") & is_rotate_able) Invoke("Set_Curve_delay_Off", rotate_push_time);
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 10000f))
                 {
-                    Curve(hit.point);
+                    Detect_input_rotate(hit.point);
                 }
-            } 
-            Set_Curve_delay_On();
+            }
         }
+        if (Input.GetMouseButtonUp(0))
+            {
+                if (is_rotate_able)
+                {
+                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 10000f))
+                    {
+                        Curve(hit.point);
+                    }
+                }
+                Set_Curve_delay_On();
+            }
     }
 
     public override void Curve(Vector3 vec)
@@ -147,7 +150,7 @@ public class Squad_Player : Squad
             Set_Curving(true);
             //Debug.Log("Start Rotate_squad");
             Quaternion target_rot = Quaternion.identity;
-            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + 360, transform.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
 
             if (curve_isright)
                 target_rot = Quaternion.Euler(0, transform.eulerAngles.y + 90, 0);

@@ -121,18 +121,25 @@ public class Squad : Squad_property
 
     protected void Set_Direction(Direction d)
     {
-        Sum_speed(-turnDecelSpeed,minSpeed);
+        Sum_speed(-turnDecelSpeed, minSpeed);
 
         direction = d;
 
-        Vector3 dir =Vector3.zero;
+        Vector3 dir = Vector3.zero;
         if (d == Direction.front) dir = new Vector3(0, 0, 0);
         else if (d == Direction.back) dir = new Vector3(0, 180, 0);
         else if (d == Direction.left) dir = new Vector3(0, 270, 0);
         else if (d == Direction.right) dir = new Vector3(0, 90, 0);
-            foreach (Soldier s in Get_soldier())
+        foreach (Soldier s in Get_soldier())
+        {
+            try
             {
-            s.gameObject.transform.eulerAngles = dir;
+                s.gameObject.transform.eulerAngles = dir;
+            }
+            catch
+            {
+
+            }
         }
     }
     Vector3 Get_Direction()
