@@ -202,7 +202,7 @@ public class Soldier : MonoBehaviour
                 }
                 catch
                 {
-                    if (c.gameObject.tag == "rock")
+                    if (!isEnemy && c.gameObject.tag == "rock")
                     {
                         contact = true;
                         //Debug.Log(c.gameObject.name);

@@ -74,24 +74,35 @@ public override void Curve(Vector3 vec)
     {
         while(isActive)
         {
-            if(isSturn)
-                rigid.velocity = Vector3.zero;
-            float x = 0; x = Mathf.Clamp(x, -maxSpeed, maxSpeed);
-            float z = 0; z = Mathf.Clamp(z, -maxSpeed, maxSpeed);
-
-            if (isColliderContact)
+            if (isSturn)
             {
-                nav.speed = 0;
-                x = 0; z = 0;
+                rigid.velocity = Vector3.zero;
+                nav.isStopped = true;
             }
-            else nav.speed = maxSpeed;
+            bool front = Front_check();
+            if (!front)
+            {
+                nav.isStopped = false;
+                float x = 0; x = Mathf.Clamp(x, -maxSpeed, maxSpeed);
+                float z = 0; z = Mathf.Clamp(z, -maxSpeed, maxSpeed);
 
-            if (isMire) Set_speed(maxSpeed * mire_speed_ratio);
-            else Set_speed(maxSpeed * mire_speed_ratio);
-            rigid.velocity = new Vector3(x, rigid.velocity.y, z);
+                if (isColliderContact)
+                {
+                    nav.speed = 0;
+                    x = 0; z = 0;
+                }
+                else nav.speed = maxSpeed;
 
+                if (isMire) Set_speed(maxSpeed * mire_speed_ratio);
+                else Set_speed(maxSpeed * mire_speed_ratio);
+                rigid.velocity = new Vector3(x, rigid.velocity.y, z);
 
-            yield return new WaitForEndOfFrame();
+            }
+            else
+            {
+                nav.isStopped = true;
+            }
+                yield return new WaitForEndOfFrame();
         }
     }
 
@@ -116,9 +127,7 @@ public override void Curve(Vector3 vec)
         if (value)
         {
             Set_Active(false);
-            nav.velocity = Vector3.zero;
             rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
             //nav.angularSpeed = 0.0f;
         }
         else
@@ -141,5 +150,4 @@ public override void Curve(Vector3 vec)
 
         yield return null;
     }
-
 }
