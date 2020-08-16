@@ -121,7 +121,8 @@ public class Squad : Squad_property
 
     protected void Set_Direction(Direction d)
     {
-        Sum_speed(-turnDecelSpeed, minSpeed);
+        //이동방향 변경시 호출됨.
+        if(direction != d) Sum_speed(-turnDecelSpeed, minSpeed);
 
         direction = d;
 
@@ -134,7 +135,7 @@ public class Squad : Squad_property
         {
             try
             {
-                s.gameObject.transform.eulerAngles = dir;
+                s.Set_Direction(dir);
             }
             catch
             {
@@ -144,6 +145,7 @@ public class Squad : Squad_property
     }
     protected void Set_Direction()
     {
+        //각도변환시 용병들의 바라보는 방향을 갱신하려고 만든 오버라이딩메소드
         Vector3 dir = Vector3.zero;
         if (direction == Direction.front) dir = new Vector3(0, 0, 0);
         else if (direction == Direction.back) dir = new Vector3(0, 180, 0);

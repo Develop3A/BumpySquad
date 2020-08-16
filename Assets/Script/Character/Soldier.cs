@@ -28,6 +28,7 @@ public class Soldier : MonoBehaviour
 
     protected float hp;
     protected bool isFighting;
+    private Quaternion direction;
 
     public bool isEnemy;
 
@@ -171,6 +172,21 @@ public class Soldier : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void Set_Direction(Vector3 d)
+    {
+        direction = Quaternion.Euler(d);
+        StartCoroutine("Change_Direction");
+    }
+    IEnumerator Change_Direction()
+    {
+        for(int i=0; i<5;i++)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, direction, 0.4f);
+
+            yield return new WaitForEndOfFrame();
+        }
+        transform.rotation = direction;
+    }
 
     public bool Front_contact()
     {

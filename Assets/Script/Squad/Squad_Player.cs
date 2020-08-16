@@ -120,12 +120,12 @@ public class Squad_Player : Squad
         rot_target.LookAt(vec);
 
         //누르는 위치 계산해서 분대기준 왼쪽인지 오른쪽인지
-        if (rot_target.localEulerAngles.y >= 225 && rot_target.localEulerAngles.y < 315)
+        if (rot_target.eulerAngles.y >= 181 && rot_target.eulerAngles.y < 360)
         {
             curve_isright = false;
             input_rotate = true;
         }
-        else if (rot_target.localEulerAngles.y >= 45 && rot_target.localEulerAngles.y < 135)
+        else if (rot_target.eulerAngles.y >= 0 && rot_target.eulerAngles.y < 180)
         {
             curve_isright = true;
             input_rotate = true;
