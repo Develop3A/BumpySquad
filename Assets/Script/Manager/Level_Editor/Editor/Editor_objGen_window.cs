@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Editor_objGen_window : EditorWindow
 {
+    string filename;
+    bool isSaveLoadMode = true;
+
     string object_name;
     Editor gameObjectEditor;
     GameObject search_name;
@@ -16,11 +19,51 @@ public class Editor_objGen_window : EditorWindow
     {
         GetWindow<Editor_objGen_window>("Obj Spawner");
         var window = GetWindow<Editor_objGen_window>();
-        window.maxSize = window.minSize = new Vector2(300, 220);
+        window.maxSize = window.minSize = new Vector2(300, 300);
     }
 
     void OnGUI()
     {
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("저장/불러오기 감추기");
+        if(isSaveLoadMode)
+        {
+            if(GUILayout.Button("감추기"))
+            {
+                isSaveLoadMode = false;
+            }
+        }
+        else
+        {
+            if (GUILayout.Button("펼치기"))
+            {
+                isSaveLoadMode = true;
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+        if (isSaveLoadMode)
+        {
+            EditorGUILayout.BeginHorizontal();
+            filename = EditorGUILayout.TextField("ㄴ세이브명", filename);
+            bool load = GUILayout.Button("불러오기");
+            bool save = GUILayout.Button("저장");
+            if (save)
+            {
+                obj_Save saver = FindObjectOfType<obj_Save>();
+                saver.filename = filename;
+                saver.Write();
+            }
+            if (load)
+            {
+                obj_Generator generator = FindObjectOfType<obj_Generator>();
+                generator.filename = filename;
+                generator.Load(filename);
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
         object_name = EditorGUILayout.TextField("오브젝트 이름으로 검색", object_name);
         search_name = (GameObject)objNumberManager.instance.Search_Prefab(object_name);
         GameObject obj = (GameObject)EditorGUILayout.ObjectField(search_name, typeof(GameObject), true);
@@ -40,7 +83,7 @@ public class Editor_objGen_window : EditorWindow
             }
             if (GUILayout.Button("Generate"))
             {
-                GameObject g = FindObjectOfType<obj_Generator>().Editor_generate(obj);
+                FindObjectOfType<obj_Generator>().Editor_generate(obj);
                 //g.transform.position = 
             }
             }

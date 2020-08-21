@@ -113,7 +113,6 @@ public class obj_Generator : CsvReader {
     public void Load(string load_filename_)
     {
         load_filename = load_filename_;
-        GameObject objs = GameObject.FindWithTag("objs");
         Read();
     }
     

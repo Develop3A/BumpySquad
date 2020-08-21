@@ -1167,7 +1167,7 @@ MonoBehaviour:
   attack_speed: 1
   soldier_sturn_time: 0
   box_size: {x: 1, y: 0.5, z: 0.5}
-  box_center: {x: 0, y: 0, z: 0.3}
+  box_center: {x: 0, y: 0, z: 0.5}
   Squad: {fileID: 0}
   anim: {fileID: 95052261230209552}
   running_particle: {fileID: 1159905061553742, guid: f185a65242bb1644e8290b7d0135862d,

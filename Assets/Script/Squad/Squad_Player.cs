@@ -8,6 +8,7 @@ public class Squad_Player : Squad
 
     [Space(15)]
     [Header("Player Option")]
+    public float collision_Damage;
     [Header("각도")]
     [HideInInspector]public bool isAbs;
     protected float maxangular = 2;
@@ -35,21 +36,70 @@ public class Squad_Player : Squad
             isActive = false;
         }
     }
-
-    /*
+    
     protected override IEnumerator Active()
     {
         while (isActive)
         {
-            Sum_speed(accel);
-            float yv = rigid.velocity.y;
-            Vector3 vel = transform.forward * speed * Application.targetFrameRate * Time.deltaTime;
-            rigid.velocity = new Vector3(vel.x, yv, vel.z);
-
-            if (isCurving)
+            bool front = Front_check();
+            if (!front)
             {
-                if (curve_isright && !is_rotate_able) transform.Rotate(Vector3.up * rotation_speed);
-                else if (!is_rotate_able) transform.Rotate(Vector3.up * -rotation_speed);
+                float bonus_speed = 1.0f;
+                if (isDash)
+                {
+                    Set_speed(maxSpeed);
+                }
+                else
+                {
+                    accel = Cal_accel();
+                    speed = Update_speed(accel);
+                }
+                if (speed == maxSpeed)
+                {
+                    collisionPower = true;
+                    bonus_speed = 2.0f;
+                }
+                else collisionPower = false;
+                //float yv = rigid.velocity.y;
+                SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+                Vector3 vel = Vector3.zero;
+                vel = Get_Direction() * (speed+bonus_speed) * Time.deltaTime;
+                //rigid.velocity = new Vector3(vel.x, yv, vel.z);
+                transform.position += vel;
+            }
+            else //앞에 적이 있을경우
+            {
+                if (collisionPower)
+                {
+                    collisionPower = false;
+                    SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+                    List<Squad> contact_enemies = new List<Squad>();
+                    Contact_check(out contact_enemies);
+                    if (contact_enemies.Count > 0)
+                    {
+                        foreach (Squad s in contact_enemies)
+                        {
+                            //카메라 쉐이크
+                            Soldier[] soldiers = s.Get_soldier();
+                            foreach (Soldier soldier in soldiers)
+                            {
+                                soldier.Sum_hp(collision_Damage);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("None enemies!");
+                    }
+                }
+                if (isDash)
+                {
+                    Set_speed(maxSpeed);
+                }
+                else
+                {
+                    Set_speed(0);
+                }
             }
             Contact_Check();
 
@@ -57,7 +107,6 @@ public class Squad_Player : Squad
         }
         yield return new WaitForEndOfFrame();
     }
-    */
 
     void Update()
     {

@@ -15,7 +15,7 @@ public class Soldier : MonoBehaviour
 
     [Header("충돌박스")]
     public Vector3 box_size = new Vector3(1, 0.5f, 0.5f);
-    public Vector3 box_center = new Vector3(0, 0, 0.3f);
+    public Vector3 box_center = new Vector3(0, 0, 0.5f);
     Vector3 center;
 
 
@@ -234,12 +234,12 @@ public class Soldier : MonoBehaviour
 
         return contact;
     }
-    /*
+
     void OnDrawGizmos()
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(Vector3.zero + new Vector3(box_center.x, box_center.y, box_center.z), box_size);
     }
-    */
+
 }

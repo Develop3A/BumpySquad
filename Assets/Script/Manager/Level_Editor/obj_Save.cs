@@ -58,7 +58,6 @@ public class obj_Save : CsvReader
 
                 result += values[i];
             }
-            Debug.Log(result);
             sw.WriteLine(result);
         }
 

@@ -193,12 +193,12 @@ Transform:
   m_LocalPosition: {x: -10.836222, y: 7.145035, z: -0.6596181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1101625720}
+  - {fileID: 1218612439}
+  - {fileID: 1948638430}
   - {fileID: 1808313427}
   - {fileID: 824896443}
   - {fileID: 974983009}
-  - {fileID: 1948638430}
-  - {fileID: 1218612439}
-  - {fileID: 1101625720}
   m_Father: {fileID: 259504077}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2385,23 +2385,6 @@ Transform:
   m_Father: {fileID: 1808313427}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &811489029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1849378925804252, guid: a29e86638d0dc1f43950feee39e16b83,
-    type: 2}
-  m_PrefabInternal: {fileID: 1551464015}
---- !u!65 &811489033
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 811489029}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 3.5, y: 1, z: 3.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &824896442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2436,7 +2419,7 @@ Transform:
   m_Children:
   - {fileID: 1678962820}
   m_Father: {fileID: 10694509}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!54 &824896444
 Rigidbody:
@@ -2506,6 +2489,7 @@ MonoBehaviour:
   speed: 0
   skills: []
   rigid: {fileID: 0}
+  isDash: 0
   isMoving: 0
   Angular_speed: 45
 --- !u!195 &824896447
@@ -2552,7 +2536,6 @@ MonoBehaviour:
   - {fileID: 1478563535}
   stop_distance: 1
   wait_on_waypoint_time: 1
-  dis: 0
 --- !u!1001 &826530704
 Prefab:
   m_ObjectHideFlags: 0
@@ -3150,8 +3133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Skill_Order: 1
-  cool_time: 0
-  present: 0
   timer: {fileID: 595792613}
 --- !u!114 &970759685
 MonoBehaviour:
@@ -3357,7 +3338,7 @@ Transform:
   m_Children:
   - {fileID: 941237020}
   m_Father: {fileID: 10694509}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!195 &974983010
 NavMeshAgent:
@@ -3428,7 +3409,6 @@ MonoBehaviour:
   - {fileID: 1029478021}
   stop_distance: 1
   wait_on_waypoint_time: 1
-  dis: 0
 --- !u!114 &974983013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3456,6 +3436,7 @@ MonoBehaviour:
   speed: 0
   skills: []
   rigid: {fileID: 0}
+  isDash: 0
   isMoving: 0
   Angular_speed: 45
 --- !u!54 &974983014
@@ -3945,7 +3926,7 @@ Transform:
   m_Children:
   - {fileID: 439593233}
   m_Father: {fileID: 10694509}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!195 &1101625721
 NavMeshAgent:
@@ -4030,6 +4011,7 @@ MonoBehaviour:
   speed: 0
   skills: []
   rigid: {fileID: 0}
+  isDash: 0
   isMoving: 0
   Angular_speed: 45
 --- !u!54 &1101625725
@@ -4192,7 +4174,7 @@ Transform:
   m_Children:
   - {fileID: 1493109138}
   m_Father: {fileID: 10694509}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &1218612440
 MonoBehaviour:
@@ -4282,6 +4264,7 @@ MonoBehaviour:
   speed: 0
   skills: []
   rigid: {fileID: 0}
+  isDash: 0
   isMoving: 0
   Angular_speed: 45
 --- !u!54 &1218612444
@@ -4791,6 +4774,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114543749544261834, guid: a29e86638d0dc1f43950feee39e16b83,
+        type: 2}
+      propertyPath: collision_Damage
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
   m_IsPrefabAsset: 0
@@ -4812,7 +4800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1576870457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4825,8 +4813,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Skill_Order: 0
-  cool_time: 0
-  present: 0
   timer: {fileID: 842488695}
 --- !u!114 &1576870458
 MonoBehaviour:
@@ -5757,6 +5743,7 @@ MonoBehaviour:
   speed: 0
   skills: []
   rigid: {fileID: 0}
+  isDash: 0
   isMoving: 0
   Angular_speed: 45
 --- !u!54 &1808313426
@@ -5786,7 +5773,7 @@ Transform:
   m_Children:
   - {fileID: 811401028}
   m_Father: {fileID: 10694509}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &1808313428
 MonoBehaviour:
@@ -6232,7 +6219,7 @@ Transform:
   m_Children:
   - {fileID: 163437698}
   m_Father: {fileID: 10694509}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!195 &1948638431
 NavMeshAgent:
@@ -6317,6 +6304,7 @@ MonoBehaviour:
   speed: 0
   skills: []
   rigid: {fileID: 0}
+  isDash: 0
   isMoving: 0
   Angular_speed: 45
 --- !u!54 &1948638435

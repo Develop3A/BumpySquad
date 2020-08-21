@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class Cooltime_timer : MonoBehaviour {
 
     public int Skill_Order;
-    public float cool_time;
-    public float present =0.0f;
     public Text timer;
 
     void Awake()
@@ -16,24 +14,11 @@ public class Cooltime_timer : MonoBehaviour {
 
     }
 
-    public void Start_Cooltime()
+    public void Set_Cooltime(float remain_cooltime)
     {
-        if (present > 0) return;
-        present = cool_time;
-        StartCoroutine("Active");
+        remain_cooltime = Mathf.Round(remain_cooltime * 10.0f) / 10.0f;
+        timer.text = remain_cooltime.ToString();
     }
-
-    IEnumerator Active()
-    {
-        float pre_time = Time.time;
-        GetComponent<Button>().interactable = true;
-        while (present > 0)
-        {
-            present = cool_time - (Mathf.Round((Time.time - pre_time )* 10.0f) / 10f);
-            Mathf.Clamp(present, 0, cool_time);
-            timer.text = present.ToString();
-            yield return new WaitForEndOfFrame();
-        }
-    }
+    
 
 }

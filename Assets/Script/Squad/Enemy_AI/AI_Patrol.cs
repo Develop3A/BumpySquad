@@ -10,7 +10,6 @@ public class AI_Patrol : AI_ChaseInRange {
     public Transform[] waypoints;
     public float stop_distance;
     public float wait_on_waypoint_time;
-    public float dis;
     int point_order = 0;
 
     public override void AI_Act()

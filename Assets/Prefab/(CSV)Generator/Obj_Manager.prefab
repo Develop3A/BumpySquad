@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4941643360813698}
   - component: {fileID: 114481551418861244}
   - component: {fileID: 114905764566216364}
+  - component: {fileID: 114544863058683354}
   m_Layer: 0
   m_Name: Obj_Manager
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1552422339058982}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -54,6 +55,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filename: test_save
   Objectname: Rock03
+--- !u!114 &114544863058683354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1552422339058982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a016199f256935445a1ac74a116496ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: 
 --- !u!114 &114905764566216364
 MonoBehaviour:
   m_ObjectHideFlags: 1

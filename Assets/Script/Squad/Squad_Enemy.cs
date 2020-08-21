@@ -94,7 +94,7 @@ public override void Curve(Vector3 vec)
                 else nav.speed = maxSpeed;
 
                 if (isMire) Set_speed(maxSpeed * mire_speed_ratio);
-                else Set_speed(maxSpeed * mire_speed_ratio);
+                else Set_speed(maxSpeed);
                 rigid.velocity = new Vector3(x, rigid.velocity.y, z);
 
             }

@@ -26,7 +26,7 @@ public class Squad_property : MonoBehaviour {
 
     //[Header("지속시간 관련")]
     protected float sturn_duration;
-    protected float yellowboxsize;
+    protected float yellowboxsize = 4.0f;
     protected float plus_z;
     protected Transform rot_target;
 

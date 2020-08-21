@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Skill_Dash : Skill
 {
-    bool can_dash;
-    public float max_dash_speed_persecond;
+    //bool can_dash;
+    //public float max_dash_speed_persecond;
     protected bool isDash;
     public float Dash_duration;
-    public float Dash_knockback_time;
-    public float Dash_knockback_speed;
-    public float Dash_sturn_duration;
+    //public float Dash_knockback_time;
+    //public float Dash_knockback_speed;
+    //public float Dash_sturn_duration;
 
     [Space(20)]
     bool can_doubletap = false;
@@ -21,13 +21,13 @@ public class Skill_Dash : Skill
         base.First();
 
         Skill_Number = 0;
-        max_dash_speed_persecond = 15;
-        cooltime = 5;
-        Dash_duration = 0.25f;
-        Dash_knockback_time = 0.15f;
-        Dash_knockback_speed = -30;
-        Dash_sturn_duration = 3;
-        can_dash = true;
+        //max_dash_speed_persecond = 15;
+        cooltime = 10;
+        Dash_duration = 5f;
+        //Dash_knockback_time = 0.15f;
+        //Dash_knockback_speed = -30;
+        //Dash_sturn_duration = 3;
+        //can_dash = true;
     }
 
     void Update()
@@ -60,40 +60,26 @@ public class Skill_Dash : Skill
 
     public override void Use()
     {
+        base.Use();
         if (isDash) return;
         else
         {
             isDash = true;
             StartCoroutine("Use_Dash");
         }
-        base.Use();
     }
     IEnumerator Use_Dash()
     {
-        float present_time = Time.time;
-        if (can_dash)
-        {
-            can_dash = false;
-            #region 스킬 내용
-            squad.Set_Curving(false);
-            //Debug.Log(Time.time + "   " +(present_time + Dash_duration));
-            while (Time.time < present_time + Dash_duration && isDash)
-            {
-                //Debug.Log("Dash");
-                squad.Set_speed(max_dash_speed_persecond);
-                squad.rigid.velocity = transform.forward * squad.speed * Application.targetFrameRate * Time.deltaTime;
-                Check_FrontLine();
-                yield return new WaitForEndOfFrame();
-            }
-            isDash = false;
-            #endregion
-            yield return new WaitForSeconds(cooltime);
-            isDash = false;
-            can_dash = true;
-        }
+        squad.isDash = true;
+        Debug.Log("dash on");
+        yield return new WaitForSeconds(Dash_duration);
+        Debug.Log("dash off");
+        squad.isDash = false;
+        isDash = false;
 
         yield return new WaitForEndOfFrame();
     }
+    /*
     public void Check_FrontLine()
     {
         bool end = false;
@@ -193,6 +179,7 @@ public class Skill_Dash : Skill
             }
         }
     }
+    */
 
 
 }

@@ -13,7 +13,7 @@ public class Squad : Squad_property
     [HideInInspector]
     public float speed;
     [HideInInspector] public Skill[] skills;
-    [HideInInspector] public Rigidbody rigid;
+    [HideInInspector] public Rigidbody rigid;[HideInInspector] public bool isDash = false;
     //public float back_;
 
     protected float knockback_time; //넉백되는 시간
@@ -39,7 +39,7 @@ public class Squad : Squad_property
         if (!rot_target) rot_target = transform.GetChild(0);
         speed = 0;
 
-        box_size = new Vector3(yellowboxsize, yellowboxsize, yellowboxsize + plus_z);
+        box_size = new Vector3(yellowboxsize, 1.0f, yellowboxsize + plus_z);
 
         foreach (Soldier s in soldiers)
             s.Ready();
@@ -64,9 +64,9 @@ public class Squad : Squad_property
         bool contact = false;
 
         Soldier[] soldiers = Get_soldier();
-        foreach(Soldier s in soldiers)
+        foreach (Soldier s in soldiers)
         {
-            if(s.Front_contact())
+            if (s.Front_contact())
             {
                 contact = true;
                 break;
@@ -104,7 +104,7 @@ public class Squad : Squad_property
     {
         speed += value;
     }
-    public void Sum_speed(float value,float min)
+    public void Sum_speed(float value, float min)
     {
         speed += value;
         speed = Mathf.Clamp(speed, min, maxSpeed);
@@ -112,7 +112,7 @@ public class Squad : Squad_property
     public virtual void Set_speed(float value)
     {
         speed = value;
-        speed = Mathf.Clamp(speed, speed, value);
+        //speed = Mathf.Clamp(speed, speed, value);
     }
     public float Cal_accel()
     {
@@ -122,7 +122,7 @@ public class Squad : Squad_property
     protected void Set_Direction(Direction d)
     {
         //이동방향 변경시 호출됨.
-        if(direction != d) Sum_speed(-turnDecelSpeed, minSpeed);
+        if (direction != d) Sum_speed(-turnDecelSpeed, minSpeed);
 
         direction = d;
 
@@ -163,7 +163,7 @@ public class Squad : Squad_property
             }
         }
     }
-    Vector3 Get_Direction()
+    protected Vector3 Get_Direction()
     {
         switch (direction)
         {
@@ -379,16 +379,27 @@ public class Squad : Squad_property
             bool front = Front_check();
             if (!front)
             {
+                float bonus_speed = 1.0f;
+
                 accel = Cal_accel();
-                speed = Update_speed(accel);
-                if (speed == maxSpeed) collisionPower = true;
-                else collisionPower = false;
-                //float yv = rigid.velocity.y;
+                Set_speed(Update_speed(accel));
                 SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+                if (speed == maxSpeed)
+                {
+                    collisionPower = true;
+                    bonus_speed = 2.0f;
+                }
+            else collisionPower = false;
+                //float yv = rigid.velocity.y;
                 Vector3 vel = Vector3.zero;
-                vel = Get_Direction() * speed * Time.deltaTime;
+                vel = Get_Direction() * (speed+bonus_speed) * Time.deltaTime;
                 //rigid.velocity = new Vector3(vel.x, yv, vel.z);
                 transform.position += vel;
+            }
+            else //앞에 적이 있을경우
+            {
+                Set_speed(0);
+                SpeedBarManager.sbm.Refresh(speed / maxSpeed);
             }
             Contact_Check();
 
@@ -419,14 +430,14 @@ public class Squad : Squad_property
             Set_Sturn(false);
         }
     }
-    /*
+
     void OnDrawGizmos()
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(Vector3.zero + new Vector3(0, 0, plus_z), box_size);
     }
-    */
+
     public virtual void Bounce_byObject(Vector3 contactPoint)
     {
         Debug.Log("qwe");
@@ -434,9 +445,9 @@ public class Squad : Squad_property
         q.SetLookRotation(contactPoint);
         Debug.Log(transform.eulerAngles);
         Debug.Log(q.eulerAngles);
-        rigid.velocity = -q.eulerAngles 
+        rigid.velocity = -q.eulerAngles
             //* back_
             ;
     }
-    
+
 }

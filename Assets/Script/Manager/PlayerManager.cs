@@ -38,14 +38,12 @@ public class PlayerManager : MonoBehaviour {
                     //엑셀을 참조하든 어쩌든 수치수정가능하게
                     sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Dash>();
                     sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
-                    ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
                     break;
                 case 1:
                     sp.gameObject.AddComponent<Skill_Turnback>();
                     //엑셀을 참조하든 어쩌든 수치수정가능하게
                     sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Turnback>();
                     sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
-                    ct.cool_time = sp.skills[ct.Skill_Order].cooltime;
                     break;
             }
         }
@@ -57,17 +55,11 @@ public class PlayerManager : MonoBehaviour {
     public void Use_skill(int value)
     {
         //UI에서 스킬 조작을 인식함.
-        if (timers[value].present > 0) return;
         sp.skills[value].Use();
-        Start_Cooltime_timer(value);
     }
 
     public void Set_Cooltime_timer(Cooltime_timer ct, float cooltime)
     {
-        ct.cool_time = cooltime;
-    }
-    public void Start_Cooltime_timer(int value)
-    {
-        timers[value].Start_Cooltime();
+        ct.Set_Cooltime(cooltime);
     }
 }
