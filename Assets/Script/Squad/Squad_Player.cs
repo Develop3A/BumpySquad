@@ -42,63 +42,60 @@ public class Squad_Player : Squad
         while (isActive)
         {
             bool front = Front_check();
-            if (!front)
+            if (isDash)
             {
-                float bonus_speed = 1.0f;
-                if (isDash)
-                {
-                    Set_speed(maxSpeed);
-                }
-                else
-                {
-                    accel = Cal_accel();
-                    speed = Update_speed(accel);
-                }
-                if (speed == maxSpeed)
-                {
-                    collisionPower = true;
-                    bonus_speed = 2.0f;
-                }
-                else collisionPower = false;
-                //float yv = rigid.velocity.y;
+                float bonus_speed = 2.0f;
+                Set_speed(maxSpeed);
                 SpeedBarManager.sbm.Refresh(speed / maxSpeed);
                 Vector3 vel = Vector3.zero;
-                vel = Get_Direction() * (speed+bonus_speed) * Time.deltaTime;
-                //rigid.velocity = new Vector3(vel.x, yv, vel.z);
+                vel = Get_Direction() * (speed + bonus_speed) * Time.deltaTime;
                 transform.position += vel;
             }
-            else //앞에 적이 있을경우
+            else
             {
-                if (collisionPower)
+                if (!front)
                 {
-                    collisionPower = false;
-                    SpeedBarManager.sbm.Refresh(speed / maxSpeed);
-                    List<Squad> contact_enemies = new List<Squad>();
-                    Contact_check(out contact_enemies);
-                    if (contact_enemies.Count > 0)
+                    float bonus_speed = 1.0f;
+
+                    accel = Cal_accel();
+                    speed = Update_speed(accel);
+                    if (speed == maxSpeed)
                     {
-                        foreach (Squad s in contact_enemies)
+                        collisionPower = true;
+                        bonus_speed = 2.0f;
+                    }
+                    else collisionPower = false;
+                    SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+                    Vector3 vel = Vector3.zero;
+                    vel = Get_Direction() * (speed + bonus_speed) * Time.deltaTime;
+                    transform.position += vel;
+                }
+                else //앞에 적이 있을경우
+                {
+                    if (collisionPower)
+                    {
+                        collisionPower = false;
+                        SpeedBarManager.sbm.Refresh(speed / maxSpeed);
+                        List<Squad> contact_enemies = new List<Squad>();
+                        Contact_check(out contact_enemies);
+                        if (contact_enemies.Count > 0)
                         {
-                            //카메라 쉐이크
-                            Soldier[] soldiers = s.Get_soldier();
-                            foreach (Soldier soldier in soldiers)
+                            foreach (Squad s in contact_enemies)
                             {
-                                soldier.Sum_hp(collision_Damage);
+                                Soldier[] soldiers = s.Get_soldier();
+                                foreach (Soldier soldier in soldiers)
+                                {
+                                    soldier.Sum_hp(collision_Damage);
+                                }
                             }
                         }
+                        else
+                        {
+                            //Debug.Log("None enemies!");
+                        }
+                        mainCamera.GetComponent<StressReceiver>().StartCoroutine("Shaking");
+                        Set_speed(0);
                     }
-                    else
-                    {
-                        Debug.Log("None enemies!");
-                    }
-                }
-                if (isDash)
-                {
-                    Set_speed(maxSpeed);
-                }
-                else
-                {
-                    Set_speed(0);
                 }
             }
             Contact_Check();
@@ -181,7 +178,7 @@ public class Squad_Player : Squad
         }
         else
         {
-            Debug.Log("is front or back");
+            //Debug.Log("is front or back");
             input_rotate = false;
         }
     }

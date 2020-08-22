@@ -160,7 +160,14 @@ public class Soldier : MonoBehaviour
     }
     void hit()
     {
-        ParticleManager.pm.Gen_hit_particle(transform, 0);
+        try
+        {
+            ParticleManager.pm.Gen_hit_particle(transform, 0);
+        }
+        catch
+        {
+
+        }
     }
     public float Get_hp()
     {
@@ -169,7 +176,14 @@ public class Soldier : MonoBehaviour
 
     protected void Death()
     {
-        Destroy(this.gameObject);
+        try
+        {
+            Destroy(this.gameObject);
+        }
+        catch
+        {
+
+        }
     }
 
     public void Set_Direction(Vector3 d)

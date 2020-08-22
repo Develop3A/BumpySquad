@@ -21,13 +21,8 @@ public class Skill_Dash : Skill
         base.First();
 
         Skill_Number = 0;
-        //max_dash_speed_persecond = 15;
         cooltime = 10;
         Dash_duration = 5f;
-        //Dash_knockback_time = 0.15f;
-        //Dash_knockback_speed = -30;
-        //Dash_sturn_duration = 3;
-        //can_dash = true;
     }
 
     void Update()
@@ -71,9 +66,9 @@ public class Skill_Dash : Skill
     IEnumerator Use_Dash()
     {
         squad.isDash = true;
-        Debug.Log("dash on");
+        //Debug.Log("dash on");
         yield return new WaitForSeconds(Dash_duration);
-        Debug.Log("dash off");
+        //Debug.Log("dash off");
         squad.isDash = false;
         isDash = false;
 

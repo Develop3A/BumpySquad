@@ -182,6 +182,7 @@ public class Squad : Squad_property
         Debug.Log("None Direction");
         return Vector3.zero;
     }
+
     public void Set_Curving(bool value)
     {
         isCurving = value;
@@ -197,6 +198,7 @@ public class Squad : Squad_property
     {
 
     }
+
     public void Set_Collider_Contact(bool value)
     {
         isColliderContact = value;
