@@ -78,6 +78,7 @@
      <Compile Include="Assets\Script\Manager\UserDataManager.cs" />
      <Compile Include="Assets\Script\Skill\Skill.cs" />
      <Compile Include="Assets\Script\Skill\Skill_Dash.cs" />
+     <Compile Include="Assets\Script\Skill\Skill_ShakeOff.cs" />
      <Compile Include="Assets\Script\Skill\Skill_Turnback.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\AI_Chase.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\AI_ChaseInRange.cs" />

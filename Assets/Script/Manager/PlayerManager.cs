@@ -40,9 +40,9 @@ public class PlayerManager : MonoBehaviour {
                     sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
                     break;
                 case 1:
-                    sp.gameObject.AddComponent<Skill_Turnback>();
+                    sp.gameObject.AddComponent<Skill_ShakeOff>();
                     //엑셀을 참조하든 어쩌든 수치수정가능하게
-                    sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_Turnback>();
+                    sp.skills[ct.Skill_Order] = sp.GetComponent<Skill_ShakeOff>();
                     sp.skills[ct.Skill_Order].Skill_Order = ct.Skill_Order;
                     break;
             }

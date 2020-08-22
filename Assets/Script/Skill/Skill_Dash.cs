@@ -21,8 +21,8 @@ public class Skill_Dash : Skill
         base.First();
 
         Skill_Number = 0;
-        cooltime = 10;
-        Dash_duration = 5f;
+        cooltime = 15.0f;
+        Dash_duration = 5.0f;
     }
 
     void Update()
@@ -56,9 +56,14 @@ public class Skill_Dash : Skill
     public override void Use()
     {
         base.Use();
-        if (isDash) return;
+        if (isDash)
+        {
+            Debug.Log("b");
+            return;
+        }
         else
         {
+            Debug.Log("c");
             isDash = true;
             StartCoroutine("Use_Dash");
         }
@@ -70,6 +75,7 @@ public class Skill_Dash : Skill
         yield return new WaitForSeconds(Dash_duration);
         //Debug.Log("dash off");
         squad.isDash = false;
+        yield return new WaitForSeconds(cooltime - Dash_duration);
         isDash = false;
 
         yield return new WaitForEndOfFrame();

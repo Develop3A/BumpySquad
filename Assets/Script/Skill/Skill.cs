@@ -27,14 +27,18 @@ public class Skill : MonoBehaviour {
     {
         if (can_use)
         {
+            can_use = false;
             StartCoroutine("Cooltimer");
         }
-        else return;
+        else
+        {
+            Debug.Log("a");
+            return;
+        }
     }
 
     public IEnumerator Cooltimer()
     {
-        can_use = false;
         float present_time = Time.time;
 
         while (Time.time - present_time < cooltime)

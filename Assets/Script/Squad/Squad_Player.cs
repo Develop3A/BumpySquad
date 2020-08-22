@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Squad_Player : Squad
 {
@@ -107,9 +108,11 @@ public class Squad_Player : Squad
 
     void Update()
     {
-        if (!isCurving)
+        if (!isCurving && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            else
             {
                 if (!IsInvoking("Set_Curve_delay_Off") & is_rotate_able) Invoke("Set_Curve_delay_Off", rotate_push_time);
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -121,6 +124,10 @@ public class Squad_Player : Squad
             }
         }
         if (Input.GetMouseButtonUp(0))
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            else
             {
                 if (is_rotate_able)
                 {
@@ -133,6 +140,7 @@ public class Squad_Player : Squad
                 }
                 Set_Curve_delay_On();
             }
+        }
     }
 
     public override void Curve(Vector3 vec)
