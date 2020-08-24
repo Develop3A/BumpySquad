@@ -20,7 +20,6 @@ public class Skill : MonoBehaviour {
     {
         squad = GetComponent<Squad>();
 
-        StartCoroutine("Cooltimer");
     }
 
     public virtual void Use()
