@@ -15,16 +15,7 @@ public class Sword : Soldier {
                 Soldier s = c.gameObject.GetComponent<Soldier>();
 
 
-                if (!isEnemy & s.isEnemy)
-                {
-                    //Debug.Log(s.gameObject.name);
-                    s.Sum_hp(-attack_damage);
-                    anim.SetTrigger("Attack");
-                    Set_Fighting(false);
-                    Invoke("attack_delay", attack_speed);
-                    break;
-                }
-                else if (isEnemy & !s.isEnemy)
+                if (Detect_Enemy(s))
                 {
                     //Debug.Log(s.gameObject.name);
                     s.Sum_hp(-attack_damage);

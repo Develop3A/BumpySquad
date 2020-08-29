@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10694508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.836222, y: 7.145035, z: -0.6596181}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1101625720}
@@ -895,7 +895,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 259504076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.836222, y: -7.145035, z: 0.6596181}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1842184351}
@@ -2464,19 +2464,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5effe5e0d0be94580dd3a9ce0dfd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
-  archer: {fileID: 0}
-  Soldiers_parent: {fileID: 824896443}
   soldier_type:
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Soldiers_parent: {fileID: 824896443}
+  type_id: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &824896446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3389,19 +3388,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5effe5e0d0be94580dd3a9ce0dfd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
-  archer: {fileID: 0}
-  Soldiers_parent: {fileID: 974983009}
   soldier_type:
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Soldiers_parent: {fileID: 974983009}
+  type_id: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &974983012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3936,7 +3934,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1101625719}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 1.6, y: -0.28999996, z: 25.9}
+  m_LocalPosition: {x: -22.64, y: 1, z: 23.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 439593233}
@@ -3975,19 +3973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5effe5e0d0be94580dd3a9ce0dfd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
-  archer: {fileID: 0}
-  Soldiers_parent: {fileID: 1101625720}
   soldier_type:
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
+  - {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
+  Soldiers_parent: {fileID: 1101625720}
+  type_id: 010000000100000001000000010000000100000001000000010000000100000001000000
 --- !u!114 &1101625723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4239,19 +4228,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5effe5e0d0be94580dd3a9ce0dfd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
-  archer: {fileID: 0}
-  Soldiers_parent: {fileID: 1218612439}
   soldier_type:
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Soldiers_parent: {fileID: 1218612439}
+  type_id: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &1218612443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4759,15 +4747,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.836222
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.145035
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.6596181
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4343415158571012, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4794,7 +4782,8 @@ Prefab:
       propertyPath: collision_Damage
       value: -2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114565912052410768, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: a29e86638d0dc1f43950feee39e16b83, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1576870456
@@ -5184,6 +5173,7 @@ Transform:
   - {fileID: 170076735}
   - {fileID: 1488828845}
   - {fileID: 21278495}
+  - {fileID: 1946119715}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5801,19 +5791,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5effe5e0d0be94580dd3a9ce0dfd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
-  archer: {fileID: 0}
-  Soldiers_parent: {fileID: 1808313427}
   soldier_type:
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Soldiers_parent: {fileID: 1808313427}
+  type_id: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &1808313429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6202,6 +6191,55 @@ Transform:
   m_Father: {fileID: 221929936}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1946119714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1946119715}
+  - component: {fileID: 1946119716}
+  m_Layer: 0
+  m_Name: Squad_Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1946119715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946119714}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.63050497, y: 0.69912994, z: 1.090443}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1661560385}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1946119716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946119714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88570ebca8089d4296afd2709a8b9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldier_type:
+  - {fileID: 1332194556437968, guid: 61b0c6e3735760d40bb1661c6d957c18, type: 2}
+  - {fileID: 1209139856136692, guid: 1250e3673f188124d9896a6fcf7077de, type: 2}
+  - {fileID: 1005026442352994, guid: dacef28dc789c654db1b7127241f8ea5, type: 2}
+  - {fileID: 1523331977460806, guid: bac458dbace7fc442b101c528b6b2d7e, type: 2}
+  - {fileID: 1977661189120498, guid: ae53a8ec50e656044aac51abdda0fb1d, type: 2}
+  - {fileID: 1051667722870972, guid: 8f4b8dda0b44a1d498dd569ace30d22d, type: 2}
+  Soldiers_parent: {fileID: 0}
+  type_id: 010000000200000003000000040000000400000004000000050000000600000005000000
 --- !u!1 &1948638429
 GameObject:
   m_ObjectHideFlags: 0
@@ -6268,19 +6306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5effe5e0d0be94580dd3a9ce0dfd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
-  archer: {fileID: 0}
-  Soldiers_parent: {fileID: 1948638430}
   soldier_type:
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
-  - sword
+  - {fileID: 1305431102877886, guid: a55c404051cc80249ab55dba0ac5374a, type: 2}
+  Soldiers_parent: {fileID: 1948638430}
+  type_id: 010000000100000001000000010000000100000001000000010000000100000001000000
 --- !u!114 &1948638433
 MonoBehaviour:
   m_ObjectHideFlags: 0

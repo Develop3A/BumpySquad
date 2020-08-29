@@ -47,7 +47,6 @@ public class Squad_Player : Squad
             {
                 float bonus_speed = 2.0f;
                 Set_speed(maxSpeed);
-                SpeedBarManager.sbm.Refresh(speed / maxSpeed);
                 Vector3 vel = Vector3.zero;
                 vel = Get_Direction() * (speed + bonus_speed) * Time.deltaTime;
                 transform.position += vel;
@@ -66,7 +65,6 @@ public class Squad_Player : Squad
                         bonus_speed = 2.0f;
                     }
                     else collisionPower = false;
-                    SpeedBarManager.sbm.Refresh(speed / maxSpeed);
                     Vector3 vel = Vector3.zero;
                     vel = Get_Direction() * (speed + bonus_speed) * Time.deltaTime;
                     transform.position += vel;
@@ -76,7 +74,6 @@ public class Squad_Player : Squad
                     if (collisionPower)
                     {
                         collisionPower = false;
-                        SpeedBarManager.sbm.Refresh(speed / maxSpeed);
                         List<Squad> contact_enemies = new List<Squad>();
                         Contact_check(out contact_enemies);
                         if (contact_enemies.Count > 0)
@@ -99,6 +96,7 @@ public class Squad_Player : Squad
                     }
                 }
             }
+            SpeedBarManager.sbm.Refresh(speed / maxSpeed);
             Contact_Check();
 
             yield return new WaitForEndOfFrame();

@@ -40,9 +40,8 @@ public class Squad : Squad_property
         speed = 0;
 
         box_size = new Vector3(yellowboxsize, 1.0f, yellowboxsize + plus_z);
-
-        foreach (Soldier s in soldiers)
-            s.Ready();
+            foreach (Soldier s in soldiers)
+                s.Ready();
     }
 
     public virtual void Set_Active(bool value)

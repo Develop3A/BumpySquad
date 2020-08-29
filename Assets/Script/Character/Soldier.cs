@@ -7,11 +7,14 @@ public class Soldier : MonoBehaviour
 
 
     [Header("용병 기본 옵션")]
+    public int grade = 1;
     public float max_hp = 10.0f;
     public float attack_damage;
     public float attack_range;
     public float attack_speed = 1.0f;
-    public float soldier_sturn_time = 0.0f;
+    public float critical_rate = 0.05f;
+    public float critical_damage = 2.0f;
+    [HideInInspector]public float soldier_sturn_time = 0.0f;
 
     [Header("충돌박스")]
     public Vector3 box_size = new Vector3(1, 0.5f, 0.5f);
@@ -254,6 +257,13 @@ public class Soldier : MonoBehaviour
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(Vector3.zero + new Vector3(box_center.x, box_center.y, box_center.z), box_size);
+    }
+
+    protected bool Detect_Enemy(Soldier s)
+    {
+        bool value = !isEnemy & s.isEnemy || isEnemy & !s.isEnemy;
+
+        return value;
     }
 
 }

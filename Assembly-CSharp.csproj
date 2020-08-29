@@ -55,13 +55,18 @@
   <ItemGroup>
      <Compile Include="Assets\Import Asset\CameraShakeFX\Scripts\StressReceiver.cs" />
      <Compile Include="Assets\Import Asset\CameraShakeFX\Scripts\TraumaInducer.cs" />
-     <Compile Include="Assets\Script\Character\Character\Char_customize.cs" />
+     <Compile Include="Assets\Script\Character\Customize\Char_customize.cs" />
      <Compile Include="Assets\Script\Character\Enemy\Proto_enemy.cs" />
      <Compile Include="Assets\Script\Character\Soldier.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Archer.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\Caster.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\Medic.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Proto_Archer.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Proto_sword.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\Shielder.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Soldier&apos;s obj\Archers_arrow.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\Soldier&apos;s obj\Casters_Fireball.cs" />
+     <Compile Include="Assets\Script\Character\Soldiers\SpearMan.cs" />
      <Compile Include="Assets\Script\Character\Soldiers\Sword.cs" />
      <Compile Include="Assets\Script\gimmik\hole.cs" />
      <Compile Include="Assets\Script\Manager\Camera_Manager.cs" />
@@ -86,9 +91,10 @@
      <Compile Include="Assets\Script\Squad\Enemy_AI\AI_Patrol.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\AI_Stay.cs" />
      <Compile Include="Assets\Script\Squad\Enemy_AI\Enemy_AI.cs" />
+     <Compile Include="Assets\Script\Squad\Generator\PlayerSquad_Generator.cs" />
+     <Compile Include="Assets\Script\Squad\Generator\Squad_Generator.cs" />
      <Compile Include="Assets\Script\Squad\Squad.cs" />
      <Compile Include="Assets\Script\Squad\Squad_Enemy.cs" />
-     <Compile Include="Assets\Script\Squad\Squad_Generator.cs" />
      <Compile Include="Assets\Script\Squad\Squad_Player.cs" />
      <Compile Include="Assets\Script\Squad\Squad_property.cs" />
      <Compile Include="Assets\Script\Squad\Squad_SpeedTester.cs" />

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skill_ShakeOff : Skill {
 
-    public float shakeoff_knockback_range = 3;
+    public float shakeoff_knockback_range = 2.5f;
     float shakeoff_knockback_time;
     float shakeoff_knockback_speed;
 
@@ -28,11 +28,14 @@ public class Skill_ShakeOff : Skill {
 
     IEnumerator Use_ShakeOff()
     {
-        List<Squad> enemies = new List<Squad>();
-        squad.Contact_check(out enemies);
-        foreach(Squad enemy in enemies)
+        Collider[] contacts = Physics.OverlapSphere(transform.position, shakeoff_knockback_range);
+        foreach (Collider c in contacts)
         {
-            enemy.Set_Knockback(true, shakeoff_knockback_time, shakeoff_knockback_speed, 0, transform);
+            if (c.tag == "Enemy")
+            {
+                c.GetComponent<Soldier>().Squad.Set_Knockback(true, shakeoff_knockback_time, shakeoff_knockback_speed, 0, transform);
+                //Debug.Log(c.gameObject.name);
+            }
         }
         yield return null;
         //foreach ()
